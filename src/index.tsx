@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Loader } from './core/loader';
+
+//
+// ─── LOADER ─────────────────────────────────────────────────────────────────────
+//
+Loader.init()
+// ────────────────────────────────────────────────────────────────────────────────
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
