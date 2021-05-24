@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { RecoilState, SetterOrUpdater, useRecoilState } from 'recoil';
-import Playground from '../../../components/pages/playground/Playground';
 import { authenticationState } from '../../../store/recoil/authentication/authentication.atom';
 
 interface IAtomMapped{
