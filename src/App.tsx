@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
+import Login from './components/pages/unauthorized/Authentication/views/Login';
 // import ClassWithRecoil from './components/pages/playground/ClassWithRecoil';
 import LandingPage from './components/pages/unauthorized/LandingPage';
 import { CreateClassWithEmbeddedState } from './core/recoil/transformation/class-with-embedded-state';
@@ -16,6 +17,7 @@ function App() {
       <Router>
           <Switch>
             <Route path="/" exact component={LandingPage}/>
+            <Route path="/login" exact component={Login}/>
           </Switch>
       </Router>
     </RecoilRoot>
