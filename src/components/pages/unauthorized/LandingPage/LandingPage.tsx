@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Navbar from '../../../common/navbar'
+import { BgContainer, LeftTab} from './LandingPage.styles'
 
-export default class LandingPage extends Component {
-  render() {
+export default function Landing() {
     return (
-      <div>
-        <h1>LandingPage</h1>
-      </div>
+        <>
+            <Navbar/>
+            <BgContainer/>
+            <LeftTab/>
+        </>
     )
-  }
 }
