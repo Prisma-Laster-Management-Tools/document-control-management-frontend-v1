@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
-import ClassWithRecoil from './components/pages/playground/ClassWithRecoil';
+// import ClassWithRecoil from './components/pages/playground/ClassWithRecoil';
 import LandingPage from './components/pages/unauthorized/LandingPage';
 import { CreateClassWithEmbeddedState } from './core/recoil/transformation/class-with-embedded-state';
 
