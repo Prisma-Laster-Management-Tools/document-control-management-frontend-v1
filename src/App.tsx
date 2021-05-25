@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
+import Feedback from './components/pages/authorized/Deliberation/views/Feedback';
 import Sales from './components/pages/authorized/Deliberation/views/Sales';
 import Login from './components/pages/unauthorized/Authentication/views/Login';
 // import ClassWithRecoil from './components/pages/playground/ClassWithRecoil';
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" exact component={LandingPage}/>
             <Route path="/login" exact component={Login}/>
             <Route path="/sales" exact component={Sales}/>
+            <Route path="/feedback" exact component={Feedback}/>
           </Switch>
       </Router>
     </RecoilRoot>
