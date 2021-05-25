@@ -8,6 +8,9 @@ import { Typography, message } from 'antd';
 import LoadingIndicator from '../../../../../common/loading-indicator'
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
 import { Authentication } from '../../../../../../core/authentication/Authentication'
+import { useRecoilState } from 'recoil'
+import { authenticationState } from '../../../../../../store/recoil/authentication/authentication.atom'
+import { LoadingScreen } from '../../../../../../core/loading-screen/LoadingScreen'
 const { Text, Link } = Typography;
 
 interface ICredentialInput{
@@ -21,6 +24,23 @@ export default function Login(props:any) {
     const [credentialInput,setCredentialInput] = React.useState<ICredentialInput>({email:'',password:''})
     const [errors,setErrors] = React.useState<any>({})
     const [isLoading,setIsLoading] = React.useState<boolean>(false)
+    const [authState,setAuthState] = useRecoilState(authenticationState)
+
+    //
+    // ─── REDIRECTION IF ALREADY AUTHENTICATED ───────────────────────────────────────
+    //
+    React.useEffect(() => {
+        (async() => {
+            LoadingScreen.show_loading_screen("กำลังตรวจสอบ session")
+            await sleep(1000)
+            if(authState.isAuthenticated){
+                props.history.push('/dashboard')
+                LoadingScreen.hide_loading_screen()
+            }
+        })()
+    },[authState])
+    // ────────────────────────────────────────────────────────────────────────────────
+
 
     function clear_errors(){
         setErrors({})
