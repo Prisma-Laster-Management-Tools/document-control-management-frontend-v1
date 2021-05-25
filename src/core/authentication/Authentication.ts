@@ -33,4 +33,10 @@ export class Authentication {
       Authentication.$recoil_authentication_need_init = false;
     }
   }
+  static load_stored_token_in_the_local_storage() {
+    const access_token = LocalStorage.get_data_from_key('token');
+    if (!access_token) return;
+    console.log('[jwt]: found existing jwt-token');
+    this.decode_token_and_store_in_recoil(access_token);
+  }
 }
