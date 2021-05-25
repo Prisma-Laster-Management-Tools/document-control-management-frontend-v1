@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Input, DatePicker } from 'antd';
 import Navbar from '../../../../../common/navbar'
-import { ItemModal, ThHeaderUniq, TdContent, BgContainer, SaleActivityText, SalesContainer, Table, TbodyContent, TheadHeader, ThHeader, TrContent, TrHeader, TdContentUniq, BodyWrapper, SalesInnerHeaderContainer, HeaderTopRightZone, AddSalesBtn, AddactivityModal, ListText, InsideModalContainer, ListInputBox } from './sales.styles'
+import { ListBtn2, ListBtn, ItemModal, ThHeaderUniq, TdContent, BgContainer, SaleActivityText, SalesContainer, Table, TbodyContent, TheadHeader, ThHeader, TrContent, TrHeader, TdContentUniq, BodyWrapper, SalesInnerHeaderContainer, HeaderTopRightZone, AddSalesBtn, AddactivityModal, ListText, InsideModalContainer, ListInputBox, ListModalFooter, ListContainer, ListImage, ListTextDetailContainer, ListSigleContainer, ListHeaderText, ListColonText, ListDetailText } from './sales.styles'
 
 export default function Sales() {
     const [visible, setVisible] = useState(false);
@@ -48,17 +48,34 @@ export default function Sales() {
                 {/* TableHeader */}
                 
                 <ItemModal
-                    title="รายละเอียด"
+                    title="รายละเอียดการขาย"
                     centered
+                    closable={false}
                     visible={tdcontainervisible}
                     onCancel={() => tdcontainersetVisible(false)}
                     width={1000}
                     cancelText={"ปิด"}
                     footer={null}
                 >
-                    <p>some contents...</p>
-                    <p>some contents...</p>
-                    <p>some contents...</p>
+
+                    <ListContainer>
+                        <ListImage></ListImage>
+                        <ListTextDetailContainer>
+                            <ListSigleContainer><ListHeaderText>สินค้า</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>หมวกสมาร์ท</ListDetailText></ListSigleContainer>
+                            <ListSigleContainer><ListHeaderText>ซีเรียลนัมเบอร์ (S/N)</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>BK02074asdasasdasasd42087</ListDetailText></ListSigleContainer>
+                            <ListSigleContainer><ListHeaderText>ลูกค้า</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>Thiti Mahawannakit</ListDetailText></ListSigleContainer>
+                            <ListSigleContainer><ListHeaderText>วันที่ขาย</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>20/12/2020</ListDetailText></ListSigleContainer>
+                            <ListSigleContainer><ListHeaderText>ราคา</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>65,000</ListDetailText></ListSigleContainer>
+                        </ListTextDetailContainer>
+                       
+                    </ListContainer>
+                    
+
+                    <ListModalFooter>
+                        <ListBtn>ดูข้อเสนอแนะ</ListBtn>
+                        <ListBtn2 onClick={() => tdcontainersetVisible(false)}>ออก</ListBtn2>
+                    </ListModalFooter>
+                    
                 </ItemModal>
             
                     <Table>
