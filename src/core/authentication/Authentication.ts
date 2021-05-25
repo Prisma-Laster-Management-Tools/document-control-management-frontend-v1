@@ -19,7 +19,10 @@ export class Authentication {
   }
   static decode_token_and_store_in_recoil(token: string): boolean {
     const decoded_data = jwt.decode(token) as ITokenCredential;
-    if (!decoded_data) return false;
+    if (!decoded_data) {
+      localStorage.removeItem('token'); // remove token
+      return false;
+    }
     this.$recoil_authentication.set!((prevState) => ({ ...prevState, isAuthenticated: true, userData: decoded_data }));
     return true;
   }
