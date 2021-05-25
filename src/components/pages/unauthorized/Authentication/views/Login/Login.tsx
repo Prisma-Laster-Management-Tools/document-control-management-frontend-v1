@@ -7,6 +7,7 @@ import { BgContainer, InputValue, LoginBtn, LoginContainer, LoginText, TextP } f
 import { Typography, message } from 'antd';
 import LoadingIndicator from '../../../../../common/loading-indicator'
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
+import { Authentication } from '../../../../../../core/authentication/Authentication'
 const { Text, Link } = Typography;
 
 interface ICredentialInput{
@@ -62,12 +63,14 @@ export default function Login(props:any) {
         }else{
             clear_errors()
             const {accessToken} = response.data
-            console.log(accessToken)
-            // TODO store token in the the local storage and also store in the authentication recoil
-
-            message.success("ลงชื่อเข้าใช้สำเร็จ",1.5)
-            await sleep(1500)
-            props.history.push('/dashboard')
+            Authentication.store_token_in_localstorage(accessToken)
+            if(Authentication.decode_token_and_store_in_recoil(accessToken)){
+                message.success("ลงชื่อเข้าใช้สำเร็จ",1.5)
+                await sleep(1500)
+                props.history.push('/dashboard')
+            }else{
+                message.error("เกิดข้อผิดพลาดบางอย่างเกินขึ้น",1.5)
+            }
         }
     }
     return (
