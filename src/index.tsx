@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import 'antd/dist/antd.css';
 import { Loader } from './core/loader';
+import { RecoilRoot, useRecoilState } from 'recoil';
 
 //
 // ─── LOADER ─────────────────────────────────────────────────────────────────────
@@ -15,7 +16,9 @@ Loader.init()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <RecoilRoot>
+        <App />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
