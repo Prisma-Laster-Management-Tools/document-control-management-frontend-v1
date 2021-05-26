@@ -1,24 +1,23 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { Button } from 'antd';
 
 export const NavTop = styled.div`
-    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left : 280px;
-    padding-right : 280px;
-    
-    position: absolute;
+    padding-left: 280px;
+    padding-right: 280px;
+
+    position: relative;
     width: 100%;
     height: 80px;
 
     background: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 
-    z-index:1000; 
-`
+    z-index: 1000;
+`;
 export const RegisZone = styled.div`
     /* Regis zone */
     /* Auto Layout */
@@ -35,14 +34,13 @@ export const RegisZone = styled.div`
     order: 1;
     flex-grow: 0;
     margin: 0px 10px;
-
-`
+`;
 
 export const LogoName = styled.h1`
     margin-top: 10px;
     font-size: 30px;
     color: goldenrod;
-`
+`;
 export const LoginBtn = styled(Button)`
     margin-left: 20px;
 
@@ -55,19 +53,19 @@ export const LoginBtn = styled(Button)`
     color: white;
     box-shadow: none;
     border-radius: 10px;
-    &:hover{
+    &:hover {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-    &:focus{
+    &:focus {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-`
+`;
 export const RegisterBtn = styled(Button)`
     font-family: 'Kanit', sans-serif;
     font-size: 15px;
@@ -78,20 +76,19 @@ export const RegisterBtn = styled(Button)`
     color: goldenrod;
     box-shadow: none;
     border-radius: 10px;
-    &:hover{
+    &:hover {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-    &:focus
-    {
+    &:focus {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-`
+`;
 
 export const LogoPrima = styled.div`
     /* border: 1px solid #555; */
@@ -102,4 +99,4 @@ export const LogoPrima = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 1001;
-`
+`;
