@@ -18,6 +18,13 @@ import { CreateClassWithEmbeddedState } from './core/recoil/transformation/class
 import { authenticationState } from './store/recoil/authentication/authentication.atom';
 import { loadingScreenState } from './store/recoil/loading-screen/loading-screen.atom';
 
+//
+// ─── MOMENT ─────────────────────────────────────────────────────────────────────
+//
+import 'moment/locale/th';
+import 'moment-timezone';
+// ────────────────────────────────────────────────────────────────────────────────
+
 function App() {
   //
   // ─── STORING RECOIL REF ─────────────────────────────────────────────────────────
