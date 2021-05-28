@@ -24,6 +24,7 @@ import { loadingScreenState } from './store/recoil/loading-screen/loading-screen
 import 'moment/locale/th';
 import 'moment-timezone';
 import Feedbacksurvey from './components/pages/unauthorized/Feedbacksurvey';
+import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 // ────────────────────────────────────────────────────────────────────────────────
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
             <Route path="/sales" exact component={Sales}/>
             <Route path="/feedback" exact component={Feedback}/>
             <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
+
+            <Route path="/product-add" exact component={Productadd}/>
           </Switch>
       </Router>
   );
