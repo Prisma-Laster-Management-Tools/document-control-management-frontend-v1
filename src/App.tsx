@@ -25,6 +25,7 @@ import 'moment/locale/th';
 import 'moment-timezone';
 import Feedbacksurvey from './components/pages/unauthorized/Feedbacksurvey';
 import Productadd from './components/pages/authorized/Product/views/ProductAdd';
+import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 // ────────────────────────────────────────────────────────────────────────────────
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
             <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
 
             <Route path="/product-add" exact component={Productadd}/>
+            <Route path="/pr-order" exact component={Prorder}/>
           </Switch>
       </Router>
   );
