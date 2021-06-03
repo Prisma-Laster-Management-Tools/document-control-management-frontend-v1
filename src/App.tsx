@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+// import Dashboard from './components/pages/authorized/Dashboard';
 import Feedback from './components/pages/authorized/Deliberation/views/Feedback';
 import Sales from './components/pages/authorized/Deliberation/views/Sales';
 import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
@@ -27,6 +28,7 @@ import Feedbacksurvey from './components/pages/unauthorized/Feedbacksurvey';
 import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
+import Dashboard from './components/pages/authorized/Dashboard/views';
 // ────────────────────────────────────────────────────────────────────────────────
 
 function App() {
@@ -59,9 +61,10 @@ function App() {
             <Route path="/feedback" exact component={Feedback}/>
             <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
 
+            <Route path="/dashboard" exact component={Dashboard}/>
             <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/product-add" exact component={Productadd}/>
-            <Route path="/pr-order" exact component={Prorder}/>
+            <Route path="/pr-order" exact component={Prorder}/>            
           </Switch>
       </Router>
   );
