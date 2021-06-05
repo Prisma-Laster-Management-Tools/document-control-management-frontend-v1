@@ -29,6 +29,7 @@ import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
 import Dashboard from './components/pages/authorized/Dashboard/views';
+import Recruitment from './components/pages/authorized/Recruitment';
 // ────────────────────────────────────────────────────────────────────────────────
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
             <Route path="/sales" exact component={Sales}/>
             <Route path="/feedback" exact component={Feedback}/>
             <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
-
+            <Route path="/recruitment" exact component={Recruitment}/>
             <Route path="/dashboard" exact component={Dashboard}/>
             <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/product-add" exact component={Productadd}/>
