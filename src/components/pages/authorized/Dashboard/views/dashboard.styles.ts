@@ -89,7 +89,7 @@ export const MidBody = styled.div`
     padding: 60px 20px 20px 20px;
     width: 920px;
     //height: 55rem;
-    background-color: rgba(97, 208, 255, 0.2);
+    //background-color: rgba(97, 208, 255, 0.2);
 
     display: flex;
     flex-direction: column;
@@ -105,7 +105,7 @@ export const MidTopContainer = styled.div`
     height: 10vh;
     padding: 20px 20px 20px 20px;
 
-    background-color: pink;
+    //background-color: pink;
 
     display: flex;
     flex-direction: row;
