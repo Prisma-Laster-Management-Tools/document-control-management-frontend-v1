@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../../../common/navbar'
+import Navbar from '../../../../common/navbar'
 import { Divider, Dropdown, Menu} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { DropTextSelect, GeneratedLinkText, GenLinkBTN, GenLinkContainer, RCFnameText, RCInnerTextContainer, RCInputContainer, RCInputText2, RCText, RCTextHeader, RecruitmentContainer } from './Recruitment.styles'

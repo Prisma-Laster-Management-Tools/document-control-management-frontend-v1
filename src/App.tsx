@@ -29,7 +29,7 @@ import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
 import Dashboard from './components/pages/authorized/Dashboard/views';
-import Recruitment from './components/pages/authorized/Recruitment';
+import Recruitment from './components/pages/authorized/Recruitment/views';
 // ────────────────────────────────────────────────────────────────────────────────
 
 function App() {
