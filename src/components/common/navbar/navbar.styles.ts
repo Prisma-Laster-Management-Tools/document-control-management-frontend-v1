@@ -142,6 +142,7 @@ export const IconMenuOutline = styled.div`
 
 export const NameTop = styled.div`
     font-size: 20px;
+    font-weight: 600;
     color: #555555;
     //border: 1px solid green;
     margin-right: 1rem;
