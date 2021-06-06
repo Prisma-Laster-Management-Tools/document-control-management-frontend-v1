@@ -1,7 +1,7 @@
 import React from 'react'
 import { Drawer, Divider} from 'antd';
 import { AppstoreOutlined, SettingOutlined, MedicineBoxOutlined} from '@ant-design/icons';
-import { NavTop, LoginBtn, RegisterBtn, RegisZone, LogoPrima, IconMenuOutline, NameTop, IconContainer, DrawerContainer, ListItemContainer, DrawerListText } from './navbar.styles'
+import { NavTop, LoginBtn, RegisterBtn, RegisZone, LogoPrima, IconMenuOutline, NameTop, IconContainer, DrawerContainer, ListItemContainer, DrawerListText, DrawerOutside } from './navbar.styles'
 
 
 export default function Navbar() {
@@ -27,19 +27,27 @@ export default function Navbar() {
                 onClose={onClose}
                 visible={visible}
                 width={500}
-            >
-                <DrawerContainer>
+            >   
+                <DrawerOutside>
+                    <div>
+                    <DrawerContainer>
 
-                    <Divider />
-                    <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
-                    <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
-                    <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
-                    <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
-                    
-                </DrawerContainer>
-                <Divider />
-                <ListItemContainer><MedicineBoxOutlined /><DrawerListText>Help Center</DrawerListText></ListItemContainer>
-                    <ListItemContainer><SettingOutlined /><DrawerListText>Settings</DrawerListText></ListItemContainer>
+                        <Divider />
+                        <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
+                        <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
+                        <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
+                        <ListItemContainer><AppstoreOutlined /><DrawerListText>Dashboard</DrawerListText></ListItemContainer>
+                        
+                        
+                    </DrawerContainer>
+                    </div>
+
+                    <div>
+                        <Divider />
+                        <ListItemContainer><MedicineBoxOutlined /><DrawerListText>Help Center</DrawerListText></ListItemContainer>
+                        <ListItemContainer><SettingOutlined /><DrawerListText>Settings</DrawerListText></ListItemContainer>
+                    </div>
+                </DrawerOutside>
             </Drawer>
         </NavTop>
 
