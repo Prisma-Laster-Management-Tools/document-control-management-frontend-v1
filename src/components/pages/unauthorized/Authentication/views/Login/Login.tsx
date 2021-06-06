@@ -2,9 +2,9 @@ import React from 'react'
 import API_instance from '../../../../../../core/axios/instance'
 import Navbar from '../../../../../common/navbar'
 import { API_Login } from '../../apis/authentication'
-import { BgContainer, InputValue, LoginBtn, LoginContainer, LoginText, TextP } from './login.styles'
+import { ColPic1, ColPic2, InputValue, LoginBtn, LoginContainer, LoginPic, LoginPicContainer, LoginText, MainContainer, RowStyle, TextP } from './login.styles'
 
-import { Typography, message } from 'antd';
+import { Typography, message , Row, Col} from 'antd';
 import LoadingIndicator from '../../../../../common/loading-indicator'
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
 import { Authentication } from '../../../../../../core/authentication/Authentication'
@@ -35,8 +35,9 @@ export default function Login(props:any) {
             await sleep(1000)
             if(authState.isAuthenticated){
                 props.history.push('/dashboard')
-                LoadingScreen.hide_loading_screen()
+                
             }
+            LoadingScreen.hide_loading_screen()
         })()
     },[authState])
     // ────────────────────────────────────────────────────────────────────────────────
@@ -95,25 +96,53 @@ export default function Login(props:any) {
     }
     return (
         <>
-            <Navbar/>
-            <BgContainer/>
-            <LoginContainer>
-                <LoginText>ลงชื่อเข้าใช้</LoginText>
-                <TextP fontSize={24}>อีเมล์</TextP>
-                <InputValue value={credentialInput.email} onChange={(event) => {
-                    setCredentialInput(prevState => ({...prevState,email:event.target.value}))
-                }}/>
-                {UI_RenderErrorText('email')}
-                <TextP fontSize={24}>รหัสผ่าน</TextP>
-                <InputValue onChange={(event) => {
-                    setCredentialInput(prevState => ({...prevState,password:event.target.value}))
-                }}/>
-                {UI_RenderErrorText('password')}
-                <TextP fontSize={18}>ไอดี คือที่อยู่อีเมลที่คุณใช้ยืนยันตัวตนกับบริษัทแล้วเพื่อใช้ เข้าสู่ระบบ</TextP>
-                <LoginBtn onClick={() => {
-                    onLoggingIn()
-                }}>{rendered_confirm_text}</LoginBtn>
-            </LoginContainer>
+            <MainContainer>
+                <Navbar />
+                <RowStyle>
+                    <ColPic1 xs={24} sm={24} md={12}>
+                        <LoginPicContainer>
+                            <LoginPic/>
+                        </LoginPicContainer>
+                    </ColPic1>
+
+                    <Col xs={24} sm={24} md={12}
+                    style={{
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center"
+                    }}
+                    >
+                    
+                    <LoginContainer>
+                        <LoginText>ลงชื่อเข้าใช้</LoginText>
+                        <TextP fontSize={20}>อีเมล์</TextP>
+                        <InputValue value={credentialInput.email} onChange={(event) => {
+                            setCredentialInput(prevState => ({...prevState,email:event.target.value}))
+                        }}/>
+                        {UI_RenderErrorText('email')}
+                        <TextP fontSize={20}>รหัสผ่าน</TextP>
+                        <InputValue onChange={(event) => {
+                            setCredentialInput(prevState => ({...prevState,password:event.target.value}))
+                        }}/>
+                        {UI_RenderErrorText('password')}
+                        <TextP fontSize={14}>ไอดี คือที่อยู่อีเมลที่คุณใช้ยืนยันตัวตนกับบริษัทแล้วเพื่อใช้ เข้าสู่ระบบ</TextP>
+                        <LoginBtn onClick={() => {
+                            onLoggingIn()
+                        }}>{rendered_confirm_text}</LoginBtn>
+                    </LoginContainer>
+                    
+                    </Col>
+
+                    <ColPic2 xs={24} sm={24} md={12}>
+                        <LoginPicContainer>
+                            <LoginPic/>
+                        </LoginPicContainer>
+                    </ColPic2>
+
+                </RowStyle>
+
+                
+            </MainContainer>
         </>
     )
 }

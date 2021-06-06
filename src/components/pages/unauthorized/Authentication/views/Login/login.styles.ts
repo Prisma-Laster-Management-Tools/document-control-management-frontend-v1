@@ -1,44 +1,37 @@
 import styled from '@emotion/styled';
-import { Button } from 'antd';
-import bg_image from '../../../../../../assets/main_background.jpg';
+import { Button, Row, Col } from 'antd';
+import login_image from './assets/login_image.jpg';
 
-///// Background /////
-export const BgContainer = styled.div`
-  position: absolute;
+
+export const MainContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url(${bg_image});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-`;
+  ////////////////////////////////////  *****************************************************
+  overflow: hidden;
+  @media (max-width:768px){
+    overflow-y: auto;
+  }
+  font-family: 'Kanit', sans-serif;
+`
 
 //// Other /////
 export const LoginContainer = styled.div`
-  /* LoginContainer */
-  /* Auto Layout */
   width: 100%;
-  height: 100vh;
+  //height: calc(100% - 4rem);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  align-content: center;
-  padding: 80px 280px 0px 280px;
-`;
+  align-items: center;
+
+ // border: 1px solid violet;
+` 
 export const LoginText = styled.h1`
   /* ลงชื่อเข้าใช้ */
 
-  width: 400px;
-  height: 57px;
-
-  font-family: 'Kanit', sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 48px;
-  line-height: 24px;
+  font-size: 30px;
   /* or 50% */
 
   color: #444444;
@@ -51,49 +44,40 @@ export const LoginText = styled.h1`
 `;
 export const TextP = styled.p<{ fontSize: number }>`
   /* ไอดี */
-  width: 420px;
-  height: 48px;
-
-  font-family: 'Kanit', sans-serif;
+  width: 60%;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: ${(props) => props.fontSize}px;
-  line-height: 24px;
+  line-height: 18px;
   /* or 100% */
-
+  
   display: flex;
   align-items: center;
 
   color: #707070;
-
-  /* Inside Auto Layout */
-
-  flex: none;
-  //order: 1;
-  flex-grow: 0;
-  margin: 5px 10px;
+  margin: 10px 10px 10px 0px;
 `;
 export const InputValue = styled.input`
   /* Rectangle 1 */
 
-  width: 440px;
-  height: 65px;
+  width: 60%;
+  height: 45px;
   left: 280px;
   top: 369px;
 
   border: 3px solid #f2c94c;
-  border-radius: 20px;
+  border-radius: 10px;
 
   /* Inside Auto Layout */
-
+  padding: 0rem 1rem 0rem 1rem;
   flex: none;
   //order: 1;
   flex-grow: 0;
-  margin: 0px 0px;
+  margin: 1rem 0rem 1rem 0rem;
 `;
 export const LoginBtn = styled(Button)`
   /* Login Button 1 */
-  width: 440px;
+  width: 30%;
   height: 65px;
 
   /* Inside Auto Layout */
@@ -107,10 +91,9 @@ export const LoginBtn = styled(Button)`
   border: 3px solid #f2c94c;
   border-radius: 20px;
 
-  font-family: 'Kanit', sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 24px;
   color: white;
   /* or 100% */
@@ -126,4 +109,43 @@ export const LoginBtn = styled(Button)`
     border: none;
     box-shadow: none;
   }
-`;
+`
+export const LoginPicContainer = styled.div`
+    width: 100%;
+    height: calc(100% - 4rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //padding: 4rem 0rem 4rem 0rem ;
+    //border: 1px solid red;
+`
+
+export const LoginPic = styled.div`
+    //border: 1px solid #555;
+    width: 100%;
+    height: 100%;
+    background-image: url('${login_image}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    //z-index: 1001;
+    //margin-bottom: 1rem;
+`
+export const RowStyle = styled(Row)`
+  height: 100%;
+`
+
+export const ColPic1 = styled(Col)`
+  display: none;
+  @media (max-width:768px){
+    display: block;
+    height: 400px;
+  }
+`
+export const ColPic2 = styled(Col)`
+  display: block;
+  @media (max-width:768px){
+    display: none;
+  }
+`
+
