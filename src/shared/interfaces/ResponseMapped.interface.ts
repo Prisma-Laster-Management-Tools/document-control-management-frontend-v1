@@ -1,6 +1,6 @@
 export interface IResponseMapped<T = any> {
-  success: boolean;
-  data?: T;
-  message?: string;
-  error_type?: 'validation' | 'authorization';
+    success: boolean;
+    data?: T;
+    message?: string;
+    error_type?: 'validation' | 'authorization' | 'unknown' | 'no-connection';
 }
