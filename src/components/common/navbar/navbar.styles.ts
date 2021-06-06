@@ -149,9 +149,16 @@ export const NameTop = styled.div`
 `
 
 /////////////////   Drawer  ////////////////////
+export const DrawerOutside = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
 export const DrawerContainer = styled.div`
     width: 28.5rem;
-    height: 45rem;
+    //height: 45rem;
     //background-color: #f9f9f9;
 
     display: flex;
