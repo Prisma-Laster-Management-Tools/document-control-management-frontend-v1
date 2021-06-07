@@ -1,18 +1,6 @@
 import styled from '@emotion/styled'
 import { Button, List} from 'antd';
-import bg_image from '../../../../../../assets/main_background.jpg'
 
-///// Background /////
-export const BgContainer = styled.div`
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-image: url(${bg_image});
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-`
 /////////   Button Generate Link ///////////
 export const GenLinkContainer = styled.div`
     font-family: 'Kanit', sans-serif;
@@ -32,7 +20,6 @@ export const GenPopContainer = styled.div`
     width: 400px;
     height: 40px;
     //background-color: gray;
-    padding: 10;
 
     display: flex;
     flex-direction: row;
@@ -77,7 +64,7 @@ export const GenPopCopyBtn = styled(Button)`
 export const GenBtn = styled(Button)`
 
     font-family: 'Kanit', sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     width: 400px;
     height: 60px;
     border: none;
@@ -98,6 +85,9 @@ export const GenBtn = styled(Button)`
         border: none;
         box-shadow: none;
     }
+    @media (max-width:768px){
+        font-size: 16px;
+    }
 `
 
 ///////////  Container  ////////////////
@@ -105,11 +95,15 @@ export const FeedbackContainer = styled.div`
     width: 100%;
     height: 100vh;
     opacity: 0.8;
-    padding: 80px 150px 0px 150px;
+    padding: 0px 150px 0px 150px;
 
-    //background-color: green;
+   // background-color: green;
     display: flex;
     flex-direction: column;
+    //overflow: hidden;
+    @media (max-width:768px){
+        font-size: 12px;
+    }
 
 `
 export const TopInnerContainer = styled.div`
@@ -120,19 +114,21 @@ export const TopInnerContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 `
-export const TableContainer = styled.div`
-    width: 100%;
-    height: 120px;
-    //background-color: gray;
-`
+
 export const MainFeedbackContainer = styled.div`
     width: 100%;
-    height: 500px;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     overflow-y: auto;
-    padding: 50px 50px 50px 50px;
+    padding: 0px 50px 0px 50px;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
     //border: 1px solid black;
+    @media (max-width:768px){
+        font-size: 12px;
+    }
 `
 
 export const ContainerBox = styled.div`
@@ -141,45 +137,58 @@ export const ContainerBox = styled.div`
     justify-content: space-around;
     
     width: 100%;
-    height: 100%;
+    height: 80%;
     //background-color: #44FFD2;
     //border: 1px solid red;
     font-family: 'Kanit', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
-
+    
     padding: 20px;
 `
 export const CommentBox = styled.div`
     width: 100%;
-    height: 100px;
-    margin-top: 10px;
+    height: 100%;
+    margin-top: 20px;
     border: 1px solid #616163;
     border-radius: 20px;
     padding: 20px;
-    font-size: 18px;
+    font-size: 16px;
     //background-color: ;
+    @media (max-width:768px){
+        font-size: 12px;
+    }
+    
 `
 export const InsideHeaderContainer = styled.div`
     width: 100%;
+    height: 50%;
     //background-color: gray;
-    justify-content: center;
-    //border: 1px solid #616163;
-    //padding: 20px;
-
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
+    //border: 1px solid #616163;
+    //padding: 20px;
 `
 export const ColonText = styled.p`
     margin: 0px 20px 0px 20px;
 `
-export const HeaderText = styled.p`
+export const HeaderText = styled.div`
     width: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 600;
+    font-size: 16px;
     //color: #ec9a29;
     //border: 1px solid #616163;
+    @media (max-width:810px){
+        font-size: 12px;
+    }
+    user-select: none;
 `
 
 ///////////  Component  ////////////////
@@ -187,64 +196,63 @@ export const FeedbackText = styled.h1`
     font-family: 'Kanit', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 48px;
+    font-size: 36px;
     color: #444444;
     margin-top: 40px;
+    @media (max-width:768px){
+        font-size: 24px;
+    }
+    user-select: none;
 `
 
 //////////  Table Zone //////////////
-export const Table = styled.table`
+export const TableContainer = styled.div`
+    width: 100%;
+    //height: 120px;
+    //background-color: gray;
+    margin-bottom: 1rem;
 `
 
-export const TheadHeader = styled.thead`
-    text-align: left; 
+export const TableFeed = styled.div`
 `
+
 export const TrHeader = styled.tr`
+    width: 100%;
     display: flex;
     flex-direction: row;
+    //border: 1px solid green;
     //box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    user-select: none;
 `
 export const ThHeader = styled.th<{width: number}>`
-    width: ${props=>props.width}px;
-    height: 50px;
+    width: ${props=>props.width}%;
+    height: 10%;
 
     background-color: #F2C94C; 
     
     font-family: 'Kanit', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 45px;
 
     padding-left: 15px;
     text-align: left;
     color: #454545;
-    //border: 1px solid black;
-`
-export const ThHeaderUniq = styled.th<{width: number}>`
-    width: ${props=>props.width}px;
-    height: 50px;
-
-    background-color: #F2C94C; 
-    
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 45px;
-
-    text-align: center;
-    color: #454545;
-    //border: 1px solid black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    //border: 1px solid blue;
+    @media (max-width:1180px){
+        font-size: 14px;
+    }
+    user-select: none;
 `
 
 ///// Table Content //// 
 
 export const BodyWrapper = styled.div`
-    //width:100%;
-    height: 600px;
-    //table-layout: fixed;
-    //border: 1px solid black;
+    
+    //height: 600px;
+    border: 1px solid black;
     overflow-y: auto;
 
     ::-webkit-scrollbar {
@@ -266,7 +274,7 @@ export const BodyWrapper = styled.div`
     
 `
 export const TbodyContent = styled.tbody`
-    height: 100%;
+
     padding: 20px 15px;
     text-align: left;
     font-weight: 500;
@@ -282,22 +290,24 @@ export const TbodyContent = styled.tbody`
 `
 
 export const TrContent = styled.tr`
+    width: 100%;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgba(220, 220, 200, 1);
     &:hover{
         cursor: pointer;
     }
+    user-select: none;
 `
 
-export const TdContent = styled.td`
-    height: 40px;
-    background-color: wheat; 
+export const TdContent = styled.td<{width: number}>`
+    width: ${props=>props.width}%;
+    background-color: white; 
 
     font-family: 'Kanit', sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 35px;
 
     padding-left: 15px;
@@ -305,23 +315,10 @@ export const TdContent = styled.td`
     color: black;
     //border: 1px solid black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-`
-
-export const TdContentUniq = styled.td`
-    height: 40px;
-    background-color: wheat; 
-
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 35px;
-
-    //padding-left: 15px;
-    text-align: center;
-    color: black;
-    //border: 1px solid black;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    @media (max-width:1180px){
+        font-size: 14px;
+    }
 `
 
 //////////// Feedback List //////////////
