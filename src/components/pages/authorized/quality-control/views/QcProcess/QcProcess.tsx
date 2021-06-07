@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pagination, Divider } from 'antd';
-import { CheckCircleFilled } from '@ant-design/icons';
+import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import Navbar from '../../../../../common/navbar'
 import { BtnWithImage, BtnWithImage2, CheckBtnContainer, InfoTextBox, InsideBtn, PicCon, PicDefault, QcBtn, QcPicText, QcProcessBodyMainContainer, QcProcessDetailContainer, QcProcessMainContainer, QcProcessPictureContainer, QcTextD, QcTextR, TextInsideBoxInfo } from './QcProcess.styles'
 
@@ -16,17 +16,18 @@ export default function Qc() {
                             <PicDefault/>
                         </PicCon>
                     </QcProcessPictureContainer>
-                    <Divider type="vertical" style={{height:"48rem"}}/>
+                    <Divider type="vertical" style={{height:"90%"}}/>
                     <QcProcessDetailContainer>
                         <QcTextD>ขั้นตอน</QcTextD>
                         <Pagination simple defaultCurrent={1} current={1} pageSize={1} total={5} />
+                        <Divider style={{width:"90%"}}/>
                         <QcTextR>รายละเอียด</QcTextR>
                         <InfoTextBox>
                             <TextInsideBoxInfo>ยาว 2 มิลลิเมตร</TextInsideBoxInfo>
                         </InfoTextBox>
                         <CheckBtnContainer>
                             <BtnWithImage>
-                                <CheckCircleFilled style={{color: 'white'}}/>
+                                <CloseCircleFilled style={{color: 'white'}}/>
                                 <InsideBtn>ไม่ผ่าน</InsideBtn>
                             </BtnWithImage>
                             <BtnWithImage2>
@@ -34,7 +35,7 @@ export default function Qc() {
                                 <InsideBtn>ผ่าน</InsideBtn>
                             </BtnWithImage2>
                         </CheckBtnContainer>
-                        {/* <QcBtn>ยืนยัน</QcBtn> */}
+                        {/* <QcBtn>ยืนยัน</QcBtn> ///////////////// */} 
                     </QcProcessDetailContainer>
                 </QcProcessBodyMainContainer>
             </QcProcessMainContainer>
