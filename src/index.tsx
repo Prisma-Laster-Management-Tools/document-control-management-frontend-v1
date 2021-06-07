@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import 'antd/dist/antd.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './core/loader';
 import { RecoilRoot, useRecoilState } from 'recoil';
 

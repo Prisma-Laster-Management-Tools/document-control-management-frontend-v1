@@ -29,9 +29,16 @@ import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
 import Dashboard from './components/pages/authorized/Dashboard/views';
-import Recruitment from './components/pages/authorized/Recruitment/views';
+import Recruitment from './components/pages/authorized/Recruitment/views/RecruitmentGeneration';
 import Registration from './components/pages/unauthorized/Recruitment/views/Registration';
 // ────────────────────────────────────────────────────────────────────────────────
+
+//
+// ─── TOASTIFY ───────────────────────────────────────────────────────────────────
+//
+import { ToastContainer, toast } from 'react-toastify';
+// ────────────────────────────────────────────────────────────────────────────────
+
 
 function App() {
   //
@@ -69,6 +76,8 @@ function App() {
             <Route path="/product-add" exact component={Productadd}/>
             <Route path="/pr-order" exact component={Prorder}/>            
           </Switch>
+          <ToastContainer />
+          
       </Router>
   );
 }
