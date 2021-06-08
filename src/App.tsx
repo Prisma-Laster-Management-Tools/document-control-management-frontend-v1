@@ -68,7 +68,7 @@ function App() {
             <Route path="/login" exact component={Login}/>
             <Route path="/sales" exact component={Sales}/>
             <Route path="/feedback/:id" exact component={Feedback}/>
-            <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
+            <Route path="/feedback-survey/:access_token" exact component={Feedbacksurvey}/>
             <Route path="/recruitment" exact component={Recruitment}/>
             <Route path="/registration/:access_token" exact component={Registration}/>
             <Route path="/dashboard" exact component={Dashboard}/>

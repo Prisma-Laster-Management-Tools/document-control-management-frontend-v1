@@ -24,8 +24,11 @@ export interface IFeedbackData {
     worthiness_rating_score: number | null;
     delivery_rating_score: number | null;
     service_rating_score: number | null;
-    feedback_str: number | null;
+    feedback_str: string | null;
     access_token: string;
     createdAt: string;
     updatedAt: string;
+    sales: ISaleData;
 }
+
+export type TFeedbackCreationDTO = Omit<IFeedbackData, 'id' | 'createdAt' | 'updatedAt' | 'sales'>;
