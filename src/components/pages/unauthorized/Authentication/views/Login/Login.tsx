@@ -27,6 +27,20 @@ export default function Login(props:any) {
     const [authState,setAuthState] = useRecoilState(authenticationState)
 
     //
+    // ─── DIDMOUNT ───────────────────────────────────────────────────────────────────
+    //
+    React.useEffect(() => {
+        if(!props.location.state) return
+        const passed_email = props.location.state.email
+        if(passed_email){
+            // if just redirected from registration page -> automatic fill the email
+            setCredentialInput(prevState => ({...prevState,email:passed_email }))
+        }
+    },[])
+    // ────────────────────────────────────────────────────────────────────────────────
+
+
+    //
     // ─── REDIRECTION IF ALREADY AUTHENTICATED ───────────────────────────────────────
     //
     React.useEffect(() => {

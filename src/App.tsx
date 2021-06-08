@@ -70,7 +70,7 @@ function App() {
             <Route path="/feedback" exact component={Feedback}/>
             <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
             <Route path="/recruitment" exact component={Recruitment}/>
-            <Route path="/registration" exact component={Registration}/>
+            <Route path="/registration/:access_token" exact component={Registration}/>
             <Route path="/dashboard" exact component={Dashboard}/>
             <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/product-add" exact component={Productadd}/>
