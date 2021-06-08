@@ -9,6 +9,12 @@ export async function API_GetAllSalesData() {
     return mapped_response;
 }
 
+export async function API_GetSalesData(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get(`/api/sales/${id}`); // fetch all with no pagination
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
 export async function API_CreateSaleData(sale_data: CreateSaleDataDTO) {
     const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/sales', sale_data);
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });

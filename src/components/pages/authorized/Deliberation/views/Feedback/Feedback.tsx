@@ -4,8 +4,8 @@ import Ratingstar from '../../../../../common/Ratingstar';
 import { BodyWrapper, TbodyContent, TdContent,TrContent, FeedbackContainer, FeedbackText, MainFeedbackContainer, TableContainer, ThHeader, TopInnerContainer, TrHeader, FeedbackList, ContainerBox, CommentBox, InsideHeaderContainer, ColonText, HeaderText, GenLinkContainer, GenBtn, GenPopContainer, GenPopTextBox, GenPopCopyBtn, TableFeed} from './feedback.styles'
 import { message, Popover } from 'antd';
 import { useParams } from 'react-router-dom';
-import { API_CreateFeedbackAccessToken, API_GetFeedbackData } from '../../apis/deliberation.api';
-import { IFeedbackData } from '../../shared/interfaces/deliberation.interfaces';
+import { API_CreateFeedbackAccessToken, API_GetFeedbackData, API_GetSalesData } from '../../apis/deliberation.api';
+import { IFeedbackData, ISaleData } from '../../shared/interfaces/deliberation.interfaces';
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader';
 import copy from 'clipboard-copy'
 const LINK_PREFIX = 'http://localhost:3001/feedback-survey/'
@@ -13,6 +13,7 @@ export default function Feedback(props:any) {
     const [hasFeedback, setHasFeedback] = React.useState(false);
     const [generatedAccessLink,setGeneratedAccessLink] = useState('') 
     const [feedbackData,setFeedbackData] = useState<IFeedbackData|null>(null)
+    const [saleData,setSaleData] = useState<ISaleData | null>(null)
     const [isLoading,setIsLoading] = useState(false)
 
     const [visible, setVisible] = React.useState(false)
@@ -32,6 +33,16 @@ export default function Feedback(props:any) {
             //failed
         }
         setIsLoading(false)
+    }
+
+    async function fetchSaleData(){
+        const sales_id = parseInt(RouteParams.id)
+        const mapped_response = await API_GetSalesData(sales_id)
+        if(mapped_response.success){
+            setSaleData(mapped_response.data)
+        }else{
+            // failed to fetch sales data
+        }
     }
 
     async function fetchFeedbackData(){
@@ -60,6 +71,7 @@ export default function Feedback(props:any) {
     // ─── ON MOUNT ───────────────────────────────────────────────────────────────────
     //
     useEffect(() => {
+        fetchSaleData()
         fetchFeedbackData()
     },[])
     // ────────────────────────────────────────────────────────────────────────────────
@@ -131,11 +143,11 @@ export default function Feedback(props:any) {
                                 <th> ซีเรียลนัมเบอร์ (S/N) </th> */}
                             </TrHeader>
                             <TrContent>
-                                <TdContent width={20}>Thiti Mahawannakit</TdContent>
-                                <TdContent width={20}>-</TdContent>
-                                <TdContent width={20}>02-487-8822</TdContent>
-                                <TdContent width={20}>หมวกสมาร์ท</TdContent>
-                                <TdContent width={30}>BK0207442087</TdContent>
+                                <TdContent width={20}>{saleData?.customer_name}</TdContent>
+                                <TdContent width={20}>{"-"}</TdContent>
+                                <TdContent width={20}>{"-"}</TdContent>
+                                <TdContent width={20}>{saleData?.product_name}</TdContent>
+                                <TdContent width={30}>{saleData?.serial_number}</TdContent>
                             </TrContent>
                     </TableFeed>
                 </TableContainer>

@@ -140,7 +140,7 @@ export default function Sales(props:any) {
                             <ListSigleContainer><ListHeaderText>สินค้า</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>{currentFocusSaleData?.product_name}</ListDetailText></ListSigleContainer>
                             <ListSigleContainer><ListHeaderText>ซีเรียลนัมเบอร์ (S/N)</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>{currentFocusSaleData?.serial_number}</ListDetailText></ListSigleContainer>
                             <ListSigleContainer><ListHeaderText>ลูกค้า</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>{currentFocusSaleData?.customer_name}</ListDetailText></ListSigleContainer>
-                            <ListSigleContainer><ListHeaderText>วันที่ขาย</ListHeaderText><ListColonText>:</ListColonText><ListDetailText><Moment format="D MMM YYYY" withTitle>{currentFocusSaleData?.issued_at}</Moment></ListDetailText></ListSigleContainer>
+                            <ListSigleContainer><ListHeaderText>วันที่ขาย</ListHeaderText><ListColonText>:</ListColonText><ListDetailText><Moment format="D MMM YYYY" withTitle>{currentFocusSaleData!.issued_at}</Moment></ListDetailText></ListSigleContainer>
                             <ListSigleContainer><ListHeaderText>ราคา</ListHeaderText><ListColonText>:</ListColonText><ListDetailText>{currentFocusSaleData?.price}</ListDetailText></ListSigleContainer>
                         </ListTextDetailContainer>
                        

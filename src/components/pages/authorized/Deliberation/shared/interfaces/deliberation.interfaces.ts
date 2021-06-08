@@ -7,6 +7,7 @@ export interface ISaleData {
     price: number;
     createdAt: string;
     updatedAt: string;
+    feedback: IFeedbackData | null;
 }
 
 export interface CreateSaleDataDTO {
