@@ -38,6 +38,8 @@ export async function transformDataFromAxiosPromiseToReadableFormat($axios_promi
             }
         } else if (statusCode === 401) {
             error_type = 'authorization';
+        } else if (statusCode === 404) {
+            error_type = 'not-found';
         }
 
         if (is_on_fail_has_wildcard_extraction) {
