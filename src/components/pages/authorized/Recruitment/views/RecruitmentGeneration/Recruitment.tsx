@@ -65,8 +65,9 @@ export default function Recruitment() {
             message.info("ลิ่งสำหรับเข้าสมัครสู่เว็บไซต์ ได้ถูกก๊อปปี้ไปที่คลิปบอร์ดแล้ว")
             // ─────────────────────────────────────────────────────────────────
 
-        }} value={generatedLink}/>
-    </> : null
+        }}>
+            {generatedLink}
+    </GeneratedLinkText> </>: null
     return (
         <>
             <Navbar/>

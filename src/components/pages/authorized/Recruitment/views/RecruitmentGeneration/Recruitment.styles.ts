@@ -34,7 +34,7 @@ export const RCTextHeader = styled.p`
 `;
 
 export const GenLinkBTN = styled(Button)`
-    width: 10rem;
+    width: 30%;
     height: 3rem;
     font-size: 16px;
     background-color: #454545;
@@ -56,9 +56,12 @@ export const GenLinkBTN = styled(Button)`
     }
     user-select: none;
 `;
-export const GeneratedLinkText = styled.input`
-    width: 30rem;
+export const GeneratedLinkText = styled.div`
+    width: auto;
     height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 1rem 0rem 1rem 0rem;
     padding: 0rem 1rem 0rem 1rem;
     //background-color: white;
@@ -91,9 +94,10 @@ export const RCInputContainer = styled.div`
 `;
 export const RCInnerTextContainer = styled.div`
     width: 12.5rem;
+    height: 3.5rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 `;
 export const RCInputText2 = styled.input`
     padding: 2px 10px 2px 10px;
@@ -104,17 +108,20 @@ export const RCInputText2 = styled.input`
     //height: 95%;
     border: 0.5px solid #d9d9d9;
     border-radius: 0.1rem;
+    user-select: none;
 `;
 export const RCText = styled.text`
     font-size: 16px;
     user-select: none;
+    user-select: none;
 `;
 
 export const RCFnameText = styled.text`
-    padding-top: 0.3rem;
+    padding-top: 0.5rem;
     padding-left: 0.5rem;
     font-size: 10px;
     color: #b9b9b9;
+    user-select: none;
 `;
 
 //

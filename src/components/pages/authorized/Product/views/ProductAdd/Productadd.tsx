@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../../../../common/navbar'
 import { Menu, Upload, Divider , Button, Dropdown } from 'antd';
 import { DownOutlined, UserOutlined, UploadOutlined , InboxOutlined } from '@ant-design/icons';
-import { BoxContainer2, BoxContainer, ProductMainContainer, UploadImage, NoteText, UploadfileBtn, ReportText, AddText, SelectText, SelextManualContainer, SelectText2, SelectTextSN, ErrorText } from './Productadd.styles'
+import { BoxContainer2, BoxContainer, ProductMainContainer, UploadImage, NoteText, UploadfileBtn, ReportText, AddText, SelectText, SelextManualContainer, SelectText2, SelectTextSN, ErrorText, UploadImageCon, DiviDIV } from './Productadd.styles'
 
 export default function Productadd() {
     const props = {
@@ -43,8 +43,12 @@ export default function Productadd() {
 
             {/* ADD WITH FILE */}
                 <BoxContainer>
-                    <UploadImage/>
-                    <Upload {...props}>
+                    <UploadImageCon>
+                      <UploadImage/>
+                    </UploadImageCon>
+                    <Upload {...props}
+                    style={{width:"100%", color:"black"}}
+                    >
                         <Button icon={<UploadOutlined />}>เลือกไฟล์อัพโหลด</Button>
                     </Upload>
                     <ReportText>จำนวนของลิสต์สินค้าที่ตรวจสอบได้ จำนวน : 23 รายการ</ReportText>
@@ -56,6 +60,9 @@ export default function Productadd() {
             {/* ADD MANUAL */}
                 <BoxContainer2>
                     <AddText>เพื่มข้อมูลจากประเภทในระบบ</AddText>
+                    <DiviDIV>
+                      <Divider />
+                    </DiviDIV>
                     <SelectText>เลือกผลิตภัณฑ์</SelectText>
                     <SelextManualContainer>
                         <Dropdown overlay={menu}>
