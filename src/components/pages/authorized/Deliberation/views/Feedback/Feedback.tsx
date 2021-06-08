@@ -1,18 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../../../../common/navbar'
 import Ratingstar from '../../../../../common/Ratingstar';
 import { BodyWrapper, TbodyContent, TdContent,TrContent, FeedbackContainer, FeedbackText, MainFeedbackContainer, TableContainer, ThHeader, TopInnerContainer, TrHeader, FeedbackList, ContainerBox, CommentBox, InsideHeaderContainer, ColonText, HeaderText, GenLinkContainer, GenBtn, GenPopContainer, GenPopTextBox, GenPopCopyBtn, TableFeed} from './feedback.styles'
-import { Popover } from 'antd';
-
-export default function Feedback() {
+import { message, Popover } from 'antd';
+import { useParams } from 'react-router-dom';
+import { API_CreateFeedbackAccessToken, API_GetFeedbackData } from '../../apis/deliberation.api';
+import { IFeedbackData } from '../../shared/interfaces/deliberation.interfaces';
+import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader';
+import copy from 'clipboard-copy'
+const LINK_PREFIX = 'http://localhost:3001/feedback-survey/'
+export default function Feedback(props:any) {
     const [hasFeedback, setHasFeedback] = React.useState(false);
+    const [generatedAccessLink,setGeneratedAccessLink] = useState('') 
+    const [feedbackData,setFeedbackData] = useState<IFeedbackData|null>(null)
+    const [isLoading,setIsLoading] = useState(false)
 
     const [visible, setVisible] = React.useState(false)
+    const RouteParams = useParams<{id:string}>()
+
+    async function generateAccessTokenForSurvey(){
+        if(generatedAccessLink) return // return if already generated to not having conflict with the popover
+
+        const sales_id = parseInt(RouteParams.id)
+        setIsLoading(true)
+        await sleep(800)
+        const mapped_response = await API_CreateFeedbackAccessToken(sales_id)
+        if(mapped_response.success){
+            const {access_token}  = mapped_response.data as IFeedbackData
+            setGeneratedAccessLink(LINK_PREFIX+access_token)
+        }else{
+            //failed
+        }
+        setIsLoading(false)
+    }
+
+    async function fetchFeedbackData(){
+        const sales_id = parseInt(RouteParams.id)
+        const mapped_response = await API_GetFeedbackData(sales_id)
+        if(mapped_response.success){
+
+        }else{
+            const error_message = mapped_response.data.message
+            if(mapped_response.error_type === 'not-found'){
+                //check if it's the sales that doesn't exist or not [or its the feedback that havent been yet initiated]
+                if(error_message.startsWith("Sale data") && error_message.endsWith("exist")){
+                    // sales doesn't exist
+                    console.log("Sales data is not even exist")
+                    //TODO show 404 page
+                    props.history.push('/sales')
+                }else if(error_message.endsWith("any feedback")){
+                    // feedback not exist
+                    console.log("Feedback is not exist")
+                }
+            }
+        }
+    }
+
+    //
+    // ─── ON MOUNT ───────────────────────────────────────────────────────────────────
+    //
+    useEffect(() => {
+        fetchFeedbackData()
+    },[])
+    // ────────────────────────────────────────────────────────────────────────────────
+
+    function copyLinkToClipboard(){
+        copy(generatedAccessLink)
+        message.info("ลิ่งสำหรับเข้าสมัครสู่เว็บไซต์ ได้ถูกก๊อปปี้ไปที่คลิปบอร์ดแล้ว")
+        
+    }
+
+
     const GeneretedLinkAndCopyBTN =
     <>
         <GenPopContainer>
-            <GenPopTextBox value="https://github.com/SSPRITEz-DEV/react-fundamental-workshop.git"/>
-            <GenPopCopyBtn>คัดลอก</GenPopCopyBtn>
+            <GenPopTextBox disabled value={generatedAccessLink || 'กำลังสร้างลิ้งค์'}/>
+            <GenPopCopyBtn onClick={copyLinkToClipboard}>คัดลอก</GenPopCopyBtn>
         </GenPopContainer>
     </>
 
@@ -34,8 +97,9 @@ export default function Feedback() {
                 <Popover
                     content={GeneretedLinkAndCopyBTN}
                     trigger="click"
+                    //visible={!!generatedAccessLink}
                 >
-                   <GenBtn>สร้าง URL สำหรับให้คำแนะนำ</GenBtn>
+                   <GenBtn loading={isLoading} onClick={generateAccessTokenForSurvey}>สร้าง URL สำหรับให้คำแนะนำ</GenBtn>
                 </Popover>
                 </GenLinkContainer>
             </>

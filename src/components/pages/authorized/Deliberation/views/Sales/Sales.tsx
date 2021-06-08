@@ -149,7 +149,7 @@ export default function Sales(props:any) {
 
                     <ListModalFooter>
                         <ListBtn onClick={() => {
-                            props.history.push('/feedback')
+                            props.history.push(`/feedback/${currentFocusSaleData?.id}`)
                         }}>ดูข้อเสนอแนะ</ListBtn>
                         <ListBtn2 onClick={() => tdcontainersetVisible(false)}>ออก</ListBtn2>
                     </ListModalFooter>

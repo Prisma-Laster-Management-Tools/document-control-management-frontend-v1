@@ -16,3 +16,15 @@ export interface CreateSaleDataDTO {
     issued_at: string;
     price: number;
 }
+
+export interface IFeedbackData {
+    id: number;
+    quality_rating_score: number | null;
+    worthiness_rating_score: number | null;
+    delivery_rating_score: number | null;
+    service_rating_score: number | null;
+    feedback_str: number | null;
+    access_token: string;
+    createdAt: string;
+    updatedAt: string;
+}

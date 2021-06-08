@@ -14,3 +14,15 @@ export async function API_CreateSaleData(sale_data: CreateSaleDataDTO) {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_GetFeedbackData(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get(`/api/sales/${id}/feedback`);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_CreateFeedbackAccessToken(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get(`/api/sales/${id}/feedback/create-feedback-access-link`);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
