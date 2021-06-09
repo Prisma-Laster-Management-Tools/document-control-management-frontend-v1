@@ -103,7 +103,7 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <ContentContainer>
         {rendered_view}
       </ContentContainer>

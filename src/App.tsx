@@ -38,6 +38,7 @@ import Registration from './components/pages/unauthorized/Recruitment/views/Regi
 //
 import { ToastContainer, toast } from 'react-toastify';
 import ProductDetail from './components/pages/authorized/Product/views/ProductDetail';
+import ProductLayout from './components/pages/authorized/Product/adapter/ProductLayout/ProductLayout';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -77,6 +78,7 @@ function App() {
             <Route path="/product-add" exact component={Productadd}/>
             <Route path="/pr-order" exact component={Prorder}/>            
             <Route path="/product-detail" exact component={ProductDetail}/>
+            <Route path="/product" exact component={ProductLayout}/>
           </Switch>
           <ToastContainer />
           
