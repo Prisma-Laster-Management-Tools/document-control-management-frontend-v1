@@ -9742,6 +9742,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-confirm-pro@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-confirm-pro/-/react-confirm-pro-1.2.2.tgz#342f04fcf96299a7b251660b353061dee152ec45"
+  integrity sha512-cB9ATHhM982SnCFTD4dXZjmOV57FscPJ+bbWO1XQsD3k80s3AOeDqId+ThZMtidraPZ71wG02XuT5InKP+3pyQ==
+
 react-copy-to-clipboard@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.3.tgz#2a0623b1115a1d8c84144e9434d3342b5af41ab4"
