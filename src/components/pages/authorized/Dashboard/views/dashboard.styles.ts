@@ -118,8 +118,7 @@ export const MidBody = styled.div`
 export const MidTopContainer = styled.div`
     width: 100%;
     //height: 10%;
-    padding: 20px 20px 20px 20px;
-
+    padding: 20px 0px 20px 0px;
     
 
     display: flex;
