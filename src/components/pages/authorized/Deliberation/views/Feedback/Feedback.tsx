@@ -49,7 +49,8 @@ export default function Feedback(props:any) {
         const sales_id = parseInt(RouteParams.id)
         const mapped_response = await API_GetFeedbackData(sales_id)
         if(mapped_response.success){
-
+            console.log(mapped_response)
+            setFeedbackData(mapped_response.data)
         }else{
             const error_message = mapped_response.data.message
             if(mapped_response.error_type === 'not-found'){
@@ -92,14 +93,14 @@ export default function Feedback(props:any) {
     </>
 
     const rendered_feedback = 
-        hasFeedback?
+    feedbackData?
             <>
                 <ContainerBox>
-                <InsideHeaderContainer><HeaderText>คุณภาพสินค้า</HeaderText>     <ColonText>:</ColonText>  <Ratingstar starcount={0}/> </InsideHeaderContainer>
-                <InsideHeaderContainer><HeaderText>ความคุ้มค่า</HeaderText>        <ColonText>:</ColonText>    <Ratingstar starcount={0}/> </InsideHeaderContainer>
-                <InsideHeaderContainer><HeaderText>ความเร็วในการจัดส่ง</HeaderText>    <ColonText>:</ColonText>    <Ratingstar starcount={0}/></InsideHeaderContainer>
-                <InsideHeaderContainer><HeaderText>การให้บริการจากบริษัท</HeaderText>   <ColonText>:</ColonText>   <Ratingstar starcount={0}/> </InsideHeaderContainer>
-                <CommentBox> สินค้าโอเคมาก ถูกใจ สุดๆได้ของครบตามสั่ง เเนะนำ มาตำเลย สินค้าโอเคมาก ถูกใจ สุดๆได้ของครบตามสั่ง เเนะนำ มาตำเลย สินค้าโอเคมากสินค้าโอเคมาก ถูกใจ สุดๆได้ของครบตามสั่ง เเนะนำ มาตำเลย สินค้าโอเคมาก ถูกใจ สุดๆได้ของครบตามสั่ง เเนะนำ มาตำเลย สินค้าโอเคมาก ถูกใจ สุดๆได้ของครบตามสั่ง เเนะนำ มาตำเลย</CommentBox>
+                <InsideHeaderContainer><HeaderText>คุณภาพสินค้า</HeaderText>     <ColonText>:</ColonText>  <Ratingstar starcount={feedbackData.quality_rating_score!}/> </InsideHeaderContainer>
+                <InsideHeaderContainer><HeaderText>ความคุ้มค่า</HeaderText>        <ColonText>:</ColonText>    <Ratingstar starcount={feedbackData.worthiness_rating_score!}/> </InsideHeaderContainer>
+                <InsideHeaderContainer><HeaderText>ความเร็วในการจัดส่ง</HeaderText>    <ColonText>:</ColonText>    <Ratingstar starcount={feedbackData.delivery_rating_score!}/></InsideHeaderContainer>
+                <InsideHeaderContainer><HeaderText>การให้บริการจากบริษัท</HeaderText>   <ColonText>:</ColonText>   <Ratingstar starcount={feedbackData.service_rating_score!}/> </InsideHeaderContainer>
+                {feedbackData.feedback_str ? <CommentBox> {feedbackData.feedback_str!}</CommentBox> : null}
                 </ContainerBox>
             </>
             

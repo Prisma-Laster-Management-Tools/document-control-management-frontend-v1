@@ -37,6 +37,8 @@ import Registration from './components/pages/unauthorized/Recruitment/views/Regi
 // ─── TOASTIFY ───────────────────────────────────────────────────────────────────
 //
 import { ToastContainer, toast } from 'react-toastify';
+import ProductDetail from './components/pages/authorized/Product/views/ProductDetail';
+import ProductLayout from './components/pages/authorized/Product/adapter/ProductLayout/ProductLayout';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -68,13 +70,15 @@ function App() {
             <Route path="/login" exact component={Login}/>
             <Route path="/sales" exact component={Sales}/>
             <Route path="/feedback/:id" exact component={Feedback}/>
-            <Route path="/feedback-survey" exact component={Feedbacksurvey}/>
+            <Route path="/feedback-survey/:access_token" exact component={Feedbacksurvey}/>
             <Route path="/recruitment" exact component={Recruitment}/>
             <Route path="/registration/:access_token" exact component={Registration}/>
             <Route path="/dashboard" exact component={Dashboard}/>
             <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/product-add" exact component={Productadd}/>
             <Route path="/pr-order" exact component={Prorder}/>            
+            <Route path="/product-detail" exact component={ProductDetail}/>
+            <Route path="/product" exact component={ProductLayout}/>
           </Switch>
           <ToastContainer />
           
