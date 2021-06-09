@@ -38,7 +38,7 @@ export default function Productadd() {
       );
     return (
         <>
-            <Navbar/>
+            {/* <Navbar/> */}
             <ProductMainContainer>
 
             {/* ADD WITH FILE */}
