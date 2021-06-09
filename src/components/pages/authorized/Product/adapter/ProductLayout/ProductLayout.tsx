@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import Navbar from '../../../../../common/navbar';
 import ProductDetail from '../../views/ProductDetail';
+import ProductList from '../../views/ProductList';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -41,6 +42,10 @@ export default class ProductLayout extends Component<IProps,IState> {
             case "product-detail":
                 rendered_content = <ProductDetail/>
                 break;
+
+            case "product-list":
+                rendered_content = <ProductList/>
+                break
         
             default:
                 break;

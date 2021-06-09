@@ -5,3 +5,8 @@ export const CenteredContainerBox = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+export const ContentContainer = styled.div`
+    font-family: 'Kanit';
+    padding: 20px;
+`;

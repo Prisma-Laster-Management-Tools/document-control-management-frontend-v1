@@ -20,3 +20,14 @@ export async function API_RemoveProductDetail(product_code: string) {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+//
+// ─── PRODUCT SELF (created one) ───────────────────────────────────────────────────────────────
+//
+export async function API_GetAllProduct() {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product?limit=1000000000&page=1'); // fetch all with no pagination
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+// ────────────────────────────────────────────────────────────────────────────────

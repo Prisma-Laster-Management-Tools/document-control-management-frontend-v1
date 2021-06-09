@@ -8,3 +8,15 @@ export interface IProductDetail {
 }
 
 export type ICreateProductDetailDTO = Omit<IProductDetail, 'id' | 'createdAt' | 'updatedAt'>;
+
+export interface IProductList {
+    id: number;
+    serial_number: string;
+    product_code: string;
+    createdAt: string;
+    updatedAt: string;
+    product_name: string;
+    product_description: string;
+    quality_passed: boolean | null;
+    is_in_queue: boolean;
+}
