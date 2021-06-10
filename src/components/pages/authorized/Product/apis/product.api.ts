@@ -42,4 +42,10 @@ export async function API_CreateProduct(data: ICreateProductDTO) {
     return mapped_response;
 }
 
+export async function API_RemoveProduct(serial_number: string) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/product/remove-product/' + serial_number); // fetch all with no pagination
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
 // ────────────────────────────────────────────────────────────────────────────────

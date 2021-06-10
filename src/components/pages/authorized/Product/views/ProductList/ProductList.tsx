@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { CenteredContainerBox, ContentContainer } from '../../../../../../shared/styles/common'
 import {Table,Button, Space, Badge, BadgeProps } from 'antd'
 import { IProductList } from '../../shared/interfaces/product.interfaces'
-import { API_GetAllProduct } from '../../apis/product.api'
+import { API_GetAllProduct, API_RemoveProduct } from '../../apis/product.api'
 import Moment from 'react-moment'
 import { MainOperatorContainer } from '../ProductDetail/productDetail.styles'
 import ProductAdd from '../ProductAdd'
 import { ControlledHeightContainer } from './productList.styles'
+import { onConfirm } from 'react-confirm-pro'
+import { toast } from 'react-toastify'
+import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 const {Column} = Table
 
 type TQcStatus = null | boolean
@@ -22,6 +25,18 @@ export const ProductList:React.FC = () => {
       setProdDetails(mapped_response.data.data.data) // nested 3 lol -> cuz of the pagination support [but we ignore that for a moment]
     }else{
       // failed to fetch
+    }
+  }
+
+  async function removeProduct(serial_number:string){
+    const mapped_response = await API_RemoveProduct(serial_number)
+    if(mapped_response.success){
+      // success
+      console.log('removal success')
+      setProdDetails(prevState => (prevState!.filter(prod => prod.serial_number !== serial_number)))
+      toast.success('สินค้าได้ถูกลบออกจากระบบเรียบร้อยแล้ว',ERROR_TOAST_OPTION);
+    }else{
+      //failed to remove
     }
   }
 
@@ -42,6 +57,33 @@ export const ProductList:React.FC = () => {
     }
   }
   // ────────────────────────────────────────────────────────────────────────────────
+
+  //
+  // ─── CONFIRMATION MODAL ─────────────────────────────────────────────────────────
+  //
+  const onClickLight = (serial_number:string) => {
+    onConfirm({
+      title: (
+        <h3>
+          โปรดยืนยัน
+        </h3>
+      ),
+      description: (
+        <p>คุณแน่ใจหรอว่าคุณต้องการที่จะลบสินค้าที่มีรหัสซีเรียลนัมเบอร์เป็น {serial_number}</p>
+      ),
+      onSubmit: () => {
+        removeProduct(serial_number)
+      },
+      onCancel: () => {
+        //do nothings
+      },
+      btnCancel:"ยกเลิก",
+      btnSubmit:"ยืนยัน"
+    })
+  };
+
+  // ────────────────────────────────────────────────────────────────────────────────
+
 
   let rendered_view = null
   switch (action) {
@@ -75,7 +117,7 @@ export const ProductList:React.FC = () => {
             return <CenteredContainerBox>
                 <Space>
                   <Button type="primary" ghost disabled={(record as IProductList).is_in_queue}>ส่งไปตรวจสอบคุณภาพ</Button>
-                  <Button danger ghost>ลบ</Button>
+                  <Button onClick={onClickLight.bind(null,(record as IProductList).serial_number)} danger ghost>ลบ</Button>
                 </Space>
             </CenteredContainerBox>
           }} />
