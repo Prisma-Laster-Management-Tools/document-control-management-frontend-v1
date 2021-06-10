@@ -10,6 +10,7 @@ import {
 import Navbar from '../../../../../common/navbar';
 import ProductDetail from '../../views/ProductDetail';
 import ProductList from '../../views/ProductList';
+import { ANTD_LayoutWrapper } from '../../../../../../shared/styles/common';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -51,8 +52,9 @@ export default class ProductLayout extends Component<IProps,IState> {
                 break;
         }
         return (
-            <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+           <ANTD_LayoutWrapper>
+                <Layout style={{ height:"100%" }}>
+                <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                 <div className="logo" />
                 <Menu onSelect={(info) => this.setState({action:info.key as IState["action"]})} theme="dark" selectedKeys={[action]} defaultSelectedKeys={['product-detail']} mode="inline">
                 <Menu.Item key="product-detail" icon={<PieChartOutlined />}>
@@ -79,17 +81,18 @@ export default class ProductLayout extends Component<IProps,IState> {
                 {/* <Header className="site-layout-background" style={{ padding: 0 }} /> */}
                 <Header style={{ padding: 0 }}><Navbar/></Header>
                 <Content style={{ margin: '0 16px' }}>
-                {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                </Breadcrumb> */}
-                <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                    {rendered_content}
-                </div>
+                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>User</Breadcrumb.Item>
+                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                    </Breadcrumb> */}
+                    <div className="site-layout-background" style={{ padding: 0, minHeight: 320,maxHeight: '100%',overflowX:'hidden',overflowY:'auto' }}>
+                        {rendered_content}
+                    </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Design by AAW0KENN CREWS</Footer>
+                {/* <Footer style={{ textAlign: 'center' }}>Design by AAW0KENN CREWS</Footer> */}
             </Layout>
             </Layout>
+           </ANTD_LayoutWrapper>
         );
     }
 }

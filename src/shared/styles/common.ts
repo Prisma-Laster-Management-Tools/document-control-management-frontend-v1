@@ -10,3 +10,8 @@ export const ContentContainer = styled.div`
     font-family: 'Kanit';
     padding: 20px;
 `;
+
+export const ANTD_LayoutWrapper = styled.div`
+    overflow: hidden;
+    height: 100vh;
+`;
