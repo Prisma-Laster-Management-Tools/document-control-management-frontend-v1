@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ContentContainer = styled.div`
+    font-family: 'Kanit';
     padding: 20px;
 `;
 

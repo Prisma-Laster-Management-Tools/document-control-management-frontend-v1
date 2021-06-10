@@ -1,31 +1,24 @@
-import styled from '@emotion/styled'
-import { Button, Upload} from 'antd';
-import upload_image from './assets/upload_files_image.svg'
+import styled from '@emotion/styled';
+import { Button, Upload, Input, Form } from 'antd';
+import upload_image from './assets/upload_files_image.svg';
 
 export const ProductMainContainer = styled.div`
-    padding: 0px 180px 0px 180px;
     width: 100%;
-    height: 80vh;
-    
+    height: 70vh;
+
     //background-color: green;
-    
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
     font-family: 'Kanit', sans-serif;
-    @media (max-width:1260px){
-        padding: 0px 100px 0px 100px;
-    }
-    @media (max-width:950px){
-        padding: 0px 50px 0px 50px;
-    }
-`
+`;
 
 export const BoxContainer = styled.div`
-    margin-top: 5rem;
-    width: 50%;
+    /* margin-top: 5rem; */
+    width: 100%;
     height: 100%;
     box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
@@ -35,12 +28,11 @@ export const BoxContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: 0.5rem;
-
-`
+`;
 export const BoxContainer2 = styled.div`
-    padding-top: 2rem;
-    margin-top: 5rem;
-    width: 50%;
+    padding-top: 1rem;
+    /*margin-top: 5rem; */
+    width: 100%;
     height: 100%;
     //background-color: wheat;
     box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.05);
@@ -50,7 +42,7 @@ export const BoxContainer2 = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-`
+`;
 
 ////////    Add from file   ///////////
 export const UploadImageCon = styled.div`
@@ -63,17 +55,15 @@ export const UploadImageCon = styled.div`
     padding: 1rem;
     box-shadow: 0rem 0rem 1rem 0.5rem rgba(0, 0, 0, 0.05);
     border-radius: 0.5rem;
-`
+`;
 export const UploadImage = styled.image`
-    
     width: 15rem;
     height: 15rem;
     background-image: url(${upload_image});
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    
-`
+`;
 
 export const NoteText = styled.div`
     width: 80%;
@@ -83,10 +73,10 @@ export const NoteText = styled.div`
     color: red;
     font-size: 16px;
     margin: 1rem;
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 12px;
     }
-`
+`;
 
 export const UploadfileBtn = styled(Button)`
     margin: 3rem;
@@ -99,27 +89,27 @@ export const UploadfileBtn = styled(Button)`
     box-shadow: none;
     border-radius: 10px;
     //box-shadow: 0px 3px 3px 3px rgba(0, 0, 0, 0.05);
-    &:hover{
+    &:hover {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-    &:focus{
+    &:focus {
         background-color: gray;
         color: white;
         border: none;
         box-shadow: none;
     }
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 12px;
         margin: 2rem;
     }
-    @media (max-width:950px){
+    @media (max-width: 950px) {
         font-size: 8px;
         margin: 1rem;
     }
-`
+`;
 export const ReportText = styled.div`
     width: 80%;
     display: flex;
@@ -128,24 +118,23 @@ export const ReportText = styled.div`
     color: #454545;
     font-size: 16px;
     margin-top: 2rem;
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 12px;
     }
-`
+`;
 //////////  Add Manual  ///////////
 export const AddText = styled.h1`
     color: #454545;
     font-size: 24px;
     font-weight: 600;
     margin: 2rem;
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 20px;
     }
-    @media (max-width:950px){
+    @media (max-width: 950px) {
         font-size: 18px;
     }
-    
-`
+`;
 export const SelextManualContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -153,24 +142,24 @@ export const SelextManualContainer = styled.div`
     align-items: center;
     width: 100%;
     //border: 1px solid black;
-`
+`;
 export const SelectText = styled.p`
     margin: 1rem;
     color: #454545;
     font-size: 18px;
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 16px;
     }
-`
+`;
 export const SelectTextSN = styled.p`
     margin-top: 2rem;
     color: #454545;
     font-size: 18px;
-    @media (max-width:1260px){
+    @media (max-width: 1260px) {
         font-size: 16px;
     }
-`
-export const SelectText2 = styled.input`
+`;
+export const SelectText2 = styled(Input)`
     padding: 2px 10px 2px 10px;
     color: #454545;
     font-size: 16px;
@@ -179,13 +168,27 @@ export const SelectText2 = styled.input`
     //height: 95%;
     border: 0.5px solid #d9d9d9;
     border-radius: 0.1rem;
-`
+`;
+
+export const InputStyled = styled(Input)`
+    /* padding: 2px 10px 2px 10px; */
+    color: #454545;
+    font-size: 16px;
+
+    border: 0.5px solid #d9d9d9;
+    border-radius: 0.1rem;
+`;
+
+export const FormItemStyled = styled(Form.Item)`
+    width: 60%;
+    margin-top: 1.6rem;
+`;
 
 export const ErrorText = styled.p`
     color: red;
     font-size: 14px;
     margin-top: 2rem;
-`
+`;
 export const DiviDIV = styled.div`
     width: 90%;
-`
+`;

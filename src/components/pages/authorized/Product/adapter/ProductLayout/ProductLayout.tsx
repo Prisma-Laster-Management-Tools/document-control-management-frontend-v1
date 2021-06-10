@@ -9,6 +9,8 @@ import {
 } from '@ant-design/icons';
 import Navbar from '../../../../../common/navbar';
 import ProductDetail from '../../views/ProductDetail';
+import ProductList from '../../views/ProductList';
+import { ANTD_LayoutWrapper, CategoryLabelSider } from '../../../../../../shared/styles/common';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -41,14 +43,21 @@ export default class ProductLayout extends Component<IProps,IState> {
             case "product-detail":
                 rendered_content = <ProductDetail/>
                 break;
+
+            case "product-list":
+                rendered_content = <ProductList/>
+                break
         
             default:
                 break;
         }
         return (
-            <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-                <div className="logo" />
+           <ANTD_LayoutWrapper>
+                <Layout style={{ height:"100%" }}>
+                <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+                <CategoryLabelSider>
+                    เมนูสินต้า
+                </CategoryLabelSider>
                 <Menu onSelect={(info) => this.setState({action:info.key as IState["action"]})} theme="dark" selectedKeys={[action]} defaultSelectedKeys={['product-detail']} mode="inline">
                 <Menu.Item key="product-detail" icon={<PieChartOutlined />}>
                     รายละเอียดรหัสสินค้า
@@ -74,17 +83,18 @@ export default class ProductLayout extends Component<IProps,IState> {
                 {/* <Header className="site-layout-background" style={{ padding: 0 }} /> */}
                 <Header style={{ padding: 0 }}><Navbar/></Header>
                 <Content style={{ margin: '0 16px' }}>
-                {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                </Breadcrumb> */}
-                <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                    {rendered_content}
-                </div>
+                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>User</Breadcrumb.Item>
+                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                    </Breadcrumb> */}
+                    <div className="site-layout-background" style={{ padding: 0, minHeight: 320,maxHeight: '100%',overflowX:'hidden',overflowY:'auto' }}>
+                        {rendered_content}
+                    </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Design by AAW0KENN CREWS</Footer>
+                {/* <Footer style={{ textAlign: 'center' }}>Design by AAW0KENN CREWS</Footer> */}
             </Layout>
             </Layout>
+           </ANTD_LayoutWrapper>
         );
     }
 }
