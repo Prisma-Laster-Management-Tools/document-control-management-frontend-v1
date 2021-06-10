@@ -10,7 +10,7 @@ import {
 import Navbar from '../../../../../common/navbar';
 import ProductDetail from '../../views/ProductDetail';
 import ProductList from '../../views/ProductList';
-import { ANTD_LayoutWrapper } from '../../../../../../shared/styles/common';
+import { ANTD_LayoutWrapper, CategoryLabelSider } from '../../../../../../shared/styles/common';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -55,7 +55,9 @@ export default class ProductLayout extends Component<IProps,IState> {
            <ANTD_LayoutWrapper>
                 <Layout style={{ height:"100%" }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-                <div className="logo" />
+                <CategoryLabelSider>
+                    เมนูสินต้า
+                </CategoryLabelSider>
                 <Menu onSelect={(info) => this.setState({action:info.key as IState["action"]})} theme="dark" selectedKeys={[action]} defaultSelectedKeys={['product-detail']} mode="inline">
                 <Menu.Item key="product-detail" icon={<PieChartOutlined />}>
                     รายละเอียดรหัสสินค้า
