@@ -20,3 +20,5 @@ export interface IProductList {
     quality_passed: boolean | null;
     is_in_queue: boolean;
 }
+
+export type ICreateProductDTO = Pick<IProductList, 'product_code' | 'serial_number'>;

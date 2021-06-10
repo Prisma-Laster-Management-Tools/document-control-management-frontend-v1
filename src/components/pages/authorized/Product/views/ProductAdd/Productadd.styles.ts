@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Upload } from 'antd';
+import { Button, Upload, Input, Form } from 'antd';
 import upload_image from './assets/upload_files_image.svg';
 
 export const ProductMainContainer = styled.div`
@@ -159,7 +159,7 @@ export const SelectTextSN = styled.p`
         font-size: 16px;
     }
 `;
-export const SelectText2 = styled.input`
+export const SelectText2 = styled(Input)`
     padding: 2px 10px 2px 10px;
     color: #454545;
     font-size: 16px;
@@ -168,6 +168,20 @@ export const SelectText2 = styled.input`
     //height: 95%;
     border: 0.5px solid #d9d9d9;
     border-radius: 0.1rem;
+`;
+
+export const InputStyled = styled(Input)`
+    /* padding: 2px 10px 2px 10px; */
+    color: #454545;
+    font-size: 16px;
+
+    border: 0.5px solid #d9d9d9;
+    border-radius: 0.1rem;
+`;
+
+export const FormItemStyled = styled(Form.Item)`
+    width: 60%;
+    margin-top: 1.6rem;
 `;
 
 export const ErrorText = styled.p`

@@ -6,6 +6,7 @@ import { API_GetAllProduct } from '../../apis/product.api'
 import Moment from 'react-moment'
 import { MainOperatorContainer } from '../ProductDetail/productDetail.styles'
 import ProductAdd from '../ProductAdd'
+import { ControlledHeightContainer } from './productList.styles'
 const {Column} = Table
 
 type TQcStatus = null | boolean
@@ -83,16 +84,19 @@ export const ProductList:React.FC = () => {
       break;
   
     case "add":
-      rendered_view = <ProductAdd/>
+      rendered_view = <ProductAdd on_success={() => {
+        fetchAllProductList() // re-fetching the new list down here
+        setAction.call(null,"view")
+      }}/>
       break
     default:
       break;
   }
 
   return (
-    <ContentContainer>
+    <ControlledHeightContainer>
       {rendered_view}
-    </ContentContainer>
+    </ControlledHeightContainer>
   )
 }
 
