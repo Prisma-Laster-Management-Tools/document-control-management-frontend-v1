@@ -20,6 +20,18 @@ export const NavTop = styled.div`
 
     z-index: 1000;
     font-family: 'Kanit', sans-serif;
+    @media (max-width:1200px){
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+    @media (max-width:993px){
+        padding-left: 140px;
+        padding-right: 140px;
+    }
+    @media (max-width:768px){
+        padding-left: 80px;
+        padding-right: 80px;
+    }
 `;
 export const RegisZone = styled.div`
     /* Regis zone */
@@ -97,7 +109,7 @@ export const RegisterBtn = styled(Button)`
 
 export const LogoPrima = styled.div`
     //border: 1px solid #555;
-    width: 10rem;
+    width: 3rem;
     height: 3rem;
     background-image: url('${prima_icon}');
     background-position: center;
@@ -205,5 +217,3 @@ export const DrawerListText = styled.div`
     margin-left: 1rem;
 `
 
-
-////////////////////////////////////////////////
