@@ -1,6 +1,6 @@
 import React from 'react'
-import { Menu, message, Button, Divider} from 'antd';
-import { DownOutlined, UserOutlined , HomeOutlined, SnippetsOutlined, MessageOutlined, TeamOutlined, SettingOutlined} from '@ant-design/icons';
+import { message, Divider, Select } from 'antd';
+import { HomeOutlined, SnippetsOutlined, MessageOutlined, TeamOutlined, SettingOutlined} from '@ant-design/icons';
 import Navbar from '../../../../common/navbar'
 import { MidMainContainer, BgContainer, DashboardMainContainer, DateP, DetailP, DivBox, MenuDivButton, MenuDivInner, MenuLeft, MidBody, NotificationContainer, NotificationListContainer, Notih1, TitleP, MenuButtonText, MidTopContainer, GoTaskBtn, TopPicBox, NameText, SelectDropDown} from './dashboard.styles'
 
@@ -10,19 +10,7 @@ export default function Landing() {
         message.info('Click on menu item.');
         console.log('click');
     }
-    const menu = (
-        <Menu onClick={handleMenuClick}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            1st menu item
-          </Menu.Item>
-          <Menu.Item key="2" icon={<UserOutlined />}>
-            2nd menu item
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UserOutlined />}>
-            3rd menu item
-          </Menu.Item>
-        </Menu>
-      );
+    const { Option } = Select;
 
     return (
         <>
@@ -46,11 +34,14 @@ export default function Landing() {
                     <MidTopContainer>
                         <TopPicBox></TopPicBox>
                         <NameText>Thiti Mahawannakit</NameText>
-                        <SelectDropDown overlay={menu}>
-                            <Button>
-                                เลือกอะไรสักอย่าง <DownOutlined />
-                            </Button>
-                        </SelectDropDown>
+                        <Select defaultValue="" style={{ width: 120 }} allowClear>
+                            <Option value="HR">HR</Option>
+                            <Option value="QC">QC</Option>
+                            <Option value="Man-Machine" disabled>
+                                Man-Machine
+                            </Option>
+                            <Option value="Manager">Manager</Option>
+                        </Select>
                     </MidTopContainer>
                     <MidMainContainer>Hello</MidMainContainer>
                     <GoTaskBtn>
