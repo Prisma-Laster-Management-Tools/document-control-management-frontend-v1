@@ -10,6 +10,8 @@ import { ControlledHeightContainer } from './productList.styles'
 import { onConfirm } from 'react-confirm-pro'
 import { toast } from 'react-toastify'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
+import { API_SendProductToControlQueue } from '../../../quality-control/apis/qc.api'
+import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
 const {Column} = Table
 
 type TQcStatus = null | boolean
@@ -17,6 +19,13 @@ type TActions = "view" | "add"
 export const ProductList:React.FC = () => {
   const [prodDetails,setProdDetails] = useState<Array<IProductList> | null>(null)
   const [action,setAction] = useState<TActions>("view")
+
+  //
+  // ─── FOR BEAUTIFY CONTENT ───────────────────────────────────────────────────────
+  //
+  const [productIdPendingInQueue,setProductIdPendingInQueue] = useState<null | number>(null)
+  // ────────────────────────────────────────────────────────────────────────────────
+
 
   async function fetchAllProductList(){
     const mapped_response = await API_GetAllProduct()
@@ -37,7 +46,24 @@ export const ProductList:React.FC = () => {
       toast.success('สินค้าได้ถูกลบออกจากระบบเรียบร้อยแล้ว',ERROR_TOAST_OPTION);
     }else{
       //failed to remove
+      toast.error('เกิดข้อผิดพลาดในการส่งสินค้าเข้าคิว',ERROR_TOAST_OPTION);
     }
+  }
+
+  async function sendProductToQueue(product_id:number){
+    setProductIdPendingInQueue(product_id)
+    await sleep(1300)
+    const mapped_response = await API_SendProductToControlQueue({product_id})
+    if(mapped_response.success){
+      const copied_data = [...prodDetails!]
+      const target_element = copied_data.find((data) => data.id === product_id)
+      if(!target_element) return // in case of not found [ return ]
+      target_element.is_in_queue = true
+      setProdDetails(copied_data)
+    }else{
+      // failed to send to the queue
+    }
+    setProductIdPendingInQueue(null)
   }
 
   useEffect(() => {
@@ -116,7 +142,7 @@ export const ProductList:React.FC = () => {
           <Column align="center" width="20%" title="ตัวจัดการ" render={(text,record) => {
             return <CenteredContainerBox>
                 <Space>
-                  <Button type="primary" ghost disabled={(record as IProductList).is_in_queue}>ส่งไปตรวจสอบคุณภาพ</Button>
+                  <Button loading={productIdPendingInQueue === (record as IProductList).id} onClick={sendProductToQueue.bind(null,(record as IProductList).id)} type="primary" ghost disabled={(record as IProductList).is_in_queue}>ส่งไปตรวจสอบคุณภาพ</Button>
                   <Button onClick={onClickLight.bind(null,(record as IProductList).serial_number)} danger ghost>ลบ</Button>
                 </Space>
             </CenteredContainerBox>
