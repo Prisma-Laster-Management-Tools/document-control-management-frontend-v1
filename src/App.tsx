@@ -41,6 +41,7 @@ import ProductDetail from './components/pages/authorized/Product/views/ProductDe
 import ProductLayout from './components/pages/authorized/Product/adapter/ProductLayout/ProductLayout';
 import QcQueue from './components/pages/authorized/quality-control/views/QcQueue';
 import QcLayout from './components/pages/authorized/quality-control/adapter/QcLayout/QcLayout';
+import Notification from './components/pages/authorized/Notification/views';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -83,6 +84,8 @@ function App() {
             <Route path="/pr-order" exact component={Prorder}/>            
             <Route path="/product-detail" exact component={ProductDetail}/>
             <Route path="/product" exact component={ProductLayout}/>
+
+            <Route path="/notifications" exact component={Notification}/>
           </Switch>
           <ToastContainer />
           
