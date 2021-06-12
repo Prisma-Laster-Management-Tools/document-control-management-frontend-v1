@@ -108,6 +108,7 @@ export const CRTextHeader = styled.div`
     justify-content: center;
     align-items: center;
 
+    color: #454545;
     font-size: 24px;
     font-weight: 600;
 `
