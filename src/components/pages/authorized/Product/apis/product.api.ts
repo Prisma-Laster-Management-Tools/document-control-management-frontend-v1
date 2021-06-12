@@ -2,9 +2,10 @@ import { AxiosPromise } from 'axios';
 import API_instance from '../../../../../core/axios/instance';
 import { transformDataFromAxiosPromiseToReadableFormat } from '../../../../../core/axios/response-mapper';
 import { ICreateProductDetailDTO, ICreateProductDTO } from '../shared/interfaces/product.interfaces';
-
-export async function API_GetAllProductDetail() {
-    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product/details'); // fetch all with no pagination
+import qs from 'querystring';
+export async function API_GetAllProductDetail(query?: { with_protocol: boolean }) {
+    const query_string = qs.stringify(query);
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product/details?' + query_string); // fetch all with no pagination
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }

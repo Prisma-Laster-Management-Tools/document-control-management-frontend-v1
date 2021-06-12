@@ -10,6 +10,7 @@ import {
 import Navbar from '../../../../../common/navbar';
 import { ANTD_LayoutWrapper, CategoryLabelSider } from '../../../../../../shared/styles/common';
 import QcQueue from '../../views/QcQueue';
+import QcProtocol from '../../views/QcProtocol';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -44,7 +45,7 @@ export default class QcLayout extends Component<IProps,IState> {
                 break;
 
             case "protocol":
-                rendered_content = null
+                rendered_content = <QcProtocol/>
                 break
         
             default:

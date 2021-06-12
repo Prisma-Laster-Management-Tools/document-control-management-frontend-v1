@@ -2,7 +2,7 @@ import React from 'react'
 import { PageHeader, Button, Descriptions,Tag } from 'antd';
 export default function QcHeaderStatus() {
   return (
-<div className="site-page-header-ghost-wrapper">
+  <div className="site-page-header-ghost-wrapper">
     <PageHeader
       ghost={false}
       onBack={() => window.history.back()}

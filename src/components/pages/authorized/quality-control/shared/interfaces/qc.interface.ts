@@ -10,3 +10,22 @@ export interface IQualityInQueueData {
     updatedAt: string;
     product: Omit<IProductList, 'product_name' | 'product_description' | 'is_in_queue'>;
 }
+
+export interface IQualityControlProtocol {
+    id: number;
+    product_code: string;
+    process_order: number;
+    process_description: string;
+    required_attachment: boolean;
+    attachment_path: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ICreateProtocalDTO {
+    product_code: string;
+    process_order: number;
+    process_description: string;
+    required_attachment: boolean;
+    attachment_path?: string;
+}

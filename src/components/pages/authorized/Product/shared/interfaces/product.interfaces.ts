@@ -1,8 +1,11 @@
+import { IQualityControlProtocol } from '../../../quality-control/shared/interfaces/qc.interface';
+
 export interface IProductDetail {
     id: number;
     product_code: string;
     product_name: string;
     product_description: string;
+    protocol?: IQualityControlProtocol[];
     createdAt: string;
     updatedAt: string;
 }
