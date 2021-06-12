@@ -2,11 +2,14 @@ import { Button, Space, Table, Tag,Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { ControlledHeightContainer } from '../../../Product/views/ProductList/productList.styles'
-import { API_GetAllProductInControlQueue } from '../../apis/qc.api'
+import { API_GetAllProductInControlQueue, API_RemoveProductFromQueue } from '../../apis/qc.api'
 import { IQualityInQueueData } from '../../shared/interfaces/qc.interface'
 import QcHeaderStatus from './sub-component/Header/Header'
 
 import { PartitionOutlined,ExportOutlined } from '@ant-design/icons';
+import { onConfirm } from 'react-confirm-pro'
+import { toast } from 'react-toastify'
+import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 const {Column} = Table
 type TQcStatus = null | boolean
 const QcQueue:React.FC = () => {
@@ -19,6 +22,45 @@ const QcQueue:React.FC = () => {
             // failed to get the data
         }
     }
+
+    async function onRemoveFromQueue(id:number){
+        const mapped_response = await API_RemoveProductFromQueue(id)
+        if(mapped_response.success){
+            // dq success
+            setProdInQueue(prevState => (prevState!.filter(data => data.product.id !== id))) // filtered out the removed element
+            toast.success('สินค้าได้ถูกลบออกจากคิวการตรวจสอบแล้ว',ERROR_TOAST_OPTION);
+        }else{
+            // dequeue failed
+            toast.error('ไม่สามารถลบสินค้าออกจากคิวการตรวจสอบได้',ERROR_TOAST_OPTION)
+        }
+    }
+
+    //
+  // ─── CONFIRMATION MODAL ─────────────────────────────────────────────────────────
+  //
+  const onClickLight = (id:number,serial_number:string) => {
+    onConfirm({
+      title: (
+        <h3>
+          โปรดยืนยัน
+        </h3>
+      ),
+      description: (
+        <p>คุณแน่ใจหรอว่าคุณต้องการที่นำสินค้าที่มีซีเรียลนัมเบอร์ {serial_number} ออกจากคิวการตรวจสอบ</p>
+      ),
+      onSubmit: () => {
+        onRemoveFromQueue(id)
+      },
+      onCancel: () => {
+        //do nothings
+      },
+      btnCancel:"ยกเลิก",
+      btnSubmit:"ยืนยัน",
+      type:"light"
+    })
+  };
+
+  // ────────────────────────────────────────────────────────────────────────────────
 
     useEffect(() => {
         getAllProdInQueue()
@@ -41,7 +83,7 @@ const QcQueue:React.FC = () => {
 
     return (
         <ControlledHeightContainer>
-            <QcHeaderStatus/>
+            <QcHeaderStatus product_data={prodInQueue}/>
             <Table style={{ padding:22 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodInQueue || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodInQueue===null}>
                 <Column width="5%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex={["product","serial_number"]} key="serial_number" />
                 <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex={["product","product_code"]} key="product_code" />
@@ -51,13 +93,13 @@ const QcQueue:React.FC = () => {
                 <Column align="center" width="1%" title="สถานะ" render={(text,record) => {
                     return generateStatusTrackFromState((record as IQualityInQueueData).product.quality_passed)
                 }} />
-                <Column align="center" width="5%" title="การจัดการ" render={(text,record) => {
+                <Column align="center" width="5%" title="การจัดการ" render={(text,record:IQualityInQueueData) => {
                     return  <Space>
                             <Tooltip placement="bottom" title="ตรวจสอบสินค้า">
                                 <Button ghost type="primary" shape="circle" icon={<PartitionOutlined />} size="middle" />
                             </Tooltip>
                             <Tooltip placement="bottom" title="นำสินค้าออกจากคิว">
-                                <Button ghost danger shape="circle" icon={<ExportOutlined />} size="middle" />
+                                <Button onClick={onClickLight.bind(null,record.product.id,record.product.serial_number)} ghost danger shape="circle" icon={<ExportOutlined />} size="middle" />
                             </Tooltip>
                     </Space>
                 }} />
