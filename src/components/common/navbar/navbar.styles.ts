@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Button } from 'antd';
-import menu_outline from './assets/menu_outline.png'
-import prima_icon from './assets/PLT-gray.png'
+import menu_outline from './assets/menu_outline.png';
+import prima_icon from './assets/PLT-gray.png';
 
 export const NavTop = styled.div`
     display: flex;
@@ -18,17 +18,17 @@ export const NavTop = styled.div`
     background: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 
-    z-index: 1000;
+    z-index: 9;
     font-family: 'Kanit', sans-serif;
-    @media (max-width:1200px){
+    @media (max-width: 1200px) {
         padding-left: 200px;
         padding-right: 200px;
     }
-    @media (max-width:993px){
+    @media (max-width: 993px) {
         padding-left: 140px;
         padding-right: 140px;
     }
-    @media (max-width:768px){
+    @media (max-width: 768px) {
         padding-left: 80px;
         padding-right: 80px;
     }
@@ -133,24 +133,24 @@ export const IconContainer = styled.div`
         border: none;
         box-shadow: none;
     }
-    transition: background-color 0.2s ;
+    transition: background-color 0.2s;
 
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
     //border: 1px solid red;
-`
+`;
 export const IconMenuOutline = styled.div`
     width: 2.5rem;
     height: 2.5rem;
-    background-image: url("${menu_outline}");
+    background-image: url('${menu_outline}');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     //margin-left: 2rem;
     //border: 1px solid red;
-`
+`;
 
 export const NameTop = styled.div`
     font-size: 20px;
@@ -158,7 +158,7 @@ export const NameTop = styled.div`
     color: #555555;
     //border: 1px solid green;
     margin-right: 1rem;
-`
+`;
 
 /////////////////   Drawer  ////////////////////
 export const DrawerOutside = styled.div`
@@ -166,7 +166,7 @@ export const DrawerOutside = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-`
+`;
 
 export const DrawerContainer = styled.div`
     width: 28.5rem;
@@ -177,7 +177,7 @@ export const DrawerContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-`
+`;
 export const ListItemContainer = styled.div`
     width: 28.5rem;
     height: 3rem;
@@ -189,7 +189,7 @@ export const ListItemContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     border-radius: 0.2rem;
-    
+
     font-size: 19px;
     font-weight: 600;
     color: gray;
@@ -208,12 +208,10 @@ export const ListItemContainer = styled.div`
         border: none;
         box-shadow: none;
         cursor: pointer;
-        
     }
-    transition: background-color 0.2s ;
+    transition: background-color 0.2s;
     user-select: none;
-`
+`;
 export const DrawerListText = styled.div`
     margin-left: 1rem;
-`
-
+`;
