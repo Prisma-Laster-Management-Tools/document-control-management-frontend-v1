@@ -43,6 +43,7 @@ import QcQueue from './components/pages/authorized/quality-control/views/QcQueue
 import QcLayout from './components/pages/authorized/quality-control/adapter/QcLayout/QcLayout';
 import Notification from './components/pages/authorized/Notification/views';
 import Createsource from './components/pages/authorized/Purchase/views/CreateSource';
+import Partdetail from './components/pages/authorized/Purchase/views/PartDetail/views';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -88,6 +89,7 @@ function App() {
 
             <Route path="/notifications" exact component={Notification}/>
             <Route path="/create-source-detail" exact component={Createsource}/>
+            <Route path="/part-detail" exact component={Partdetail}/>
           </Switch>
           <ToastContainer />
           
