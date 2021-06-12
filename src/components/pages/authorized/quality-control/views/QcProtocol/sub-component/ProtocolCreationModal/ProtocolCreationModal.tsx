@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Button,Table,Form,Input, PageHeader, Upload ,Image, Space, Tooltip} from 'antd'
+import { Modal, Button,Table,Form,Input, PageHeader, Upload ,Image, Space, Tooltip,message} from 'antd'
 import { ICreateProtocalDTO, IQualityControlProtocol } from '../../../../shared/interfaces/qc.interface'
-import { API_CreateProtocolForProductCode, API_GetProtocolListFromProductCode } from '../../../../apis/qc.api'
+import { API_CreateProtocolForProductCode, API_GetProtocolListFromProductCode, API_RemoveProtocol } from '../../../../apis/qc.api'
 import { PlusOutlined,UploadOutlined,EditTwoTone,DeleteOutlined} from '@ant-design/icons';
 import { MainContainer } from './protocolCreation.styles';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import {SERVER_ADDRESS} from '../../../../../../../../config/STATIC.json'
+import { onConfirm } from 'react-confirm-pro';
 const {Column} = Table
 const {useForm} = Form
 interface IProps{
@@ -43,6 +44,19 @@ const ProtocolCreationModal:React.FC<IProps> = ({visible,product_code,back,on_cr
         }
     }
 
+    async function removeProtocol(id:number){
+        const mapped_response = await API_RemoveProtocol(id)
+        if(mapped_response.success){
+            //removal success
+            setProtocolData(prevState => (prevState!.filter(data => data.id !== id))) // filtered out the deleted element
+            message.success("ลบข้อกำหนดสำเร็จ")
+            on_crud() // triggering re-fetching data for the mother component
+        }else{
+            //removal failed
+            message.error("ไม่สามารถลบข้อกำหนดได้")
+        }
+    }
+
     useEffect(() => {
         if(product_code){
             fetchProtocolList(product_code)
@@ -57,17 +71,44 @@ const ProtocolCreationModal:React.FC<IProps> = ({visible,product_code,back,on_cr
     //
     // ────────────────────────────────────────────────────────────────────────────────
 
+  //
+  // ─── CONFIRMATION MODAL ─────────────────────────────────────────────────────────
+  //
+  const onClickLight = (id:number,order:number) => {
+    onConfirm({
+      title: (
+        <h3>
+          โปรดยืนยัน
+        </h3>
+      ),
+      description: (
+        <p>คุณแน่ใจหรอว่าคุณต้องการที่จะลบข้อกำหนดลำดับที่ {order}</p>
+      ),
+      onSubmit: () => {
+        removeProtocol(id)
+      },
+      onCancel: () => {
+        //do nothings
+      },
+      btnCancel:"ยกเลิก",
+      btnSubmit:"ยืนยัน",
+      type:"dark"
+    })
+  };
+
+  // ────────────────────────────────────────────────────────────────────────────────
+
 
     let rendered_content = null
     switch (action) {
         case "view":
             rendered_content = <>
             <PageHeader
-className="site-page-header"
-onBack={() => back()}
-title="ข้อกำหนด"
-subTitle="ข้อกำหนดของมาตรฐานของสินค้า"
-/>
+                className="site-page-header"
+                onBack={() => back()}
+                title="ข้อกำหนด"
+                subTitle="ข้อกำหนดของมาตรฐานของสินค้า"
+            />
             <div style={{ padding:20 }}>
                         <div style={{ display:'flex',justifyContent:'flex-end',marginBottom:20 }}>
                             <Button icon={<PlusOutlined />} onClick={() => setAction("add")}>เพิ่มข้อกำหนด</Button>
@@ -89,7 +130,7 @@ subTitle="ข้อกำหนดของมาตรฐานของสิ�
                                          <Button onClick={() => null} ghost type="primary" shape="circle" icon={<EditTwoTone/>} size="middle" />
                                         </Tooltip>
                                         <Tooltip placement="bottom" title="ลบข้อกำหนด">
-                                         <Button  danger onClick={() => null} ghost type="primary" shape="circle" icon={<DeleteOutlined/>} size="middle" />
+                                         <Button  danger onClick={() => onClickLight(record.id,record.process_order)} ghost type="primary" shape="circle" icon={<DeleteOutlined/>} size="middle" />
                                         </Tooltip>
 
 
@@ -116,6 +157,7 @@ subTitle="ข้อกำหนดของมาตรฐานของสิ�
     return (
       <>
         <Modal
+        zIndex={10} // navtop is 9
         style={{ fontFamily:'Kanit' }}
         footer={null}
         //   title={`ข้อกำหนดของ ${product_code}`}
@@ -162,8 +204,15 @@ const CreationForm:React.FC<ICreationFormProps> = ({back,product_code,on_crud}) 
         if(mapped_response.success){
             console.log('creating protocol success')
             on_crud()
+            message.success("สร้างข้อกำหนดสำเร็จ")
         }else{
             console.log('failed to create the protocol')
+            if(mapped_response.data.message.includes("already declared")){
+                message.error("ไม่สามารถสร้างข้อกำหนดได้ เนื่องจากลำดับความสำคัญนี้มีอยู่แล้ว")
+            }else{
+                // server error
+                message.error("ไม่สามารถสร้างข้อกำหนดได้ กรุณาลองใหม่ภายหลัง")
+            }
         }
     }
     return <MainContainer>

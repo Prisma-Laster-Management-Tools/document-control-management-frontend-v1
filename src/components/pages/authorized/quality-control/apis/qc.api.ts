@@ -26,3 +26,9 @@ export async function API_CreateProtocolForProductCode(data: ICreateProtocalDTO)
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_RemoveProtocol(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/quality-control/remove-protocol/' + id); // fetch all with no pagination
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
