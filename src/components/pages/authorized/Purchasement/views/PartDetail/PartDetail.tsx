@@ -1,6 +1,6 @@
 import { PageHeader,Table,Button, Tooltip, Space, Popover, Form, Input } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { API_CreatePartDetail, API_GetAllPartDetail } from '../../apis/purchasement.api'
+import { API_CreatePartDetail, API_GetAllPartDetail, API_RemovePartDetail } from '../../apis/purchasement.api'
 import { ICreatePartDetailDTO, IPurchasementPartDetail } from '../../shared/interfaces/purchasement.interfaces'
 import { MainContainer } from './partDetail.styles'
 
@@ -8,6 +8,7 @@ import { PartitionOutlined,ExportOutlined,EditFilled,DeleteFilled,PlusOutlined,P
 import { useForm } from 'antd/lib/form/Form'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 import { toast } from 'react-toastify'
+import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro'
 
 const {Column} = Table
 
@@ -40,6 +41,16 @@ const PartDetail:React.FC<IProps> = () => {
             //failed to fetch
         }
     }
+    async function onRemovePartDetail(part_number:string){
+        const mapped_response = await API_RemovePartDetail(part_number)
+        if(mapped_response.success){
+            toast.success('ส่วนประกอบได้ถูกลบเรียบร้อยแล้ว',ERROR_TOAST_OPTION);
+            setPartDetails(prevState => (prevState!.filter(data => data.part_number !== part_number)))
+        }else{
+            toast.error('เกิดข้อผิดพลาดในการลบส่วนประกอบ',ERROR_TOAST_OPTION);
+        }
+    }
+
     useEffect(() => {
         getAllPartDetail()
     },[])
@@ -152,7 +163,7 @@ const PartDetail:React.FC<IProps> = () => {
                                     <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
                                 </Tooltip>
                                 <Tooltip placement="bottom" title="ลบ">
-                                    <Button onClick={() => null} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
+                                    <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรือว่าต้องการจะลบส่วนประกอบ ${record.part_number} - ${record.part_name}`},() => onRemovePartDetail(record.part_number))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
                                 </Tooltip>
                         </Space>
                         </>

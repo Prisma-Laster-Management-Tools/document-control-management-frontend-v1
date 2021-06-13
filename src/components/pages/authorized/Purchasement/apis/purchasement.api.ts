@@ -14,3 +14,9 @@ export async function API_CreatePartDetail(data: ICreatePartDetailDTO) {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_RemovePartDetail(part_number: string) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/purchasement/remove-part-detail/' + part_number);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
