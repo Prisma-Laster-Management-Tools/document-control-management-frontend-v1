@@ -192,7 +192,7 @@ const SourceDetail:React.FC = () => {
                                     <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
                                 </Tooltip>
                                 <Tooltip placement="bottom" title="ลบ">
-                                    <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => null)} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
+                                    <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => $hook_source_detail.events.onRemoveSource(record.id))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
                                 </Tooltip>
                         </Space>
                         </>
