@@ -4,6 +4,7 @@ import { DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutl
 import Navbar from '../../../../../common/navbar';
 import { ANTD_LayoutWrapper, CategoryLabelSider } from '../../../../../../shared/styles/common';
 import PartDetail from '../../views/PartDetail';
+import SourceDetail from '../../views/SourceDetail';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -36,7 +37,7 @@ export default class PurchasementLayout extends Component<IProps, IState> {
                 break;
 
             case 'source':
-                rendered_content = null;
+                rendered_content = <SourceDetail/>;
                 break;
 
             case 'request':
