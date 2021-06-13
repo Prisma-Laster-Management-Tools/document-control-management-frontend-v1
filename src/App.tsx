@@ -44,6 +44,7 @@ import QcLayout from './components/pages/authorized/quality-control/adapter/QcLa
 import Notification from './components/pages/authorized/Notification/views';
 import Createsource from './components/pages/authorized/Purchase/views/CreateSource';
 import Partdetail from './components/pages/authorized/Purchase/views/PartDetail/views';
+import PurchasementLayout from './components/pages/authorized/Purchasement/adapter/PurchasementLayout/PurchasementLayout';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -82,6 +83,7 @@ function App() {
             <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/qc-queue" exact component={QcQueue}/>
             <Route path="/quality-control" exact component={QcLayout}/>
+            <Route path="/purchasement" exact component={PurchasementLayout}/>
             <Route path="/product-add" exact component={Productadd}/>
             <Route path="/pr-order" exact component={Prorder}/>            
             <Route path="/product-detail" exact component={ProductDetail}/>
