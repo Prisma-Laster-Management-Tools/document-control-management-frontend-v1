@@ -38,3 +38,9 @@ export async function API_RemoveSourceDetail(id: number) {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_GetAllPurchasementRequest() {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/purchasement/requests?limit=100000000000000&page=1');
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}

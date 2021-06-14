@@ -31,3 +31,20 @@ export interface ICreateSourceDetailDTO {
     seller: string;
     commercial_number: string;
 }
+
+export interface IPurchasementRequest {
+    id: number;
+    commercial_number: string;
+    quantity: string;
+    is_special_request: boolean;
+    special_part_name: string;
+    special_part_contact: string;
+    being_confirmed: true;
+    createdAt: string;
+    updatedAt: string;
+    confirmation_token: string; // should be hidden
+    part_number: string | null;
+    company: string | null;
+    email: string | null;
+    seller: string | null;
+}
