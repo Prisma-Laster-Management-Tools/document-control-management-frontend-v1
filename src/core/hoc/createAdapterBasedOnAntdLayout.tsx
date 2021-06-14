@@ -74,5 +74,5 @@ class AdapterFragment extends Component<IAdapterFragmentProps, IState> {
 
 export function createAdapterBasedOnAntdLayout(props:IAdapterFragmentProps){
     //return <AdapterFragment {...props}/> //normal way
-    return React.createElement(AdapterFragment,props,null) // without jsx
+    return () => React.createElement(AdapterFragment,props,null) // without jsx
 }

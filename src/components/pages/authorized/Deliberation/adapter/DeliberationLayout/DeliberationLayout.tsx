@@ -9,4 +9,4 @@ const DeliberationLayout = createAdapterBasedOnAntdLayout({title:"การข�
     icon: DesktopOutlined
 }]})
 
-export default () => DeliberationLayout
+export default DeliberationLayout
