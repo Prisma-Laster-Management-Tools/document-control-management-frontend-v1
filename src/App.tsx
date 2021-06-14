@@ -45,6 +45,7 @@ import Notification from './components/pages/authorized/Notification/views';
 import Createsource from './components/pages/authorized/Purchase/views/CreateSource';
 import Partdetail from './components/pages/authorized/Purchase/views/PartDetail/views';
 import PurchasementLayout from './components/pages/authorized/Purchasement/adapter/PurchasementLayout/PurchasementLayout';
+import DeliberationLayout from './components/pages/authorized/Deliberation/adapter/DeliberationLayout/DeliberationLayout';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -88,6 +89,7 @@ function App() {
             <Route path="/pr-order" exact component={Prorder}/>            
             <Route path="/product-detail" exact component={ProductDetail}/>
             <Route path="/product" exact component={ProductLayout}/>
+            <Route path="/deliberation" exact component={DeliberationLayout}/>
 
             <Route path="/notifications" exact component={Notification}/>
             <Route path="/create-source-detail" exact component={Createsource}/>
