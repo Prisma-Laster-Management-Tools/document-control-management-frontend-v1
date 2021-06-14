@@ -87,7 +87,7 @@ export default function Sales(props:any) {
 
     return (
         <>
-            <Navbar/>
+            {/* <Navbar/> */}
             {/* <BgContainer/> */}
             <SalesContainer>
                 <SalesInnerHeaderContainer>
