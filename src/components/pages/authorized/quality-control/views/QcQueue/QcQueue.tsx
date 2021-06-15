@@ -10,10 +10,14 @@ import { PartitionOutlined,ExportOutlined } from '@ant-design/icons';
 import { onConfirm } from 'react-confirm-pro'
 import { toast } from 'react-toastify'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
+import QcProcess from '../QcProcess'
 const {Column} = Table
 type TQcStatus = null | boolean
+type TAction = "view" | "process"
 const QcQueue:React.FC = () => {
     const [prodInQueue,setProdInQueue] = useState<Array<IQualityInQueueData>|null>(null)
+    const [action,setAction] = useState<TAction>("view")
+    const [focusedProductDataForQc,setFocusedProductDataForQc] = useState<{product_code:string,product_id:number} | null>(null)
     async function getAllProdInQueue(){
         const mapped_response = await API_GetAllProductInControlQueue()
         if(mapped_response.success){
@@ -21,6 +25,11 @@ const QcQueue:React.FC = () => {
         }else{
             // failed to get the data
         }
+    }
+
+    function onMakeAQCProcessForSpecificProduct($data:IQualityInQueueData){
+        setFocusedProductDataForQc({product_code:$data.product.product_code,product_id:$data.product.id})
+        setAction("process")
     }
 
     async function onRemoveFromQueue(id:number){
@@ -80,10 +89,22 @@ const QcQueue:React.FC = () => {
     }
     // ────────────────────────────────────────────────────────────────────────────────
 
+    //
+    // ─── CB ─────────────────────────────────────────────────────────────────────────
+    //
+    function onQcSuccess(){
+        //forces re-fetching
+        getAllProdInQueue()
+        setAction("view")
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
 
-    return (
-        <ControlledHeightContainer>
-            <QcHeaderStatus product_data={prodInQueue}/>
+
+    let rendered_content = null
+    switch (action) {
+        case 'view':
+            rendered_content = <>
+             <QcHeaderStatus product_data={prodInQueue}/>
             <Table style={{ padding:22 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodInQueue || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodInQueue===null}>
                 <Column width="5%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex={["product","serial_number"]} key="serial_number" />
                 <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex={["product","product_code"]} key="product_code" />
@@ -96,7 +117,7 @@ const QcQueue:React.FC = () => {
                 <Column align="center" width="5%" title="การจัดการ" render={(text,record:IQualityInQueueData) => {
                     return  <Space>
                             <Tooltip placement="bottom" title="ตรวจสอบสินค้า">
-                                <Button ghost type="primary" shape="circle" icon={<PartitionOutlined />} size="middle" />
+                                <Button onClick={onMakeAQCProcessForSpecificProduct.bind(null,record)} ghost type="primary" shape="circle" icon={<PartitionOutlined />} size="middle" />
                             </Tooltip>
                             <Tooltip placement="bottom" title="นำสินค้าออกจากคิว">
                                 <Button onClick={onClickLight.bind(null,record.product.id,record.product.serial_number)} ghost danger shape="circle" icon={<ExportOutlined />} size="middle" />
@@ -104,6 +125,20 @@ const QcQueue:React.FC = () => {
                     </Space>
                 }} />
             </Table>
+            </>
+            break;
+
+        case 'process':
+            rendered_content = <QcProcess on_success={onQcSuccess} back={() => setAction("view")} focused_product_data={focusedProductDataForQc}/>
+            break;
+        default:
+            break;
+    }
+
+
+    return (
+        <ControlledHeightContainer>
+           {rendered_content}
         </ControlledHeightContainer>
     )
 }

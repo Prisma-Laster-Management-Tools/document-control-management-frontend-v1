@@ -29,3 +29,13 @@ export interface ICreateProtocalDTO {
     required_attachment: boolean;
     attachment_path?: string;
 }
+
+interface IQualityControlProcessDTO {
+    check_status: boolean;
+    protocol_id: number;
+}
+
+export interface ICreateControlProcessDTO {
+    qc_datas: Array<IQualityControlProcessDTO>;
+    product_id: number;
+}

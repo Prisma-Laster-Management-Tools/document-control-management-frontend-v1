@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 import API_instance from '../../../../../core/axios/instance';
 import { transformDataFromAxiosPromiseToReadableFormat } from '../../../../../core/axios/response-mapper';
-import { ICreateProtocalDTO, ISendProductToControlQueueDTO } from '../shared/interfaces/qc.interface';
+import { ICreateControlProcessDTO, ICreateProtocalDTO, ISendProductToControlQueueDTO } from '../shared/interfaces/qc.interface';
 
 export async function API_SendProductToControlQueue(data: ISendProductToControlQueueDTO) {
     const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/quality-control/queue', data);
@@ -35,6 +35,12 @@ export async function API_RemoveProtocol(id: number) {
 
 export async function API_RemoveProductFromQueue(id: number) {
     const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/quality-control/queue/' + id);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_CreateControlProcessForProduct(data: ICreateControlProcessDTO) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/quality-control/control-phase@bulk', data);
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }

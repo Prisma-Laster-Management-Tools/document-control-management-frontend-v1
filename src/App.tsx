@@ -74,18 +74,18 @@ function App() {
           <Switch>
             <Route path="/" exact component={LandingPage}/>
             <Route path="/login" exact component={Login}/>
-            <Route path="/sales" exact component={Sales}/>
+            {/* <Route path="/sales" exact component={Sales}/> */}
             <Route path="/feedback/:id" exact component={Feedback}/>
             <Route path="/feedback-survey/:access_token" exact component={Feedbacksurvey}/>
             <Route path="/recruitment" exact component={Recruitment}/>
             <Route path="/registration/:access_token" exact component={Registration}/>
             <Route path="/dashboard" exact component={Dashboard}/>
-            <Route path="/qc-process" exact component={QcProcess}/>
-            <Route path="/qc-queue" exact component={QcQueue}/>
+            {/* <Route path="/qc-process" exact component={QcProcess}/>
+            <Route path="/qc-queue" exact component={QcQueue}/> */}
             <Route path="/quality-control" exact component={QcLayout}/>
             <Route path="/purchasement" exact component={PurchasementLayout}/>
-            <Route path="/product-add" exact component={Productadd}/>          
-            <Route path="/product-detail" exact component={ProductDetail}/>
+            {/* <Route path="/product-add" exact component={Productadd}/>          
+            <Route path="/product-detail" exact component={ProductDetail}/> */}
             <Route path="/product" exact component={ProductLayout}/>
             <Route path="/deliberation" exact component={DeliberationLayout}/>
             <Route path="/notifications" exact component={Notification}/>
