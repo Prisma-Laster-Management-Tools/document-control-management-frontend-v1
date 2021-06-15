@@ -24,28 +24,27 @@ import { loadingScreenState } from './store/recoil/loading-screen/loading-screen
 //
 import 'moment/locale/th';
 import 'moment-timezone';
+// ────────────────────────────────────────────────────────────────────────────────
+
+
 import Feedbacksurvey from './components/pages/unauthorized/Feedbacksurvey';
 import Productadd from './components/pages/authorized/Product/views/ProductAdd';
-import Prorder from './components/pages/authorized/Purchase/views/PrOrder';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
 import Dashboard from './components/pages/authorized/Dashboard/views';
 import Recruitment from './components/pages/authorized/Recruitment/views/RecruitmentGeneration';
 import Registration from './components/pages/unauthorized/Recruitment/views/Registration';
-// ────────────────────────────────────────────────────────────────────────────────
-
-//
-// ─── TOASTIFY ───────────────────────────────────────────────────────────────────
-//
-import { ToastContainer, toast } from 'react-toastify';
 import ProductDetail from './components/pages/authorized/Product/views/ProductDetail';
 import ProductLayout from './components/pages/authorized/Product/adapter/ProductLayout/ProductLayout';
 import QcQueue from './components/pages/authorized/quality-control/views/QcQueue';
 import QcLayout from './components/pages/authorized/quality-control/adapter/QcLayout/QcLayout';
 import Notification from './components/pages/authorized/Notification/views';
-import Createsource from './components/pages/authorized/Purchase/views/CreateSource';
-import Partdetail from './components/pages/authorized/Purchase/views/PartDetail/views';
 import PurchasementLayout from './components/pages/authorized/Purchasement/adapter/PurchasementLayout/PurchasementLayout';
 import DeliberationLayout from './components/pages/authorized/Deliberation/adapter/DeliberationLayout/DeliberationLayout';
+
+//
+// ─── TOASTIFY ───────────────────────────────────────────────────────────────────
+//
+import { ToastContainer, toast } from 'react-toastify';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -85,15 +84,11 @@ function App() {
             <Route path="/qc-queue" exact component={QcQueue}/>
             <Route path="/quality-control" exact component={QcLayout}/>
             <Route path="/purchasement" exact component={PurchasementLayout}/>
-            <Route path="/product-add" exact component={Productadd}/>
-            <Route path="/pr-order" exact component={Prorder}/>            
+            <Route path="/product-add" exact component={Productadd}/>          
             <Route path="/product-detail" exact component={ProductDetail}/>
             <Route path="/product" exact component={ProductLayout}/>
             <Route path="/deliberation" exact component={DeliberationLayout}/>
-
             <Route path="/notifications" exact component={Notification}/>
-            <Route path="/create-source-detail" exact component={Createsource}/>
-            <Route path="/part-detail" exact component={Partdetail}/>
           </Switch>
           <ToastContainer />
           

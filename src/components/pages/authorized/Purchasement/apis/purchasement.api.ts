@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 import API_instance from '../../../../../core/axios/instance';
 import { transformDataFromAxiosPromiseToReadableFormat } from '../../../../../core/axios/response-mapper';
-import { ICreatePartDetailDTO, ICreateSourceDetailDTO } from '../shared/interfaces/purchasement.interfaces';
+import { ICreatePartDetailDTO, ICreatePurchasementRequestDTO, ICreateSourceDetailDTO } from '../shared/interfaces/purchasement.interfaces';
 
 export async function API_GetAllPartDetail() {
     const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/purchasement/part-detail');
@@ -41,6 +41,18 @@ export async function API_RemoveSourceDetail(id: number) {
 
 export async function API_GetAllPurchasementRequest() {
     const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/purchasement/requests?limit=100000000000000&page=1');
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_GetPurchasementSource(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get(`/api/purchasement/source/${id}`);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_CreatePurchasementRequest(data: ICreatePurchasementRequestDTO) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/purchasement/create-purchasement-request', data);
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }

@@ -1,10 +1,11 @@
-import { Button, Form, Input, PageHeader,Popover,Select,Space,Table, Tooltip } from 'antd'
+import { Button, Divider, Form, Input, PageHeader,Popover,Select,Space,Table, Tooltip } from 'antd'
 import React, { useState,useCallback } from 'react'
 import { MainContainer } from './sourceDetail.styles'
 import useSourceDetail from './useSourceDetail'
-import { EditFilled,DeleteFilled,PlusOutlined} from '@ant-design/icons';
+import { EditFilled,DeleteFilled,PlusOutlined,FormOutlined} from '@ant-design/icons';
 import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro';
 import { IPurchasementSoruce } from '../../shared/interfaces/purchasement.interfaces';
+import PurchasementOrder from './sub-component/PurchasementOrder/PurchasementOrder';
 const {Column} = Table
 const {useForm} = Form
 const { Option } = Select;
@@ -18,10 +19,20 @@ const formItemLayout = {
       sm: { span: 15 },
     },
   };
+
+
+type TAction = "view" | "order"
 const SourceDetail:React.FC = () => {
     const $hook_source_detail = useSourceDetail()
     const [popOverVisible,setPopoverVisible] = useState(false)
+    const [action,setAction] = useState<TAction>('view')
+    const [sourceRequestedId,setSourceRequestedId] = useState<number|null>(null)
     const [form] = useForm()
+
+    function onMakingOrderReq($data:IPurchasementSoruce){
+        setSourceRequestedId($data.id)
+        setAction('order')
+    }
 
     const GET_COMMERCIAL_NUMBER_LIST = useCallback(
         () => {
@@ -155,9 +166,10 @@ const SourceDetail:React.FC = () => {
 </div>
     // ────────────────────────────────────────────────────────────────────────────────
 
-
-    return (
-        <MainContainer>
+    let rendered_content = null
+    switch (action) {
+        case 'view':
+            rendered_content = <>
             <div className="site-page-header-ghost-wrapper">
                 <PageHeader
                 ghost={false}
@@ -186,18 +198,41 @@ const SourceDetail:React.FC = () => {
                     <Column title="ผู้ขาย" dataIndex="seller" key="seller" />
                     <Column title="อีเมล์" dataIndex="email" key="email" />
                     <Column align="center" title="ตัวจัดการ" render={(text,record: IPurchasementSoruce) => {
-                        return <>
-                                <Space>
-                                <Tooltip placement="bottom" title="แก้ไข">
-                                    <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
-                                </Tooltip>
-                                <Tooltip placement="bottom" title="ลบ">
-                                    <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => $hook_source_detail.events.onRemoveSource(record.id))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
-                                </Tooltip>
-                        </Space>
-                        </>
+                        return <div style={{ display:'flex',flexDirection:'row' }}>
+                                <div style={{ width:'50%',height:'100%',alignItems:'center' }}>
+                                    <Tooltip placement="bottom" title="สร้างคำสั่งซื้อ">
+                                        <Button onClick={onMakingOrderReq.bind(null,record)} style={{ borderColor:'green' }} ghost type="primary" shape="circle" icon={<FormOutlined style={{ color:'green' }} />} size="middle" />
+                                    </Tooltip>
+                                </div>
+                                <Divider style={{ height:'35px' }} type="vertical" />
+                                <div style={{ width:'50%',height:'100%',alignItems:'center'  }}>
+                                    <Space>
+                                        <Tooltip placement="bottom" title="แก้ไข">
+                                            <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
+                                        </Tooltip>
+                                        <Tooltip placement="bottom" title="ลบ">
+                                            <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => $hook_source_detail.events.onRemoveSource(record.id))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
+                                        </Tooltip>
+                                    </Space>
+                                </div>
+                            
+                        </div>
                     }} />
+
             </Table>
+
+            </>
+            break;
+        case 'order':
+            rendered_content = <PurchasementOrder back={() => setAction('view')} focused_source_id={sourceRequestedId}/>
+            break;    
+        default:
+            break;
+    }
+
+    return (
+        <MainContainer>
+            {rendered_content}
         </MainContainer>
     )
 }

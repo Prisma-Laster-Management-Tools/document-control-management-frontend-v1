@@ -22,6 +22,7 @@ export interface IPurchasementSoruce {
     seller: string;
     createdAt: string;
     updatedAt: string;
+    part_name?: string; // optional if joined
 }
 
 export interface ICreateSourceDetailDTO {
@@ -47,4 +48,13 @@ export interface IPurchasementRequest {
     company: string | null;
     email: string | null;
     seller: string | null;
+}
+
+export interface ICreatePurchasementRequestDTO {
+    commercial_number: string;
+    quantity: string;
+    is_special_request: boolean;
+    special_part_name: string | null;
+    special_part_contact: string | null;
+    price: number;
 }
