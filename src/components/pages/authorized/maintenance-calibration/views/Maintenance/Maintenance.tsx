@@ -15,6 +15,29 @@ interface IProps{
 
 }
 
+export function translateCycleInfoDataToReadableFormat(cycle_text:string){ // currently support only th locale -> [if you wanna add more do it by urself]
+  function translateDMYAbbreviationInToReadableText(type: 'd' | 'm' | 'y'){
+    if(type === "d") return 'วัน'
+    else if(type === "m") return 'เดือน'
+    else if(type === "y") return 'ปี'
+    // should'nt be reaching to this line of code
+  }
+
+  let prefix:string; // [ทุกๆ 3 ปี,ทุกๆ 3 เดือน,ทุกๆ 3 วัน] , [อีก 2 ปี,อีก 2 เดือน]
+  let every_as_cycle_Regex = new RegExp('(every_)(\\d+)_([dmy])'); 
+  let once_of_as_cycle_Regex = new RegExp('(once_of_)(\\d+)_([dmy])');
+  if(every_as_cycle_Regex.test(cycle_text)){
+    prefix = "ทุกๆ "
+    const [full_str, _, num_as_string, __] = every_as_cycle_Regex.exec(cycle_text) as Array<string>;
+    return prefix + num_as_string + ` ${translateDMYAbbreviationInToReadableText(cycle_text[cycle_text.length-1] as 'd' | 'm' | 'y')}` 
+  }else if(once_of_as_cycle_Regex.test(cycle_text)){
+    // No need to check for the another regex -> [we already did in the backend sided so there will be no arbitary data here it should be -> once_of_1_m] => {but i did do it because of the type ensuring]}
+    prefix = "ถัดไป "
+    const [full_str, _, num_as_string, __] = once_of_as_cycle_Regex.exec(cycle_text) as Array<string>;
+    return prefix + num_as_string + ` ${translateDMYAbbreviationInToReadableText(cycle_text[cycle_text.length-1] as 'd' | 'm' | 'y')}` 
+  }
+}
+
 const Maintenance:React.FC<IProps> =() => {
   const [maintenanceCycleList,setMaintenanceCycleList] = useState<Array<IMaintenenaceCycleData>|null>(null) // null by default
   const [onCreatingCycle,setOnCreatingCycle] = useState<boolean>(false)
@@ -47,28 +70,7 @@ const Maintenance:React.FC<IProps> =() => {
   //
   // ─── VIS HELPER ─────────────────────────────────────────────────────────────────
   //
-  function translateCycleInfoDataToReadableFormat(cycle_text:string){ // currently support only th locale -> [if you wanna add more do it by urself]
-    function translateDMYAbbreviationInToReadableText(type: 'd' | 'm' | 'y'){
-      if(type === "d") return 'วัน'
-      else if(type === "m") return 'เดือน'
-      else if(type === "y") return 'ปี'
-      // should'nt be reaching to this line of code
-    }
 
-    let prefix:string; // [ทุกๆ 3 ปี,ทุกๆ 3 เดือน,ทุกๆ 3 วัน] , [อีก 2 ปี,อีก 2 เดือน]
-    let every_as_cycle_Regex = new RegExp('(every_)(\\d+)_([dmy])'); 
-    let once_of_as_cycle_Regex = new RegExp('(once_of_)(\\d+)_([dmy])');
-    if(every_as_cycle_Regex.test(cycle_text)){
-      prefix = "ทุกๆ "
-      const [full_str, _, num_as_string, __] = every_as_cycle_Regex.exec(cycle_text) as Array<string>;
-      return prefix + num_as_string + ` ${translateDMYAbbreviationInToReadableText(cycle_text[cycle_text.length-1] as 'd' | 'm' | 'y')}` 
-    }else if(once_of_as_cycle_Regex.test(cycle_text)){
-      // No need to check for the another regex -> [we already did in the backend sided so there will be no arbitary data here it should be -> once_of_1_m] => {but i did do it because of the type ensuring]}
-      prefix = "ถัดไป "
-      const [full_str, _, num_as_string, __] = once_of_as_cycle_Regex.exec(cycle_text) as Array<string>;
-      return prefix + num_as_string + ` ${translateDMYAbbreviationInToReadableText(cycle_text[cycle_text.length-1] as 'd' | 'm' | 'y')}` 
-    }
-  }
   // ────────────────────────────────────────────────────────────────────────────────
 
   function onCycleJustGotCreated(){

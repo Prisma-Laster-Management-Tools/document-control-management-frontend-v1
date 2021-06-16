@@ -2,6 +2,7 @@ import React from 'react'
 import {createAdapterBasedOnAntdLayout} from "../../../../../../core/hoc/createAdapterBasedOnAntdLayout"
 import { DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import Maintenance from '../../views/Maintenance';
+import Calibration from '../../views/Calibration';
 const MaintenanceCalibrationLayout = createAdapterBasedOnAntdLayout({title:"การตรวจวัดและการบำรุงรักษา",default_fragment:'maintenance',fragment_data:[{
     component: Maintenance,
     name: "maintenance",
@@ -9,7 +10,7 @@ const MaintenanceCalibrationLayout = createAdapterBasedOnAntdLayout({title:"ก�
     icon: DesktopOutlined
 },
 {
-    component: () => <h1>Calibration page</h1>,
+    component: Calibration,
     name: "calibration",
     proper_label: "การตรวจวัดประสิทธิภาพของอุปกรณ์",
     icon: DesktopOutlined
