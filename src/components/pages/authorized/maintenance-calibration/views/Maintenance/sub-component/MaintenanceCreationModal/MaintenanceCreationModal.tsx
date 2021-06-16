@@ -43,6 +43,7 @@ const MaintenanceCreationModal:React.FC<IProps> = ({visible,back,on_crud}) => {
         if(mapped_response.success){
             toast.success('รอบการบำรุงได้ถูกเพิ่มเรียบร้อยแล้ว',ERROR_TOAST_OPTION);
             on_crud() // trigger data re-fetching on the super component
+            form.resetFields() // reset all field current value
         }else{
             // failed to create the cycle
             toast.error('เกิดข้อผิดพลาดในการเพิ่มรอบการบำรุง',ERROR_TOAST_OPTION);
