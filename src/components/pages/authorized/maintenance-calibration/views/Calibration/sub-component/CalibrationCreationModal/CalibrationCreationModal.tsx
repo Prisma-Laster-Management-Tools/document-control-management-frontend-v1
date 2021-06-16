@@ -35,8 +35,8 @@ const CalibrationCreationModal:React.FC<IProps> = ({visible,back,on_crud}) => {
             machine_name:formData.machine_name,
             serial_number:formData.serial_number,
             instruction: formData.instruction,
-            station: formData.station,
-            who: formData.who,
+            // station: formData.station,
+            // who: formData.who,
             cycle_start_at: (formData.cycle_start_at as unknown as Date).toISOString(),
             cycle_info: `every_${formData.cycle_day}_${formData.cycle_type}`
         }
@@ -104,7 +104,7 @@ const CalibrationCreationModal:React.FC<IProps> = ({visible,back,on_crud}) => {
                             >
                             <Input />
                         </Form.Item>
-                        <Form.Item
+                        {/* <Form.Item
                                 // style={{ width:"50%" }}
                                 name="station"
                                 label="สถานี"
@@ -127,7 +127,7 @@ const CalibrationCreationModal:React.FC<IProps> = ({visible,back,on_crud}) => {
                                 ]}
                             >
                             <Input />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item name="cycle_start_at" label="เลือกวันเริ่มต้น" rules={[{ required: true, message: 'กรุณาระบุวันที่จะเริ่มต้นรอบการบำรุง' }]} >
                             <DatePicker style={{width:'100%'}}/>
                         </Form.Item>

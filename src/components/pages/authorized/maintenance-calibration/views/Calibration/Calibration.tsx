@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MainContainer } from './calibration.styles'
-import { Modal, Button,Form, Input, PageHeader, DatePicker, Select, Table, Space, Tooltip } from 'antd';
+import { Modal, Button,Form, Input, PageHeader, DatePicker, Select, Table, Space, Tooltip, Badge } from 'antd';
 import { toast } from 'react-toastify';
 import { ICalibrationCycleData, ICalibrationEvidenceData } from '../../shared/interfaces/calibration.interfaces';
 import { API_GetAllCalibrationCycleData, API_RemoveCalibrationCycleData } from '../../apis/calibration.api';
@@ -10,6 +10,7 @@ import { PartitionOutlined,DeleteOutlined,EditOutlined,PlusOutlined } from '@ant
 import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
 import CalibrationCreationModal from './sub-component/CalibrationCreationModal';
+import CalibrateHistory from './sub-component/CalibrateHistory';
 const { Option } = Select;
 const {useForm} = Form
 const {Column} = Table
@@ -20,6 +21,7 @@ const Calibration:React.FC<IProps> = () => {
 
     const [calibrationCycleList,setCalibrationCycleList] = useState<Array<ICalibrationCycleData>|null>(null)
     const [onCreatingCycle,setOnCreatingCycle] = useState<boolean>(false)
+    const [focusedSerialNumber,setFocusedSerialNumber] = useState<string | null>(null)
     async function getAllCalibrationCycleList(){
         const mapped_response = await API_GetAllCalibrationCycleData()
         if(mapped_response.success){
@@ -54,6 +56,7 @@ const Calibration:React.FC<IProps> = () => {
 
     return (
         <MainContainer>
+            <CalibrateHistory clear_focus={setFocusedSerialNumber.bind(null,null)} focused_serial_number={focusedSerialNumber}/>
             <CalibrationCreationModal on_crud={onCycleJustGotCreated} visible={onCreatingCycle} back={setOnCreatingCycle.bind(null,false)}/>
             <div className="site-page-header-ghost-wrapper">
                 <PageHeader
@@ -71,14 +74,23 @@ const Calibration:React.FC<IProps> = () => {
             <Table style={{ padding:20 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={calibrationCycleList || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={calibrationCycleList===null}>
                 <Column title="ชื่อเครื่องมือ" dataIndex="machine_name" key="machine_name" />
                 <Column align="center" width="10%" title="หมายเลขซีเรียลนัมเบอร์" dataIndex="serial_number" key="serial_number" />
-                <Column align="center" width="10%" title="สถานี" dataIndex="station" key="station" />
-                <Column align="center" width="10%" title="ผู้รับผิดชอบ" dataIndex="who" key="who"  />
+                {/* <Column align="center" width="10%" title="สถานี" dataIndex="station" key="station" />
+                <Column align="center" width="10%" title="ผู้รับผิดชอบ" dataIndex="who" key="who"  /> */}
                 <Column align="center" width="10%" title="วันเริ่มรอบ" render={(text,record:ICalibrationCycleData) => {
                     return <Moment format="D MMM YYYY" withTitle locale="th">{record.cycle_start_at}</Moment>
                 }}  />
-                    <Column align="center" width="10%" title="รอบ" render={(text,record:ICalibrationCycleData) => {
-                        return <span>{translateCycleInfoDataToReadableFormat(record.cycle_info)}</span>
-                    }}/>
+                <Column align="center" width="10%" title="รอบ" render={(text,record:ICalibrationCycleData) => {
+                    return <span>{translateCycleInfoDataToReadableFormat(record.cycle_info)}</span>
+                }}/>
+                <Column align="center" width="15%" title="สถานะ" render={(text,record:ICalibrationCycleData) => {
+                    if(!record.calibration_evidence.length) return <Badge status="default" text="ยังไม่เคยวัดประสิทธิภาพ" />
+                    const latest_evidence = record.calibration_evidence[0] // already sorted from the backend side
+                    if(latest_evidence.is_pass) return <Badge status="success" text="วัดประสิทธิภาพผ่านแล้ว" />
+                    return <Badge status="error" text="วัดประสิทธิภาพไม่ผ่าน" />
+                }}/>
+                <Column align="center" width="15%" title="สถานะ" render={(text,record:ICalibrationCycleData) => {
+                    return <Button onClick={setFocusedSerialNumber.bind(null,record.serial_number)} disabled={!record.calibration_evidence.length}>ดูประวัติการตรวจวัด</Button>
+                }}/>
                 <Column align="center" width="15%" title="การจัดการ" render={(text,record:ICalibrationCycleData) => {
                return <Space>
                         <Tooltip placement="bottom" title="แก้ไข">

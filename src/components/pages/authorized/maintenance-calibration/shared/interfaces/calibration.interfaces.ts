@@ -18,6 +18,8 @@ export interface ICalibrationCycleData {
     cycle_info: string;
     createdAt: string;
     updatedAt: string;
+
+    calibration_evidence: Array<ICalibrationEvidenceData>; // eager by default
 }
 
 export interface ICreateCalibrationCycleDTO {
@@ -26,6 +28,6 @@ export interface ICreateCalibrationCycleDTO {
     instruction: string;
     cycle_start_at: string;
     cycle_info: string;
-    who: string | null;
-    station: string | null;
+    // who: string | null;
+    // station: string | null;
 }
