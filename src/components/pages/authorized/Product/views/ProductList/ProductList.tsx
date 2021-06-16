@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 import { API_SendProductToControlQueue } from '../../../quality-control/apis/qc.api'
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
+import QcHistory from './fragments/QcHistory/QcHistory'
 const {Column} = Table
 
 type TQcStatus = null | boolean
@@ -19,6 +20,21 @@ type TActions = "view" | "add"
 export const ProductList:React.FC = () => {
   const [prodDetails,setProdDetails] = useState<Array<IProductList> | null>(null)
   const [action,setAction] = useState<TActions>("view")
+  
+  //
+  // ─── FOR HISTORICAL DRAWER TIMELINE ─────────────────────────────────────────────
+  //
+  const [focusedProductId,setFocusedProductId] = useState<number | null> (null)
+
+  function setViewingProductHistory(record:IProductList){
+      console.log(record)
+      setFocusedProductId(record.id)
+  }
+  function onStopViewingTheProductHistory(){
+    setFocusedProductId(null)
+  }
+  // ────────────────────────────────────────────────────────────────────────────────
+
 
   //
   // ─── FOR BEAUTIFY CONTENT ───────────────────────────────────────────────────────
@@ -115,6 +131,7 @@ export const ProductList:React.FC = () => {
   switch (action) {
     case "view":
       rendered_view = <>
+      <QcHistory clear_focus={onStopViewingTheProductHistory} focused_product_id={focusedProductId}/>
       <MainOperatorContainer>
         <Button type="text">สินค้าทั้งหมด {prodDetails ? prodDetails.length : 0} ชิ้น</Button>
         <Button onClick={() => setAction("add")}>เพิ่มสินค้าเข้าระบบ</Button>
@@ -134,9 +151,9 @@ export const ProductList:React.FC = () => {
               </Space>
             </CenteredContainerBox>
           }} />
-          <Column align="center" width="10%" title="ประวัติการตรวจสอบ" render={(text,record) => {
+          <Column align="center" width="10%" title="ประวัติการตรวจสอบ" render={(text,record:IProductList) => {
             return <CenteredContainerBox>
-              <Button type="primary" ghost disabled={(record as IProductList).quality_passed === null}>ดูประวัติ</Button>
+              <Button onClick={setViewingProductHistory.bind(null,record)} type="primary" ghost disabled={(record as IProductList).quality_passed === null}>ดูประวัติ</Button>
             </CenteredContainerBox>
           }} />
           <Column align="center" width="20%" title="ตัวจัดการ" render={(text,record) => {

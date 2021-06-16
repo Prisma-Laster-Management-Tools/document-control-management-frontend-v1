@@ -50,3 +50,14 @@ export async function API_RemoveProduct(serial_number: string) {
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
+
+//
+// ─── CO OPERATE WITH THE QC ─────────────────────────────────────────────────────
+//
+// might be moved later
+export async function API_GetProductHistoryTimelineOfTheQcProcess(product_id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/quality-control/control-phase/process/' + product_id);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+// ────────────────────────────────────────────────────────────────────────────────

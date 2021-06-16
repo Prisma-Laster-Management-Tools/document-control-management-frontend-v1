@@ -25,3 +25,36 @@ export interface IProductList {
 }
 
 export type ICreateProductDTO = Pick<IProductList, 'product_code' | 'serial_number'>;
+
+//
+// ─── CO OPEARATIVE WITH THE QC MODULES ──────────────────────────────────────────
+//
+// MIGHT BE MOVED LATER
+export interface IControlProecssOfProduct {
+    id: number;
+    group_code: string;
+    protocol_description: string;
+    number_of_protocol: number;
+    check_status: boolean;
+    createdAt: string;
+    updatedAt: string;
+    product: {
+        id: number;
+        serial_number: string;
+        product_code: string;
+        quality_passed: boolean;
+        createdAt: string;
+        updatedAt: string;
+    };
+    protocol: {
+        id: number;
+        product_code: string;
+        process_order: number;
+        process_description: string;
+        required_attachment: boolean;
+        attachment_path: string | null;
+        createdAt: string;
+        updatedAt: string;
+    };
+}
+// ────────────────────────────────────────────────────────────────────────────────
