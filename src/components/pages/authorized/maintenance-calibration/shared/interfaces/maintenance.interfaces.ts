@@ -10,3 +10,13 @@ export interface IMaintenenaceCycleData {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface ICreateMaintenanceCycleDTO {
+    machine_name: string;
+    serial_number: string;
+    instruction: string;
+    cycle_start_at: string;
+    cycle_info: string;
+    who: string | null;
+    station: string | null;
+}

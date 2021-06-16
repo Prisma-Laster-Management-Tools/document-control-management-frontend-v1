@@ -4,10 +4,11 @@ import Moment from 'react-moment'
 import { API_GetAllMaintenanceCycleData, API_RemoveMaintenanceCycleData } from '../../apis/maintenance.api'
 import { IMaintenenaceCycleData } from '../../shared/interfaces/maintenance.interfaces'
 import { MainContainer } from './maintenance.styles'
-import { PartitionOutlined,DeleteOutlined,EditOutlined } from '@ant-design/icons';
+import { PartitionOutlined,DeleteOutlined,EditOutlined,PlusOutlined } from '@ant-design/icons';
 import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 import { toast } from 'react-toastify'
+import MaintenanceCreationModal from './sub-component/MaintenanceCreationModal'
 const {Column} = Table
 
 interface IProps{
@@ -16,6 +17,7 @@ interface IProps{
 
 const Maintenance:React.FC<IProps> =() => {
   const [maintenanceCycleList,setMaintenanceCycleList] = useState<Array<IMaintenenaceCycleData>|null>(null) // null by default
+  const [onCreatingCycle,setOnCreatingCycle] = useState<boolean>(false)
   async function getAllMaintenanceCycleData(){
     const mapped_response = await API_GetAllMaintenanceCycleData()
     if(mapped_response.success){
@@ -69,10 +71,16 @@ const Maintenance:React.FC<IProps> =() => {
   }
   // ────────────────────────────────────────────────────────────────────────────────
 
+  function onCycleJustGotCreated(){
+    setOnCreatingCycle(false) // hide modal
+    getAllMaintenanceCycleData() // force re-fetching instead of pushing the new one [//TODO if u want to just push without fetch feel free to do it]
+  }
+
   //TODO SHOW THE REMAINING DAY UNTIL IT GETS NOTIFIED [convert cycle into number of days and + the start cycle]{X} -> then get Date.now(){Y} and calulate day passed from {Y} TO {X}
 
   return (
     <MainContainer>
+        <MaintenanceCreationModal on_crud={onCycleJustGotCreated} visible={onCreatingCycle} back={setOnCreatingCycle.bind(null,false)}/>
           <div className="site-page-header-ghost-wrapper">
             <PageHeader
             ghost={false}
@@ -81,11 +89,16 @@ const Maintenance:React.FC<IProps> =() => {
             >
             </PageHeader>
         </div>
+        <div style={{ display:'flex',justifyContent:'flex-end',marginBottom:20,paddingRight:20 }}>
+           <Tooltip placement="bottom" title="เพิ่มรอบการบำรุงรักษา">
+              <Button onClick={setOnCreatingCycle.bind(null,true)} type="primary" shape="circle" icon={<PlusOutlined />} size="large" />
+            </Tooltip>
+        </div>
         <Table style={{ padding:20 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={maintenanceCycleList || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={maintenanceCycleList===null}>
            <Column title="ชื่อเครื่องจักร" dataIndex="machine_name" key="machine_name" />
            <Column align="center" width="10%" title="หมายเลขซีเรียลนัมเบอร์" dataIndex="serial_number" key="serial_number" />
            <Column align="center" width="10%" title="สถานี" dataIndex="station" key="station" />
-           <Column align="center" width="10%" title="ผู้ดูแล" dataIndex="who" key="who"  />
+           <Column align="center" width="10%" title="ผู้รับผิดชอบ" dataIndex="who" key="who"  />
            <Column align="center" width="10%" title="วันเริ่มรอบ" render={(text,record:IMaintenenaceCycleData) => {
              return <Moment format="D MMM YYYY" withTitle locale="th">{record.cycle_start_at}</Moment>
            }}  />
