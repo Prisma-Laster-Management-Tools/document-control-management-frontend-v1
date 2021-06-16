@@ -45,6 +45,7 @@ import DeliberationLayout from './components/pages/authorized/Deliberation/adapt
 // ─── TOASTIFY ───────────────────────────────────────────────────────────────────
 //
 import { ToastContainer, toast } from 'react-toastify';
+import MaintenanceCalibrationLayout from './components/pages/authorized/maintenance-calibration/adapter/MaintenanceCalibrationLayout/MaintenanceCalibrationLayout';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -89,6 +90,8 @@ function App() {
             <Route path="/product" exact component={ProductLayout}/>
             <Route path="/deliberation" exact component={DeliberationLayout}/>
             <Route path="/notifications" exact component={Notification}/>
+
+            <Route exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
           </Switch>
           <ToastContainer />
           
