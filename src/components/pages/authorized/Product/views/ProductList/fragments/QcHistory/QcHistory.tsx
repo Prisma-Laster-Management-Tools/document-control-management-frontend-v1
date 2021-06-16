@@ -192,7 +192,7 @@ const QcHistory:React.FC<IProps> = ({focused_product_id,clear_focus}) => {
                     <Table style={{ fontFamily:'Kanit' }} dataSource={focusedControlProcessData || []} loading={focusedControlProcessData===null} rowKey="id" size="large" pagination={false} bordered >
                         <Column align="center" width="15%" title="ข้อกำหนด" dataIndex="protocol_description" key="protocol_description" />
                         <Column title="สถานะ" align="center" width="5%" render={(text,record:IControlProecssOfProduct) => {
-                            return record.check_status ? <span style={{ color:'green' }}>ผ่าน</span> : <span style={{ color:'green' }}>ไม่ผ่าน</span>
+                            return record.check_status ? <span style={{ color:'green' }}>ผ่าน</span> : <span style={{ color:'red' }}>ไม่ผ่าน</span>
                         }}/>
                     </Table>
                 </Drawer>
