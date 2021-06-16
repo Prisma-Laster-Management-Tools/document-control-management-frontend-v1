@@ -7,3 +7,9 @@ export async function API_GetAllMaintenanceCycleData() {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_RemoveMaintenanceCycleData(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/maintenance/' + id);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
