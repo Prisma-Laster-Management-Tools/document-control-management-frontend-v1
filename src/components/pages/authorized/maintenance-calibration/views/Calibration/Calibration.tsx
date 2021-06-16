@@ -9,6 +9,7 @@ import { translateCycleInfoDataToReadableFormat } from '../Maintenance/Maintenan
 import { PartitionOutlined,DeleteOutlined,EditOutlined,PlusOutlined } from '@ant-design/icons';
 import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
+import CalibrationCreationModal from './sub-component/CalibrationCreationModal';
 const { Option } = Select;
 const {useForm} = Form
 const {Column} = Table
@@ -18,7 +19,7 @@ interface IProps{
 const Calibration:React.FC<IProps> = () => {
 
     const [calibrationCycleList,setCalibrationCycleList] = useState<Array<ICalibrationCycleData>|null>(null)
-
+    const [onCreatingCycle,setOnCreatingCycle] = useState<boolean>(false)
     async function getAllCalibrationCycleList(){
         const mapped_response = await API_GetAllCalibrationCycleData()
         if(mapped_response.success){
@@ -45,8 +46,15 @@ const Calibration:React.FC<IProps> = () => {
         getAllCalibrationCycleList()
     },[])
 
+    function onCycleJustGotCreated(){
+        setOnCreatingCycle(false) // hide modal
+        getAllCalibrationCycleList() // force re-fetching instead of pushing the new one [//TODO if u want to just push without fetch feel free to do it]
+    }
+    
+
     return (
         <MainContainer>
+            <CalibrationCreationModal on_crud={onCycleJustGotCreated} visible={onCreatingCycle} back={setOnCreatingCycle.bind(null,false)}/>
             <div className="site-page-header-ghost-wrapper">
                 <PageHeader
                 ghost={false}
@@ -54,6 +62,11 @@ const Calibration:React.FC<IProps> = () => {
                 subTitle="ตารางรอบของการตรวจวัด"
                 >
                 </PageHeader>
+            </div>
+            <div style={{ display:'flex',justifyContent:'flex-end',marginBottom:20,paddingRight:20 }}>
+            <Tooltip placement="bottom" title="เพิ่มรอบการตรวจวัดประสิทธิภาพ">
+                <Button onClick={setOnCreatingCycle.bind(null,true)} type="primary" shape="circle" icon={<PlusOutlined />} size="large" />
+                </Tooltip>
             </div>
             <Table style={{ padding:20 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={calibrationCycleList || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={calibrationCycleList===null}>
                 <Column title="ชื่อเครื่องมือ" dataIndex="machine_name" key="machine_name" />
