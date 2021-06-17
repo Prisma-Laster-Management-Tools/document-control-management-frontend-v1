@@ -30,7 +30,7 @@ export default function Landing() {
                     <FirstPic/>
                 </FirstContainer>
 
-                <div>lorem</div>
+                
                 <Divider style={{color:"#646464"}}>เครื่องมือที่ใช้พัฒณาระบบนี้</Divider>
 
                 <SecondContainer>
