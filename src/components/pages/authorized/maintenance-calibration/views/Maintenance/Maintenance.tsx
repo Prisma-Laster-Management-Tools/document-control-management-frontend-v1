@@ -97,10 +97,14 @@ const Maintenance:React.FC<IProps> =() => {
             </Tooltip>
         </div>
         <Table style={{ padding:20 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={maintenanceCycleList || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={maintenanceCycleList===null}>
-           <Column title="ชื่อเครื่องจักร" dataIndex="machine_name" key="machine_name" />
+           <Column align="center"  width="20%" title="ชื่อเครื่องจักร" dataIndex="machine_name" key="machine_name" />
            <Column align="center" width="10%" title="หมายเลขซีเรียลนัมเบอร์" dataIndex="serial_number" key="serial_number" />
-           <Column align="center" width="10%" title="สถานี" dataIndex="station" key="station" />
-           <Column align="center" width="10%" title="ผู้รับผิดชอบ" dataIndex="who" key="who"  />
+           <Column align="center" width="10%" title="สถานี" render={(text,record:IMaintenenaceCycleData) => {
+             return <span>{record.station || "ไม่ระบุ"}</span>
+           }} />
+           <Column align="center" width="10%" title="ผู้รับผิดชอบ" dataIndex="who" key="who" render={(text,record:IMaintenenaceCycleData) => {
+              return <span>{record.who || "ไม่ระบุ"}</span>
+           }} />
            <Column align="center" width="10%" title="วันเริ่มรอบ" render={(text,record:IMaintenenaceCycleData) => {
              return <Moment format="D MMM YYYY" withTitle locale="th">{record.cycle_start_at}</Moment>
            }}  />
@@ -117,7 +121,7 @@ const Maintenance:React.FC<IProps> =() => {
                         </Tooltip>
                     </Space>
             }}/>
-                    </Table>
+          </Table>
     </MainContainer>
   )
 }
