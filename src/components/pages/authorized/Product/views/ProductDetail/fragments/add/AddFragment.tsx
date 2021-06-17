@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainContainer } from './addFragment.styles'
-import {Button, Form,Input, Upload} from 'antd'
+import {Button, Form,Input, PageHeader, Upload} from 'antd'
 import {InboxOutlined} from '@ant-design/icons'
 import { API_AddProductDetail } from '../../../../apis/product.api'
 import { ICreateProductDetailDTO, IProductDetail } from '../../../../shared/interfaces/product.interfaces'
@@ -48,7 +48,15 @@ const AddFragment:React.FC<Props> = ({onSuccess,onCancel})  => {
     }
     return (
         <MainContainer>
-            <h1>เพิ่มรายละเอียดรหัสสินค้า (sku)</h1> 
+           <div style={{ marginBottom:10 }} className="site-page-header-ghost-wrapper">
+          <PageHeader
+          ghost={false}
+          title="เพิ่ม"
+          subTitle="รายละเอียดของสินค้า (sku)"
+          onBack={onCancel}
+          >
+          </PageHeader>
+      </div> 
             <div style={{ width:"50%",alignSelf:'center' }}>
                 <Form form={form} onFinish={onAddProduct} {...formItemLayout}>
                     <Form.Item

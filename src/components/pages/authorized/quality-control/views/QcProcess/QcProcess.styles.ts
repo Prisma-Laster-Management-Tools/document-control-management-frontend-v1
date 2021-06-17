@@ -32,7 +32,7 @@ export const QcProcessBodyMainContainer = styled.div`
 export const QcProcessPictureContainer = styled.div`
     width: 50%;
     height: 100%;
-    border: 1px solid blue;
+    //border: 1px solid blue;
 
     display: flex;
     flex-direction: column;
@@ -46,7 +46,7 @@ export const QcProcessPictureContainer = styled.div`
 export const QcProcessDetailContainer = styled.div`
     width: 50%;
     height: 100%;
-    border: 1px solid green;
+    //border: 1px solid green;
 
     display: flex;
     flex-direction: column;

@@ -7,5 +7,5 @@ export const MainContainer = styled.div`
     text-align: center;
     flex-direction: column;
     justify-content: center;
-    background-color: aliceblue;
+    //background-color: aliceblue;
 `;
