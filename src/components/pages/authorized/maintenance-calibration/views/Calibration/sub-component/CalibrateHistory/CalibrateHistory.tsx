@@ -124,7 +124,7 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
                         </Descriptions>
                     </PageHeader>
             </div>
-            <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={evidencesList || []} rowKey="id" size="small" pagination={{ pageSize:15 }} bordered loading={evidencesList===null}>
+            <Table style={{ fontFamily:'Kanit' }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={evidencesList || []} rowKey="id" size="small" pagination={{ pageSize:15 }} bordered loading={evidencesList===null}>
                 <Column  align="center" width="10%" title="สถานะ" render={(text,record:ICalibrationEvidenceData) => {
                     return record.is_pass ? <span style={{ color:'green' }}>ผ่าน</span> : <span style={{ color:'red' }}>ไม่ผ่าน</span>
                 }} />
