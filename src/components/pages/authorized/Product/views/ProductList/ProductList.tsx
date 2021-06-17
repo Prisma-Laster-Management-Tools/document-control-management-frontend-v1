@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CenteredContainerBox, ContentContainer } from '../../../../../../shared/styles/common'
-import {Table,Button, Space, Badge, BadgeProps,Input } from 'antd'
+import {Table,Button, Space, Badge, BadgeProps,Input, PageHeader } from 'antd'
 import { IProductList } from '../../shared/interfaces/product.interfaces'
 import { API_GetAllProduct, API_RemoveProduct } from '../../apis/product.api'
 import { AudioOutlined } from '@ant-design/icons';
@@ -147,6 +147,14 @@ export const ProductList:React.FC = () => {
     case "view":
       rendered_view = <>
       <QcHistory clear_focus={onStopViewingTheProductHistory} focused_product_id={focusedProductId}/>
+      <div style={{ marginLeft:-25,marginBottom:10 }} className="site-page-header-ghost-wrapper">
+                <PageHeader
+                ghost={false}
+                title="การตรวจวัดประสิทธิภาพ"
+                subTitle="ตารางรอบของการตรวจวัด"
+                >
+                </PageHeader>
+      </div>
       <MainOperatorContainer>
         <div style={{ width:'100%' }}>
           <Search placeholder="เลขซีเรียลนัมเบอร์ที่ต้องการจะค้นหา" allowClear onSearch={onSearch} style={{ width: 285 }} />
