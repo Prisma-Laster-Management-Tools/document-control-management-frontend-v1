@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../../../../common/navbar'
 import { API_GetAllProductDetail, API_RemoveProductDetail } from '../../apis/product.api'
 import { IProductDetail } from '../../shared/interfaces/product.interfaces'
-import {Table,Button, Space} from 'antd'
+import {Table,Button, Space, PageHeader} from 'antd'
 import { ContentContainer, MainOperatorContainer } from './productDetail.styles'
 import { CenteredContainerBox } from '../../../../../../shared/styles/common'
 import AddFragment from './fragments/add/AddFragment'
@@ -74,7 +74,15 @@ const ProductDetail = () => {
   switch (action) {
     case "view":
       rendered_view = <>
-              <MainOperatorContainer>
+      <div style={{ marginLeft:-25,marginBottom:10 }} className="site-page-header-ghost-wrapper">
+          <PageHeader
+          ghost={false}
+          title="รายละเอียดสินค้า"
+          subTitle="รายละเอียดของสินค้าทั้งหมด"
+          >
+          </PageHeader>
+      </div>
+        <MainOperatorContainer>
           <Button onClick={() => setAction("add")}>เพิ่มรายละเอียด</Button>
         </MainOperatorContainer>
         <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodDetails || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodDetails===null}>
