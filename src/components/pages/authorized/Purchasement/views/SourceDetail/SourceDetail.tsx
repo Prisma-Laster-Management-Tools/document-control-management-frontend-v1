@@ -199,24 +199,24 @@ const SourceDetail:React.FC = () => {
                     <Column title="อีเมล์" dataIndex="email" key="email" />
                     <Column align="center" title="ตัวจัดการ" render={(text,record: IPurchasementSoruce) => {
                         return <div style={{ display:'flex',flexDirection:'row' }}>
-                                <div style={{ width:'50%',height:'100%',alignItems:'center' }}>
-                                    <Tooltip placement="bottom" title="สร้างคำสั่งซื้อ">
-                                        <Button onClick={onMakingOrderReq.bind(null,record)} style={{ borderColor:'green' }} ghost type="primary" shape="circle" icon={<FormOutlined style={{ color:'green' }} />} size="middle" />
-                                    </Tooltip>
-                                </div>
-                                <Divider style={{ height:'35px' }} type="vertical" />
-                                <div style={{ width:'50%',height:'100%',alignItems:'center'  }}>
-                                    <Space>
-                                        <Tooltip placement="bottom" title="แก้ไข">
-                                            <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
+                                    <div style={{ width:'50%',height:'100%',alignItems:'center' }}>
+                                        <Tooltip placement="bottom" title="สร้างคำสั่งซื้อ">
+                                            <Button onClick={onMakingOrderReq.bind(null,record)} style={{ borderColor:'green' }} ghost type="primary" shape="circle" icon={<FormOutlined style={{ color:'green' }} />} size="middle" />
                                         </Tooltip>
-                                        <Tooltip placement="bottom" title="ลบ">
-                                            <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => $hook_source_detail.events.onRemoveSource(record.id))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
-                                        </Tooltip>
-                                    </Space>
-                                </div>
+                                    </div>
+                                    <Divider style={{ height:'35px' }} type="vertical" />
+                                    <div style={{ width:'50%',height:'100%',alignItems:'center'  }}>
+                                        <Space>
+                                            <Tooltip placement="bottom" title="แก้ไข">
+                                                <Button ghost type="primary" shape="circle" icon={<EditFilled />} size="middle" />
+                                            </Tooltip>
+                                            <Tooltip placement="bottom" title="ลบ">
+                                                <Button onClick={() => ConfirmationModalRequired({title:"โปรดยืนยัน",message:`คุณแน่ใจหรอว่าคุณต้องการจะลบแห่ลงการจัดซื้อเลข  ${record.commercial_number} - ${record.company}`},() => $hook_source_detail.events.onRemoveSource(record.id))} ghost danger shape="circle" icon={<DeleteFilled />} size="middle" />
+                                            </Tooltip>
+                                        </Space>
+                                    </div>
                             
-                        </div>
+                                </div>
                     }} />
 
             </Table>
