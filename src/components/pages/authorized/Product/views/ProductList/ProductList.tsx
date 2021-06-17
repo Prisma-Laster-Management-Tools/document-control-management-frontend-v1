@@ -150,8 +150,8 @@ export const ProductList:React.FC = () => {
       <div style={{ marginLeft:-25,marginBottom:10 }} className="site-page-header-ghost-wrapper">
                 <PageHeader
                 ghost={false}
-                title="การตรวจวัดประสิทธิภาพ"
-                subTitle="ตารางรอบของการตรวจวัด"
+                title="สินค้า"
+                subTitle="รายการสินค้าทั้งหมด"
                 >
                 </PageHeader>
       </div>
