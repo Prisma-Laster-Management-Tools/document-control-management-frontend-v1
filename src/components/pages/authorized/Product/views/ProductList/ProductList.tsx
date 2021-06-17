@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { CenteredContainerBox, ContentContainer } from '../../../../../../shared/styles/common'
-import {Table,Button, Space, Badge, BadgeProps } from 'antd'
+import {Table,Button, Space, Badge, BadgeProps,Input } from 'antd'
 import { IProductList } from '../../shared/interfaces/product.interfaces'
 import { API_GetAllProduct, API_RemoveProduct } from '../../apis/product.api'
+import { AudioOutlined } from '@ant-design/icons';
 import Moment from 'react-moment'
 import { MainOperatorContainer } from '../ProductDetail/productDetail.styles'
 import ProductAdd from '../ProductAdd'
@@ -14,12 +15,14 @@ import { API_SendProductToControlQueue } from '../../../quality-control/apis/qc.
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader'
 import QcHistory from './fragments/QcHistory/QcHistory'
 const {Column} = Table
-
+const { Search } = Input;
 type TQcStatus = null | boolean
 type TActions = "view" | "add"
 export const ProductList:React.FC = () => {
   const [prodDetails,setProdDetails] = useState<Array<IProductList> | null>(null)
+  const [filteredProd,setFilteredProd] = useState<Array<any> | null>(null)
   const [action,setAction] = useState<TActions>("view")
+  let prodDetailCached = []
   
   //
   // ─── FOR HISTORICAL DRAWER TIMELINE ─────────────────────────────────────────────
@@ -126,6 +129,18 @@ export const ProductList:React.FC = () => {
 
   // ────────────────────────────────────────────────────────────────────────────────
 
+  //
+  // ─── SEARCH ─────────────────────────────────────────────────────────────────────
+  //
+  function onSearch(value:string){
+    if(!value) return setFilteredProd(null)
+    setFilteredProd(prodDetails!.filter(data => data.serial_number.includes(value)))
+  }
+  // ────────────────────────────────────────────────────────────────────────────────
+
+  const data_source_renderer = filteredProd ? filteredProd : prodDetails // if filtered is currently in action -> use it as main
+
+
 
   let rendered_view = null
   switch (action) {
@@ -133,10 +148,13 @@ export const ProductList:React.FC = () => {
       rendered_view = <>
       <QcHistory clear_focus={onStopViewingTheProductHistory} focused_product_id={focusedProductId}/>
       <MainOperatorContainer>
+        <div style={{ width:'100%' }}>
+          <Search placeholder="เลขซีเรียลนัมเบอร์ที่ต้องการจะค้นหา" allowClear onSearch={onSearch} style={{ width: 285 }} />
+        </div>
         <Button type="text">สินค้าทั้งหมด {prodDetails ? prodDetails.length : 0} ชิ้น</Button>
         <Button onClick={() => setAction("add")}>เพิ่มสินค้าเข้าระบบ</Button>
      </MainOperatorContainer>
-     <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodDetails || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodDetails===null}>
+     <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={data_source_renderer || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodDetails===null}>
           <Column width="15%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex="serial_number" key="serial_number" />
           <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex="product_code" key="product_code" />
           <Column  align="center" width="10%" title="วันที่นำเข้าระบบ" render={(text,record) => {
