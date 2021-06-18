@@ -3,13 +3,14 @@ import { Button } from 'antd';
 import menu_outline from './assets/menu_outline.png';
 import prima_icon from './assets/PLT-gray.png';
 
-export const NavTop = styled.div`
+export const NavTop = styled.div<{is_not_in_adapter?: boolean}>`
+    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 280px;
-    padding-right: 280px;
+    padding-left: ${props => props.is_not_in_adapter?"280": 50}px;
+    padding-right: ${props => props.is_not_in_adapter?"280": 50}px;
 
     position: relative;
     width: 100%;
@@ -20,18 +21,20 @@ export const NavTop = styled.div`
 
     z-index: 9;
     font-family: 'Kanit', sans-serif;
-    @media (max-width: 1200px) {
-        padding-left: 200px;
-        padding-right: 200px;
-    }
-    @media (max-width: 993px) {
-        padding-left: 140px;
-        padding-right: 140px;
-    }
-    @media (max-width: 768px) {
-        padding-left: 80px;
-        padding-right: 80px;
-    }
+    ${props => props.is_not_in_adapter?
+        `@media (max-width: 1200px) {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+        @media (max-width: 993px) {
+            padding-left: 140px;
+            padding-right: 140px;
+        }
+        @media (max-width: 768px) {
+            padding-left: 80px;
+            padding-right: 80px;
+        }`
+    :null}
 `;
 export const RegisZone = styled.div`
     /* Regis zone */

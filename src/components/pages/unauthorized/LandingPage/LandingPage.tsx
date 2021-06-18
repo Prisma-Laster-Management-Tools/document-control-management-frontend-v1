@@ -18,7 +18,7 @@ const style = {
 export default function Landing() {
     return (
         <>
-            <Navbar/>
+            <Navbar is_not_in_adapter={true}/>
             <MainLandingContainer>
 
                 <FirstContainer>

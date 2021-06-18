@@ -2,9 +2,11 @@ import React from 'react'
 import { Drawer, Divider} from 'antd';
 import { AppstoreOutlined, SettingOutlined, MedicineBoxOutlined} from '@ant-design/icons';
 import { NavTop, LoginBtn, RegisterBtn, RegisZone, LogoPrima, IconMenuOutline, NameTop, IconContainer, DrawerContainer, ListItemContainer, DrawerListText, DrawerOutside } from './navbar.styles'
+interface IProps{
+    is_not_in_adapter?: boolean,
+}
 
-
-export default function Navbar() {
+const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
     const [visible, setVisible] = React.useState(false);
     const showDrawer = () => {
         setVisible(true);
@@ -13,7 +15,7 @@ export default function Navbar() {
         setVisible(false);
     };
     return (
-        <NavTop>
+        <NavTop is_not_in_adapter={is_not_in_adapter} >
             <LogoPrima/>
             <RegisZone>
                 {/* <LoginBtn> เข้าสู่ระบบ </LoginBtn> */}
@@ -54,3 +56,5 @@ export default function Navbar() {
         
     )
 }
+
+export default Navbar;
