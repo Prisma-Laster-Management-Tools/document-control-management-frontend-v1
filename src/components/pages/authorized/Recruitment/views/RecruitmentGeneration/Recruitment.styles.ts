@@ -3,7 +3,8 @@ import { Button, Input } from 'antd';
 
 export const RecruitmentContainer = styled.div`
     width: 100%;
-    padding-top: 4rem;
+    padding-top: 0rem;
+    margin-top: -20px;
 
     display: flex;
     justify-content: center;
@@ -25,7 +26,7 @@ export const GenLinkContainer = styled.div`
 `;
 export const RCTextHeader = styled.p`
     //width: 76rem;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
     margin: 2rem 0rem 0rem 0rem;
     user-select: none;
@@ -68,6 +69,7 @@ export const GeneratedLinkText = styled.div`
     border: 0.2rem solid #555555;
     border-radius: 0.2rem;
     cursor: pointer;
+    margin-top: 50px;
     /* user-select: none; */
 `;
 export const DropTextSelect = styled.div`

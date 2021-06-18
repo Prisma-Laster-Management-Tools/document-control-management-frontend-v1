@@ -47,6 +47,7 @@ import DeliberationLayout from './components/pages/authorized/Deliberation/adapt
 import { ToastContainer, toast } from 'react-toastify';
 import MaintenanceCalibrationLayout from './components/pages/authorized/maintenance-calibration/adapter/MaintenanceCalibrationLayout/MaintenanceCalibrationLayout';
 import NotificationPortal from './components/pages/authorized/Notification/views/NotificationPortal';
+import RecruitmentLayout from './components/pages/authorized/Recruitment/adapter/RecruitmentLayout/RecruitmentLayout';
 import PurchasementTracking from './components/pages/semirized/purchasement/views/purchasement-tracking';
 // ────────────────────────────────────────────────────────────────────────────────
 
@@ -80,7 +81,7 @@ function App() {
             {/* <Route path="/sales" exact component={Sales}/> */}
             <Route path="/feedback/:id" exact component={Feedback}/>
             <Route path="/feedback-survey/:access_token" exact component={Feedbacksurvey}/>
-            <Route path="/recruitment" exact component={Recruitment}/>
+            <Route path="/recruitment" exact component={RecruitmentLayout}/>
             <Route path="/registration/:access_token" exact component={Registration}/>
             <Route path="/dashboard" exact component={Dashboard}/>
             {/* <Route path="/qc-process" exact component={QcProcess}/>
