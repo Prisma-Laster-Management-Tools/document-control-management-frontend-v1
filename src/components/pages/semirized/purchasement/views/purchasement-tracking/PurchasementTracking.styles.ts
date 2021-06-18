@@ -170,7 +170,7 @@ export const SellerDetailDiv = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 `
 export const BuyerDetailDiv = styled.div`
@@ -194,4 +194,17 @@ export const HeaderTextSY = styled.div`
 `
 export const ButtonDiv = styled(Button)`
 
+`
+
+export const ButtonContainer = styled.div`
+    width: 75%; 
+    height: 50%;
+
+    padding-right: 5px;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 `

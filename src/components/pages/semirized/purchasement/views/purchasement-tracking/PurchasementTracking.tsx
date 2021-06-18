@@ -1,7 +1,7 @@
 import React from 'react'
 import { Steps, Divider, Descriptions } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { ButtonDiv, BuyerDetailDiv, BuyerDiv, HeaderTextSY, ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, SellerDetailDiv, SellerDiv, StepDiv, TrackDiv } from './PurchasementTracking.styles'
+import { ButtonContainer, ButtonDiv, BuyerDetailDiv, BuyerDiv, HeaderTextSY, ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, SellerDetailDiv, SellerDiv, StepDiv, TrackDiv } from './PurchasementTracking.styles'
 
 const { Step } = Steps;
 export default function PurchasementTracking() {
@@ -38,13 +38,20 @@ export default function PurchasementTracking() {
 
                     </MailDetailContainer>
 
-                    {/* ///////////   Seller and Buyer Container    ///////////*/}
+                    {/* ............   Seller and Buyer Container    ............*/}
                     <TrackDiv>
 
                         <SellerDiv>
                             <SellerDetailDiv>
-                                <HeaderTextSY>รายละเอียดผู้จัดขาย</HeaderTextSY>
 
+                                {/* ............ After Click button From email  ............*/}
+                                <ButtonContainer>
+                                    <ButtonDiv style={{color:"green",border:"1px solid green"}}>ยืนยันข้อเสนอสั่งซื้อ</ButtonDiv>
+                                    <ButtonDiv style={{color:"red",border:"1px solid red"}}>ปธิเสธข้อเสนอ</ButtonDiv>
+                                </ButtonContainer> 
+                                
+                                {/* ............ Accepted Order ............ */}
+                                {/* <HeaderTextSY>รายละเอียดผู้จัดขาย</HeaderTextSY>
                                 <Descriptions
                                         bordered
                                         size="small"
@@ -55,15 +62,14 @@ export default function PurchasementTracking() {
                                         <Descriptions.Item label="เบอร์โทร">091-819-1923</Descriptions.Item>
                                         <Descriptions.Item label="อีเมล">Tanawatt2541@gmail.com</Descriptions.Item>
                                 </Descriptions>
-
-                                <ButtonDiv>เพิ่มหลักฐานการจัดส่ง</ButtonDiv>
+                                <ButtonDiv>เพิ่มหลักฐานการจัดส่ง</ButtonDiv> */}
                             </SellerDetailDiv>
                             <StepDiv direction="vertical" current={1} size="small" >
                                 <Step status="process" icon={<LoadingOutlined />} title={<div>ยืนยันออเดอร์</div>} />
                                 <Step title={<div>หลักฐานการส่ง</div>}  />
                                 <Step title={<div>ดำเนินการส่ง</div>} />
                             </StepDiv>
-                        </SellerDiv>
+                        </SellerDiv> 
                         
                         <Divider type="vertical" style={{height:"98%"}}></Divider>
 
