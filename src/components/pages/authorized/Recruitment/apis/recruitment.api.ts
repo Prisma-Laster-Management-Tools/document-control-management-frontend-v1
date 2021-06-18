@@ -20,3 +20,9 @@ export async function API_CreateRegistrationAccessLinkForEmployee(createRegistra
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_GetAllUserData() {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/user');
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
