@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Navbar from '../../../../../common/navbar'
 import { Divider, Avatar,Spin, Button} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { DotConTainer, MainNotificationContainer, NotiDateText, NotiDetailText, NotificationDiv, NotiInsideTextContainer, NotiListContainer, NotiNewDot, TextHeader } from './Notification.styles'
+import { DotConTainer, MainNotificationContainer, NotiDateText, NotiDetailText, NotificationDiv, NotiHearderType, NotiInsideTextContainer, NotiListContainer, NotiNewDot, TextHeader } from './Notification.styles'
 import { API_GetAllNotification } from '../../apis/notification.api';
 import Moment from 'react-moment';
 import { INotificationData } from '../../interfaces/notification.interfaces';
@@ -43,13 +43,14 @@ export default function Notification() {
         if(!notificationList) return <Spin/>
         return notificationList.map((notification) => {
             return <NotiListContainer key={notification.id}>
-            <Avatar size={54} icon={<UserOutlined />}/>
-            <NotiInsideTextContainer>
-                <NotiDetailText color={"#454545"}>{notification.message}</NotiDetailText>
-                <NotiDateText color={"#DDA520"}><Moment fromNow locale="th">{notification.createdAt}</Moment></NotiDateText>
-            </NotiInsideTextContainer>
-        {/* <DotConTainer><NotiNewDot/></DotConTainer> */}
-       </NotiListContainer>
+                        <Avatar size={54} icon={<UserOutlined />}/>
+                        <NotiInsideTextContainer>
+                            <NotiHearderType>การตรวจสอบคุณภาพ</NotiHearderType>
+                            <NotiDetailText color={"#454545"}>{notification.message}</NotiDetailText>
+                            <NotiDateText color={"#DDA520"}><Moment fromNow locale="th">{notification.createdAt}</Moment></NotiDateText>
+                        </NotiInsideTextContainer>
+                    {/* <DotConTainer><NotiNewDot/></DotConTainer> */}
+                    </NotiListContainer>
         })
     },[notificationList])
 

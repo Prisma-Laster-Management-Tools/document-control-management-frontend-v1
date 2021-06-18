@@ -45,7 +45,7 @@ export const TextHeader = styled.div`
 
 export const NotiListContainer = styled.div`
     width: 100%;
-    height: 72px;
+    height: 80px;
     padding: 0rem 0.5rem 0rem 0.5rem;
     border-radius: 0.5rem;
 
@@ -73,7 +73,7 @@ export const NotiListContainer = styled.div`
 export const NotiInsideTextContainer = styled.div`
     margin-left: 1rem;
     width: 82%;
-    height: 72px;
+    height: 80px;
     padding: 12px 0px 8px 0px;
     display: flex;
     flex-direction: column;
@@ -93,14 +93,15 @@ export const NotiDetailText = styled.div<{ color: string }>`
     }
 `;
 export const NotiDateText = styled.div<{ color: string }>`
-    font-size: 13px;
+    font-size: 11px;
+    margin-top: 5px;
     font-weight: 600;
     color: ${(props) => props.color};
     display: flex;
     justify-content: flex-start;
     align-items: center;
     @media (max-width: 993px) {
-        font-size: 12px;
+        font-size: 10px;
     }
 `;
 export const DotConTainer = styled.div`
@@ -117,3 +118,12 @@ export const NotiNewDot = styled.div`
     background-color: #dda520;
     border-radius: 100%;
 `;
+
+export const NotiHearderType = styled.div`
+    width: 100%;
+    color: #333333;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`
