@@ -47,11 +47,8 @@ import DeliberationLayout from './components/pages/authorized/Deliberation/adapt
 import { ToastContainer, toast } from 'react-toastify';
 import MaintenanceCalibrationLayout from './components/pages/authorized/maintenance-calibration/adapter/MaintenanceCalibrationLayout/MaintenanceCalibrationLayout';
 import NotificationPortal from './components/pages/authorized/Notification/views/NotificationPortal';
-<<<<<<< HEAD
 import RecruitmentLayout from './components/pages/authorized/Recruitment/adapter/RecruitmentLayout/RecruitmentLayout';
-=======
 import PurchasementTracking from './components/pages/semirized/purchasement/views/purchasement-tracking';
->>>>>>> bf384a567b4029fd58cf984fb773a3da45ad445c
 // ────────────────────────────────────────────────────────────────────────────────
 
 
