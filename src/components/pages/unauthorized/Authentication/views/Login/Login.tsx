@@ -135,7 +135,7 @@ export default function Login(props:any) {
                         }}/>
                         {UI_RenderErrorText('email')}
                         <TextP fontSize={20}>รหัสผ่าน</TextP>
-                        <InputValue onChange={(event) => {
+                        <InputValue type="password" onChange={(event) => {
                             setCredentialInput(prevState => ({...prevState,password:event.target.value}))
                         }}/>
                         {UI_RenderErrorText('password')}
