@@ -66,7 +66,7 @@ export default function PurchasementTracking() {
                             </SellerDetailDiv>
                             <StepDiv direction="vertical" current={1} size="small" >
                                 <Step status="process" icon={<LoadingOutlined />} title={<div>ยืนยันออเดอร์</div>} />
-                                <Step title={<div>หลักฐานการส่ง</div>}  />
+                                <Step title={<div>หลักฐานการส่ง</div>}  description={<ButtonDiv size="small">ดูหลักฐาน</ButtonDiv>}/>
                                 <Step title={<div>ดำเนินการส่ง</div>} />
                             </StepDiv>
                         </SellerDiv> 
@@ -75,8 +75,8 @@ export default function PurchasementTracking() {
 
                         <BuyerDiv>
                             <StepDiv direction="vertical" current={1} size="small" >
-                                <Step title={<div>ยืนยันการสั่งซื้อ</div>}  />
-                                <Step title={<div>การชำระเงิน</div>}  />
+                                <Step title={<div>ยืนยันการสั่งซื้อ</div>}   />
+                                <Step title={<div>การชำระเงิน</div>}  description={<ButtonDiv size="small">ดูหลักฐาน</ButtonDiv>}/>
                                 <Step title={<div>ได้รับสินค้า</div>}  />
                             </StepDiv>
                             <BuyerDetailDiv>

@@ -114,9 +114,9 @@ export const TrackDiv = styled.div`
     width: 90%;
     height: 400px;
     background-color: white;
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
 
-    padding: 0.5rem 1rem 0rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
     //border: 1px solid red;
     border-radius: 0.5rem;
@@ -126,16 +126,18 @@ export const TrackDiv = styled.div`
     justify-content: center;
     @media (max-width:993px){
         width: 100%;
+        font-size: 14px;
     }
 `
 export const StepDiv = styled(Steps)`
-    width: 160px;
+    width: 170px;
+    height: 100%;
     //font-size: 20px;
-    padding: 20px 10px 0px 10px;
+    padding: 50px 10px 0px 10px;
     
     display: flex;
-    justify-content: center;
-    align-self:center;
+    //justify-content: center;
+    //align-items: center;
 
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
     //border: 1px solid red;
