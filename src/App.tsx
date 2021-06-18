@@ -37,7 +37,7 @@ import ProductDetail from './components/pages/authorized/Product/views/ProductDe
 import ProductLayout from './components/pages/authorized/Product/adapter/ProductLayout/ProductLayout';
 import QcQueue from './components/pages/authorized/quality-control/views/QcQueue';
 import QcLayout from './components/pages/authorized/quality-control/adapter/QcLayout/QcLayout';
-import Notification from './components/pages/authorized/Notification/views';
+import Notification from './components/pages/authorized/Notification/views/NotificationList';
 import PurchasementLayout from './components/pages/authorized/Purchasement/adapter/PurchasementLayout/PurchasementLayout';
 import DeliberationLayout from './components/pages/authorized/Deliberation/adapter/DeliberationLayout/DeliberationLayout';
 
@@ -46,6 +46,7 @@ import DeliberationLayout from './components/pages/authorized/Deliberation/adapt
 //
 import { ToastContainer, toast } from 'react-toastify';
 import MaintenanceCalibrationLayout from './components/pages/authorized/maintenance-calibration/adapter/MaintenanceCalibrationLayout/MaintenanceCalibrationLayout';
+import NotificationPortal from './components/pages/authorized/Notification/views/NotificationPortal';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -90,6 +91,8 @@ function App() {
             <Route path="/product" exact component={ProductLayout}/>
             <Route path="/deliberation" exact component={DeliberationLayout}/>
             <Route path="/notifications" exact component={Notification}/>
+            <Route path="/notifications/test" exact component={NotificationPortal}/>
+
 
             <Route exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
           </Switch>
