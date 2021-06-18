@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../../../../../common/navbar'
-import { Divider, Dropdown, Menu, Form, Input, message} from 'antd';
+import { Divider, Dropdown, Menu, Form, Input, message, PageHeader} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { AntdInputStyled, DropTextSelect, GeneratedLinkText, GenLinkBTN, GenLinkContainer, RCFnameText, RCInnerTextContainer, RCInputContainer, RCInputText2, RCText, RCTextHeader, RecruitmentContainer } from './Recruitment.styles'
 import { toast, ToastOptions } from 'react-toastify';
@@ -22,7 +22,12 @@ progress: undefined,
 
 const LINK_PREFIX = 'http://localhost:3001/registration/'
 
-export default function Recruitment() {
+
+interface IProps{
+    back: () => any
+    on_crud: () => any
+}
+const Recruitment:React.FC<IProps> = ({back,on_crud}) => {
     const [form] = Form.useForm();
     const [currentRole,setCurrentRole] = React.useState({role_raw:'',display_name:'เลือกตำแหน่งงาน'})
     const [generatedLink,setGeneratedLink] = React.useState<string|null>(null)
@@ -44,6 +49,8 @@ export default function Recruitment() {
                 setGeneratedLink(LINK_PREFIX+access_token)
 
                 clearAllFilledData()
+                on_crud()
+                message.success("ลื้งค์การเข้าใข้งานภายในระบบ ได้ถูกสร้างขึ้นเรียบร้อยแล้ว")
             }else{
                 // error -> show notify
             }
@@ -70,7 +77,16 @@ export default function Recruitment() {
     </GeneratedLinkText> </>: null
     return (
         <>
-            <Navbar/>
+            {/* <Navbar/> */}
+            <div className="site-page-header-ghost-wrapper">
+                <PageHeader
+                    ghost={false}
+                    title="การจัดสรรคบุคคล"
+                    subTitle="สร้างลิ้งค์สำหรับเเข้าใช้งาน"
+                    onBack={back}
+                >
+                </PageHeader>
+            </div>
             <Form form={form}>
                 <RecruitmentContainer>
                     <GenLinkContainer>
@@ -94,14 +110,6 @@ export default function Recruitment() {
                                     min:3,
                                     message: "ชื่อจริงควรมีความยาวตั้งแต่ 3 ตัวอักษรขึ้นไป"
                                 }
-                                // ({ getFieldValue }) => ({
-                                //     validator(_, value) {
-                                //         if(value.length > 3){
-                                //             // check length can be done easiy other way
-                                //         }
-                                //       return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                                //     },
-                                //   })
                                 ]}
                                 hasFeedback
 
@@ -146,3 +154,5 @@ export default function Recruitment() {
         </>
     )
 }
+
+export default Recruitment
