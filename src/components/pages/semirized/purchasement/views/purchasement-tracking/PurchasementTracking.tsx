@@ -1,7 +1,7 @@
 import React from 'react'
 import { Steps, Divider, Descriptions } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { ButtonContainer, ButtonDiv, BuyerDetailDiv, BuyerDiv, HeaderTextSY, ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, SellerDetailDiv, SellerDiv, StepDiv, TrackDiv } from './PurchasementTracking.styles'
+import { ButtonContainer, ButtonContainer2, ButtonDiv, BuyerDetailDiv, BuyerDiv, HeaderTextSY, ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, SellerDetailDiv, SellerDiv, StepDiv, TrackDiv } from './PurchasementTracking.styles'
 
 const { Step } = Steps;
 export default function PurchasementTracking() {
@@ -92,8 +92,12 @@ export default function PurchasementTracking() {
                                         <Descriptions.Item label="เบอร์โทร">087-912-2112</Descriptions.Item>
                                         <Descriptions.Item label="อีเมล">Charoent@primalasertherapy.com</Descriptions.Item>
                                 </Descriptions>
-
-                                <ButtonDiv>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
+                                
+                                <ButtonContainer2>
+                                    <ButtonDiv>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
+                                    <ButtonDiv>ยืนยันได้รับสินค้า</ButtonDiv>
+                                </ButtonContainer2>
+                                
                             </BuyerDetailDiv>
                         </BuyerDiv>
                         

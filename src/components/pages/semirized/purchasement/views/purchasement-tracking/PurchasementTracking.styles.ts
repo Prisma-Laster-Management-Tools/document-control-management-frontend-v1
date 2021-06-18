@@ -193,7 +193,7 @@ export const HeaderTextSY = styled.div`
     align-items: center;
 `
 export const ButtonDiv = styled(Button)`
-
+    
 `
 
 export const ButtonContainer = styled.div`
@@ -206,5 +206,17 @@ export const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+`
+
+export const ButtonContainer2 = styled.div`
+    width: 75%; 
+
+    padding-right: 5px;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 `
