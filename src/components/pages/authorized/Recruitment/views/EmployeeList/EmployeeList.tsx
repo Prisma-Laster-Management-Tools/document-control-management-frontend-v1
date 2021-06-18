@@ -1,5 +1,5 @@
 import { Button, message, PageHeader,Space,Table, Tooltip } from 'antd'
-import { DeleteOutlined} from'@ant-design/icons';
+import { DeleteOutlined , SwapOutlined} from'@ant-design/icons';
 import React, { useEffect, useState } from 'react'
 import { API_GetAllUserData } from '../../apis/recruitment.api'
 import { IUserData } from '../../shared/interfaces/recruitment.interface'
@@ -42,6 +42,9 @@ const EmployeeList = () => {
                 }}/>
                  <Column align="center" width="8%" title="การจัดการ" render={(text,record:IUserData) => {
                     return  <Space>
+                            <Tooltip placement="bottom" title="ปรับเปลี่ยนตำแหน่ง">
+                                <Button type="primary" ghost shape="circle" icon={<SwapOutlined />} size="middle" />
+                            </Tooltip>
                             <Tooltip placement="bottom" title="ลบพนักงานออกจากระบบ">
                                 <Button onClick={ConfirmationModalRequired.bind(null,{title:"โปรดยืนยัน",message:`คุณแน่ใจหรือไม่ว่าคุณต้องการที่จะลบคุณ ${record.firstname} ${record.lastname} ออกจากระบบ`},() => onRemoveEmployeeOutFromTheSystem(record.id))} ghost danger shape="circle" icon={<DeleteOutlined />} size="middle" />
                             </Tooltip>
