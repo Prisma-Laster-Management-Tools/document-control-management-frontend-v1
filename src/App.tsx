@@ -30,7 +30,7 @@ import 'moment-timezone';
 import Feedbacksurvey from './components/pages/unauthorized/Feedbacksurvey';
 import Productadd from './components/pages/authorized/Product/views/ProductAdd';
 import QcProcess from './components/pages/authorized/quality-control/views/QcProcess';
-import Dashboard from './components/pages/authorized/Dashboard/views';
+import Dashboard from './components/pages/authorized/Dashboard/views/Dashboard';
 import Recruitment from './components/pages/authorized/Recruitment/views/RecruitmentGeneration';
 import Registration from './components/pages/unauthorized/Recruitment/views/Registration';
 import ProductDetail from './components/pages/authorized/Product/views/ProductDetail';
