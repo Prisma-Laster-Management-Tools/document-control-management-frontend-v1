@@ -20,8 +20,8 @@ export interface IUserData {
     email: string;
     firstname: string;
     lastname: string;
-    password: string; // TODO  will be filtered out from the  backend side
-    salt: string; // TODO  will be filtered out from the  backend side
+    //password: string; // @DONE  will be filtered out from the  backend side
+    //salt: string; // @DONE  will be filtered out from the  backend side
     role: 'user' | 'admin';
     position: string; // the string of role [super,hr,qc] -> for the responsibility
     createdAt: string;
