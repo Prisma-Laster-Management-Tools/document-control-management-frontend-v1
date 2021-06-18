@@ -47,6 +47,7 @@ import DeliberationLayout from './components/pages/authorized/Deliberation/adapt
 import { ToastContainer, toast } from 'react-toastify';
 import MaintenanceCalibrationLayout from './components/pages/authorized/maintenance-calibration/adapter/MaintenanceCalibrationLayout/MaintenanceCalibrationLayout';
 import NotificationPortal from './components/pages/authorized/Notification/views/NotificationPortal';
+import PurchasementTracking from './components/pages/semirized/purchasement/views/purchasement-tracking';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -95,6 +96,8 @@ function App() {
 
 
             <Route exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
+
+            <Route exact path="/purchasement-tracking" component={PurchasementTracking}/>
           </Switch>
           <ToastContainer />
           
