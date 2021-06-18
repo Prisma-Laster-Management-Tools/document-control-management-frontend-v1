@@ -7,3 +7,13 @@ export interface IQcStatisticData {
         total_in_queue: number;
     };
 }
+
+export interface IPurchasementStatisticData {
+    statistic: {
+        totaL_request: number;
+        total_await_request_to_be_accept: number;
+        total_rejected_request: number;
+        total_in_process_request: number;
+        total_successfully_request: number;
+    };
+}

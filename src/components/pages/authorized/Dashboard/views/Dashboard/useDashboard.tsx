@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { TRoles } from './Dashboard'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { API_GetQcStatistic } from '../../apis/dashboard.api';
-import { IQcStatisticData } from '../../shared/interfaces/dashboard.interfaces';
-import { createStaticQcChartTypeWithPassedData } from './staticChartRenderer';
+import { API_GetPurchasementStatistic, API_GetQcStatistic } from '../../apis/dashboard.api';
+import { IPurchasementStatisticData, IQcStatisticData } from '../../shared/interfaces/dashboard.interfaces';
+import { createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData } from './staticChartRenderer';
 
 export default function useDashboard() {
     const [focusedRole,setFocusRole] = useState<TRoles>('qc')
@@ -19,6 +19,7 @@ export default function useDashboard() {
     function onRoleChanged(role:TRoles){
         resetChartData()
         if(role === "qc") return fetchAndPrepareQcDataForStatistic()
+        else if(role==='purchasement') return fetchAndPreparePurchasementDataForStatistic()
     }
 
     useEffect(() => {
@@ -30,7 +31,6 @@ export default function useDashboard() {
     // ─── QC ─────────────────────────────────────────────────────────────────────────
     //
     async function fetchAndPrepareQcDataForStatistic(){
-        console.log('Fetching qc data')
         const mapped_response = await API_GetQcStatistic()
         let dataset: any = [];
         if(mapped_response.success){
@@ -63,9 +63,40 @@ export default function useDashboard() {
     // ────────────────────────────────────────────────────────────────────────────────
 
 
-    // const rendered_chart_content = useMemo(() => {
+    //
+    // ─── PURCHASEMENT ───────────────────────────────────────────────────────────────
+    //
+    async function fetchAndPreparePurchasementDataForStatistic(){
+        const mapped_response = await API_GetPurchasementStatistic()
+        let dataset: any = [];
+        if(mapped_response.success){
+            const {statistic}: IPurchasementStatisticData = mapped_response.data
+            dataset = [
+                {
+                    name: 'คำร้องทั้งหมด',
+                    'คำร้องทั้งหมด': statistic.totaL_request
+                },{
+                    name: 'คำสั่งซื้อที่รอการตอบกลับ',
+                    'คำสั่งซื้อที่รอการตอบกลับ': statistic.total_await_request_to_be_accept                    
+                },
+                {
+                    name: 'คำสั่งซื้อถูกปฏิเสธ',
+                    'คำสั่งซื้อถูกปฏิเสธ': statistic.total_rejected_request                    
+                },
+                {
+                    name: 'คำสั่งซื้อที่ดำเนินการอยู่',
+                    'คำสั่งซื้อที่ดำเนินการอยู่': statistic.total_in_process_request
+                },
+                {
+                    name: 'การสั่งซื้อสำเร็จ',
+                    'การสั่งซื้อสำเร็จ': statistic.total_successfully_request
+                }
+            ]
+        }
+        setChartElement(createStaticPurchasementChartTypeWithPassedData(dataset))
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
 
-    // },[focusedRole])
     
     return {
         get: {

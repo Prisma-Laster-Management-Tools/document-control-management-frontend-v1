@@ -59,8 +59,8 @@ const DashBoard:React.FC<IProps> = (props) => {
                         </Select>
                     </MidTopContainer>
                     <MidMainContainer>
-
-                        <ResponsiveContainer width="100%" height="100%">
+                        {/* WIDTH AND HEIGHT CAN"T GO FURTHER 99% > if u want that trasistion in duration */}
+                        <ResponsiveContainer width="99%" height="99%">
                             {rendered_chart_element}
                         </ResponsiveContainer>
 
