@@ -1,7 +1,7 @@
 import React from 'react'
-import { Steps, Divider} from 'antd';
+import { Steps, Divider, Descriptions } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, StepDiv, TrackDiv } from './PurchasementTracking.styles'
+import { ButtonDiv, BuyerDetailDiv, BuyerDiv, HeaderTextSY, ListDetailHeader, ListDetailText, ListDetailText2, MailButtomDiv, MaildetailBox, MaildetailBox2, MailDetailContainer, MailTextHeader, PTBoxContainer, PTrackMainContainer, SellerDetailDiv, SellerDiv, StepDiv, TrackDiv } from './PurchasementTracking.styles'
 
 const { Step } = Steps;
 export default function PurchasementTracking() {
@@ -38,18 +38,59 @@ export default function PurchasementTracking() {
 
                     </MailDetailContainer>
 
+                    {/* ///////////   Seller and Buyer Container    ///////////*/}
                     <TrackDiv>
-                        <StepDiv direction="vertical" current={1} size="small" >
-                            <Step status="process" icon={<LoadingOutlined />} title={<div>ยืนยันออเดอร์</div>} />
-                            <Step title={<div>หลักฐานการส่ง</div>}  />
-                            <Step title={<div>ดำเนินการส่ง</div>} />
-                        </StepDiv>
+
+                        <SellerDiv>
+                            <SellerDetailDiv>
+                                <HeaderTextSY>รายละเอียดผู้จัดขาย</HeaderTextSY>
+
+                                <Descriptions
+                                        bordered
+                                        size="small"
+                                        column={1}
+                                        >
+                                        <Descriptions.Item label="บริษัท">Cloud Database</Descriptions.Item>
+                                        <Descriptions.Item label="ชื่อผู้ขาย">นายธนวัฒน์ จิตอุทัย</Descriptions.Item>
+                                        <Descriptions.Item label="เบอร์โทร">091-819-1923</Descriptions.Item>
+                                        <Descriptions.Item label="อีเมล">Tanawatt2541@gmail.com</Descriptions.Item>
+                                </Descriptions>
+
+                                <ButtonDiv>เพิ่มหลักฐานการจัดส่ง</ButtonDiv>
+                            </SellerDetailDiv>
+                            <StepDiv direction="vertical" current={1} size="small" >
+                                <Step status="process" icon={<LoadingOutlined />} title={<div>ยืนยันออเดอร์</div>} />
+                                <Step title={<div>หลักฐานการส่ง</div>}  />
+                                <Step title={<div>ดำเนินการส่ง</div>} />
+                            </StepDiv>
+                        </SellerDiv>
+                        
                         <Divider type="vertical" style={{height:"98%"}}></Divider>
-                        <StepDiv direction="vertical" current={1} size="small" >
-                            <Step title={<div>ยืนยันการสั่งซื้อ</div>}  />
-                            <Step title={<div>การชำระเงิน</div>}  />
-                            <Step title={<div>ได้รับสินค้า</div>}  />
-                        </StepDiv>
+
+                        <BuyerDiv>
+                            <StepDiv direction="vertical" current={1} size="small" >
+                                <Step title={<div>ยืนยันการสั่งซื้อ</div>}  />
+                                <Step title={<div>การชำระเงิน</div>}  />
+                                <Step title={<div>ได้รับสินค้า</div>}  />
+                            </StepDiv>
+                            <BuyerDetailDiv>
+                                <HeaderTextSY>รายละเอียดผู้จัดขาย</HeaderTextSY>
+
+                                <Descriptions
+                                        bordered
+                                        size="small"
+                                        column={1}
+                                        >
+                                        <Descriptions.Item label="บริษัท">บริษัท พรีมา เลเซอร์ เทอร์ราพี จำกัด</Descriptions.Item>
+                                        <Descriptions.Item label="ชื่อผู้ขาย">นายเจริญ ตั้งตรงเบญจศีล</Descriptions.Item>
+                                        <Descriptions.Item label="เบอร์โทร">087-912-2112</Descriptions.Item>
+                                        <Descriptions.Item label="อีเมล">Charoent@primalasertherapy.com</Descriptions.Item>
+                                </Descriptions>
+
+                                <ButtonDiv>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
+                            </BuyerDetailDiv>
+                        </BuyerDiv>
+                        
                     </TrackDiv>
 
                 </PTBoxContainer>
