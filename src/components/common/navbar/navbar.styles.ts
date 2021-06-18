@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Button } from 'antd';
-import menu_outline from './assets/menu_outline.png';
+import menu_outline from './assets/home.png';
 import prima_icon from './assets/PLT-gray.png';
 
 export const NavTop = styled.div<{is_not_in_adapter?: boolean}>`
@@ -145,8 +145,8 @@ export const IconContainer = styled.div`
     //border: 1px solid red;
 `;
 export const IconMenuOutline = styled.div`
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background-image: url('${menu_outline}');
     background-position: center;
     background-repeat: no-repeat;

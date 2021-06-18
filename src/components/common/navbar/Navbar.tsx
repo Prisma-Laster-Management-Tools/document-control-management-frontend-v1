@@ -18,11 +18,11 @@ const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
         <NavTop is_not_in_adapter={is_not_in_adapter} >
             <LogoPrima/>
             <RegisZone>
-                {/* <LoginBtn> เข้าสู่ระบบ </LoginBtn> */}
-                <NameTop>ธิติ มหาวรรณกิจ</NameTop>
-                <IconContainer onClick={showDrawer} ><IconMenuOutline/></IconContainer>
+                <LoginBtn> เข้าสู่ระบบ </LoginBtn>
+                {/* <NameTop>ธิติ มหาวรรณกิจ</NameTop>
+                <IconContainer><IconMenuOutline/></IconContainer> */}
             </RegisZone>
-            <Drawer
+            {/* <Drawer
                 //title="ยินตีต้อนรับ, ธิติ มหาวรรณกิจ"
                 placement="right"
                 closable={false}
@@ -50,7 +50,7 @@ const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
                         <ListItemContainer><SettingOutlined /><DrawerListText>Settings</DrawerListText></ListItemContainer>
                     </div>
                 </DrawerOutside>
-            </Drawer>
+            </Drawer> */}
         </NavTop>
 
         
