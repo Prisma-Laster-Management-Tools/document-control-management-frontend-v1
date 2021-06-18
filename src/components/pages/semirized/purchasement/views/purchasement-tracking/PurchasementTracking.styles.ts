@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Steps } from 'antd';
+import { Steps, Button } from 'antd';
 
 export const PTrackMainContainer = styled.div`
     width: 100vw;
@@ -7,6 +7,7 @@ export const PTrackMainContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    
 
     font-family: 'Kanit', sans-serif;
     font-style: normal;
@@ -20,7 +21,7 @@ export const PTBoxContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: white;
+    background-color: #f9f9f9;
 
     padding: 0.5rem 1rem 0rem 1rem;
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
@@ -123,9 +124,12 @@ export const TrackDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    @media (max-width:993px){
+        width: 100%;
+    }
 `
 export const StepDiv = styled(Steps)`
-    width: 155px;
+    width: 160px;
     //font-size: 20px;
     padding: 20px 10px 0px 10px;
     
@@ -136,4 +140,58 @@ export const StepDiv = styled(Steps)`
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
     //border: 1px solid red;
     border-radius: 0.5rem;
+`
+
+///////////////////////////////////////////////
+
+export const SellerDiv = styled.div`
+    width: 50%;
+    //height: 80%;
+    //background-color: blue;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+export const BuyerDiv = styled.div`
+    width: 50%;
+    //height: 80%;
+    //background-color: green;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+export const SellerDetailDiv = styled.div`
+    width: 75%;
+    //background-color: #d9d9d9;
+    padding-right: 5px;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+`
+export const BuyerDetailDiv = styled.div`
+    width: 75%;
+    //background-color: #d9d9d9;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+`
+export const HeaderTextSY = styled.div`
+    font-size: 20px;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+`
+export const ButtonDiv = styled(Button)`
+
 `
