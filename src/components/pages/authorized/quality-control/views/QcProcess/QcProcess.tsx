@@ -8,6 +8,7 @@ import { ICreateControlProcessDTO, IQualityControlProtocol } from '../../shared/
 import {SERVER_ADDRESS} from '../../../../../../config/STATIC.json'
 import { toast } from 'react-toastify';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
+import { useHistory } from 'react-router-dom';
 interface IProps{
     focused_product_data:{product_code:string,product_id:number} | null
     back: () => any
@@ -18,14 +19,19 @@ interface IQualityControlProcessDTO{
     protocol_id:number
 }
 const Qc:React.FC<IProps> = ({focused_product_data,back,on_success}) => {
+    const history = useHistory()
     const [protocolList,setProtocolList] = useState<Array<IQualityControlProtocol> | null>(null)
     const [currentStep,setCurrentStep] = useState<number>(0)
     const [qcDatas,setQcDatas] = useState<Array<IQualityControlProcessDTO>>([])
     async function getProtocolList(product_code:string){
         const mapped_response = await API_GetProtocolListFromProductCode(product_code)
         if(mapped_response.success){
-            setProtocolList(mapped_response.data)
-            console.log(mapped_response.data)
+            const protocol_datas = !mapped_response.data.length ? null : mapped_response.data
+            setProtocolList(protocol_datas)
+            if(!protocol_datas){
+                back()
+                toast.error(`สินค้ารหัส ${focused_product_data?.product_code} ยังไม่มีข้อกำหนดในการตรวจสอบ`,ERROR_TOAST_OPTION)
+            }
         }else{
             // faiiled to get the protocol list
         }
@@ -89,7 +95,7 @@ const Qc:React.FC<IProps> = ({focused_product_data,back,on_success}) => {
     // ─── VIS HELPER ─────────────────────────────────────────────────────────────────
     //
     const rendered_description_content = useMemo(()=> {
-        if(!protocolList) return null
+        if(!protocolList || !protocolList.length) return null
         return <TextInsideBoxInfo>{protocolList[currentStep].process_description}</TextInsideBoxInfo>
     },[currentStep,protocolList])
     const rendered_picture_content = useMemo(()=> {
