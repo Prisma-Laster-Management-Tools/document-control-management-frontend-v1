@@ -29,8 +29,9 @@ export const MainLandingContainer = styled.div`
 `
 ////////////////// 1 /////////////////////
 export const FirstContainer = styled.div`
-    margin-top: 2rem;
+    //margin-top: 2rem;
     width: 100%;
+    height: 90vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -57,7 +58,7 @@ export const H3TextGold = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    font-size: 54px;
+    font-size: 60px;
     font-weight: 600;
     color: #DAA520;
     @media (max-width:1200px){
@@ -77,7 +78,7 @@ export const H3TextGray = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    font-size: 54px;
+    font-size: 64px;
     font-weight: 600;
     color: #454545;
     @media (max-width:1200px){
@@ -109,8 +110,8 @@ export const FirstTextP = styled.p`
     }
 `
 export const FirstPic = styled.div`
-    width: 18rem;
-    height: 18rem;
+    width: 25rem;
+    height: 25rem;
     background-image: url(${firstPic});
     background-position: center;
     background-size: contain;
@@ -182,3 +183,25 @@ export const FooterContainer = styled.div`
     justify-content: center;
     align-items: center;
 `
+export const FooterContainer2 = styled.div`
+    width: 100vw;
+    height: 2rem;
+    background-color: #333333;
+    padding-left: 15%;
+    font-family: 'Kanit', sans-serif;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`
+export const CopyR = styled.div`
+    font-size: 14;
+    color: rgba(255,255,255,0.5);;
+
+    font-family: 'Kanit', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+` 

@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import Navbar from '../../../common/navbar'
-import { Divider, BackTop , Carousel } from 'antd';
-import { FirstContainer, FirstPic, FirstPic2, FirstTextContainer, FirstTextP, FooterContainer, H3TextGold, H3TextGray, MainLandingContainer, SecondContainer, TestCard } from './LandingPage.styles';
+import { Divider, BackTop , Carousel ,Button} from 'antd';
+import { CopyR, FirstContainer, FirstPic, FirstPic2, FirstTextContainer, FirstTextP, FooterContainer, FooterContainer2, H3TextGold, H3TextGray, MainLandingContainer, SecondContainer, TestCard } from './LandingPage.styles';
 
 
 const style = {
@@ -25,7 +25,8 @@ export default function Landing() {
                     <FirstTextContainer>
                         <H3TextGray>จัดการสินค้าที่ผลิต</H3TextGray>
                         <H3TextGold>Prima Platform</H3TextGold>
-                        <FirstTextP>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, magni quia neque maiores quisquam sequi minima reiciendis repellendus, facilis, fugit aliquam sapiente! Adipisci quo ut animi vitae labore itaque tempora.</FirstTextP>
+                        <FirstTextP>PRIMA TEAM นำทีมมารวมกันไม่ว่าจะอยู่ที่ไหน ด้วยการสื่อสารและเครื่องมือทั้งหมดในที่เดียว ทีมงานทางไกลจะยังคงทำงานได้อย่างมีประสิทธิภาพ ไม่ว่าคุณจะทำงานจากที่ไหน</FirstTextP>
+                        <Button size='large' shape="round" style={{border:"solid #DDA520",color:"#DDA520",width:"15rem"}}>เรียนรู้เพิ่มเติม</Button>
                     </FirstTextContainer>
                     <FirstPic/>
                 </FirstContainer>
@@ -68,6 +69,9 @@ export default function Landing() {
             <FooterContainer>
                     asdasd
             </FooterContainer> 
+            <FooterContainer2>
+                <CopyR>Copyright © 2020 by Prima laser Therapy. All Right Reserved</CopyR>
+            </FooterContainer2>
         </>
     )
 }
