@@ -6,6 +6,7 @@ export interface IProductDetail {
     product_name: string;
     product_description: string;
     protocol?: IQualityControlProtocol[];
+    product_entity?: Array<IProductList>;
     createdAt: string;
     updatedAt: string;
 }
