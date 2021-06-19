@@ -1,3 +1,5 @@
+import { IProductList } from '../../../Product/shared/interfaces/product.interfaces';
+
 export interface ISaleData {
     id: number;
     product_name: string;
@@ -32,3 +34,33 @@ export interface IFeedbackData {
 }
 
 export type TFeedbackCreationDTO = Omit<IFeedbackData, 'id' | 'createdAt' | 'updatedAt' | 'sales'>;
+
+//
+// ─── NEW SYSTEM ─────────────────────────────────────────────────────────────────
+//
+export interface ICreateProductManufactShippingDTO {
+    product_code: string;
+    product_name: string;
+    total_products: string;
+    price: number;
+    buyer_name: string;
+    buyer_contact: string | null;
+}
+
+export interface IProductManufactData {
+    id: number;
+    generated_key: string;
+    product_code: string;
+    product_name: string;
+    total_products: number;
+    price: number;
+    shipping_status: boolean;
+    buyer_name: string;
+    buyer_contact: string | null;
+    shipping_evidence: string | null;
+    shipping_evidence_uploaded_at: string | null;
+    createdAt: string;
+    updatedAt: string;
+    product: Array<IProductList>;
+}
+// ────────────────────────────────────────────────────────────────────────────────
