@@ -61,7 +61,13 @@ const ProductManufact = () => {
             <Column align="center" title="ติดต่อ" render={(text,record:IProductManufactData) => {
               return <span>{record.buyer_contact || 'ไม่ระบุ'}</span>
             }}/>
-            <Column width="5%" align="center" title="สถานะ" render={(text,record:IProductManufactData) => {
+            <Column onFilter={(value:any,record: IProductManufactData) => record.shipping_status === value} filters={
+                  [
+                    {text: "รอการจัดส่ง",value:null as unknown as any},
+                    {text: "จัดส่งแล้ว",value:true},
+                    {text: "ถูกยกเลิก",value:false},
+                  ]
+                } width="5%" align="center" title="สถานะ" render={(text,record:IProductManufactData) => {
               return createStatusTextTag(record.shipping_status)
             }}/>
             <Column width="5%" align="center" title="การจัดการ" render={(text,record:IProductManufactData) => {
