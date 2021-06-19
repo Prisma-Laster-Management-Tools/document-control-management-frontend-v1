@@ -98,7 +98,7 @@ function App() {
 
             <Route exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
 
-            <Route exact path="/purchasement-tracking" component={PurchasementTracking}/>
+            <Route exact path="/purchasement-tracking/:confirmation_token" component={PurchasementTracking}/>
           </Switch>
           <ToastContainer />
           
