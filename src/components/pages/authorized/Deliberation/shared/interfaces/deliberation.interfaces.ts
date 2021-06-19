@@ -32,3 +32,16 @@ export interface IFeedbackData {
 }
 
 export type TFeedbackCreationDTO = Omit<IFeedbackData, 'id' | 'createdAt' | 'updatedAt' | 'sales'>;
+
+//
+// ─── NEW SYSTEM ─────────────────────────────────────────────────────────────────
+//
+export interface ICreateProductManufactShippingDTO {
+    product_code: string;
+    product_name: string;
+    total_products: string;
+    price: number;
+    buyer_name: string;
+    buyer_contact: string | null;
+}
+// ────────────────────────────────────────────────────────────────────────────────
