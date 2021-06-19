@@ -3,7 +3,7 @@ import API_instance from '../../../../../core/axios/instance';
 import { transformDataFromAxiosPromiseToReadableFormat } from '../../../../../core/axios/response-mapper';
 import { ICreateProductDetailDTO, ICreateProductDTO } from '../shared/interfaces/product.interfaces';
 import qs from 'querystring';
-export async function API_GetAllProductDetail(query?: { with_protocol: boolean }) {
+export async function API_GetAllProductDetail(query?: { with_protocol?: boolean; with_product?: boolean }) {
     const query_string = qs.stringify(query);
     const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product/details?' + query_string); // fetch all with no pagination
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
