@@ -1,6 +1,14 @@
 import styled from '@emotion/styled'
 import firstPic from './assets/1.svg'
 import p1 from '../../../../assets/main_background.jpg'
+import landing1 from './assets/landing1.png'
+import landing2 from './assets/landing2.png'
+import { types } from '@babel/core'
+
+const landingi = {
+    producti: landing1,
+    qci: landing2,
+}
 
 export const MainLandingContainer = styled.div`
     width: 100%;
@@ -146,7 +154,6 @@ export const SecondContainer = styled.div`
     flex-wrap: wrap;
     flex-shrink: 3;
     padding: 2rem;
-    
 
     margin-bottom: 1rem;
 `
@@ -160,6 +167,73 @@ export const TestCard = styled.div`
     background-color: #848484;
     padding: 1.5rem;
     border-radius: 0.5rem;
+`
+//////////////////      3       /////////////////////////////
+export const ThirdContainer = styled.div`
+    width: 100%;
+    height: 20rem;
+    //border: 1px solid black;
+    margin-bottom: 6rem;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    flex-shrink: 3;
+    padding: 0rem 1rem 0rem 1rem;
+`
+
+export const TPicContainer = styled.div<{icon_name: keyof typeof landingi}>`
+    width: 50%;
+    height: 310px;
+    margin: 5px 0px 5px 0px;
+    background-image: url(${props => landingi[props.icon_name]});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+`
+export const TTextContainer = styled.div`
+    width: 50%;
+    height: 310px;
+    margin: 5px 0px 5px 0px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+export const TTextHeader = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 38px;
+    font-weight: 600;
+    color: #DDA520;
+    @media (max-width:993px){
+        font-size: 34px;
+    }
+    @media (max-width:768px){
+        font-size: 30px;
+    }
+`
+export const TTextDetaiilContainer = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+    font-size: 22px;
+    font-weight: 500;
+    color: #a9a9a9;
+    @media (max-width:993px){
+        font-size: 20px;
+    }
+    @media (max-width:768px){
+        font-size: 18px;
+    }
 `
 
 //////////////////////////////////////////////

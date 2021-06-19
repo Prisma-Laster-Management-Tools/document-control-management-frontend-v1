@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import Navbar from '../../../common/navbar'
 import { Divider, BackTop , Carousel ,Button} from 'antd';
-import { CopyR, FirstContainer, FirstPic, FirstPic2, FirstTextContainer, FirstTextP, FooterContainer, FooterContainer2, H3TextGold, H3TextGray, MainLandingContainer, SecondContainer, TestCard } from './LandingPage.styles';
+import { CopyR, FirstContainer, FirstPic, FirstPic2, FirstTextContainer, FirstTextP, FooterContainer, FooterContainer2, H3TextGold, H3TextGray, MainLandingContainer, SecondContainer, TestCard, ThirdContainer, TPicContainer, TTextContainer, TTextDetaiilContainer, TTextHeader } from './LandingPage.styles';
 
 
 const style = {
@@ -32,7 +32,38 @@ export default function Landing() {
                 </FirstContainer>
 
                 
-                <Divider style={{color:"#646464"}}>เครื่องมือที่ใช้พัฒณาระบบนี้</Divider>
+                <Divider style={{color:"#646464",margin:"2rem 0rem 5rem 0rem"}}>ฟังก์ชั่นการทำงาน</Divider>
+
+                <ThirdContainer>
+                    <TPicContainer icon_name="producti"></TPicContainer>
+                    <TTextContainer>
+                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
+                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                    </TTextContainer>
+                </ThirdContainer>
+                <ThirdContainer>
+                    <TTextContainer>
+                        <TTextHeader>ตรวจคุณภาพได้ตามเกณฑ์</TTextHeader>
+                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                    </TTextContainer>
+                    <TPicContainer icon_name="qci"></TPicContainer>
+                </ThirdContainer>
+                {/* <ThirdContainer>
+                    <TPicContainer></TPicContainer>
+                    <TTextContainer>
+                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
+                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                    </TTextContainer>
+                </ThirdContainer>
+                <ThirdContainer>
+                    <TTextContainer>
+                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
+                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                    </TTextContainer>
+                    <TPicContainer></TPicContainer>
+                </ThirdContainer> */}
+                
+                <Divider style={{color:"#646464",margin:"2rem 0rem 5rem 0rem"}}></Divider>
 
                 <SecondContainer>
                     <TestCard>1</TestCard>
