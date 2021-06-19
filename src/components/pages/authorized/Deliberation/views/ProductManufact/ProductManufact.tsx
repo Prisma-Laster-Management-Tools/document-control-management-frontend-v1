@@ -4,10 +4,11 @@ import { API_GetAllProductManufactData } from '../../apis/deliberation.api'
 import { IProductManufactData } from '../../shared/interfaces/deliberation.interfaces'
 import { MainContainer } from './productManufact.styles'
 import { DeleteOutlined , SearchOutlined} from'@ant-design/icons';
+import ProductManufactDetailDrawer from './sub-component/ProductManufactDetailDrawer'
 const {Column} = Table
 const ProductManufact = () => {
     const [prodManufactDatas,setProdManufactDatas] = useState<null | Array<IProductManufactData>>(null)
-    
+    const [focusedManufactKey,setFocusedManufactKey] = useState<null | string>(null)
     async function getAllProductManufactData(){
       const mapped_response = await API_GetAllProductManufactData()
       if(mapped_response.success){
@@ -31,9 +32,14 @@ const ProductManufact = () => {
     }
     // ─────────────────────────────────────────────────────────────────
 
+    function onChildComponentDoingAnyCRUDOperation(){
+      getAllProductManufactData() // force - re fetching [FAST FIRST lol no time]
+    }
+
 
     return (
       <MainContainer>
+          <ProductManufactDetailDrawer on_crud={onChildComponentDoingAnyCRUDOperation} focused_generated_key={focusedManufactKey} visible={!!focusedManufactKey} back={setFocusedManufactKey.bind(null,null)}/>
           <div style={{ marginLeft: -20,marginBottom:25 }} className="site-page-header-ghost-wrapper">
               <PageHeader
               ghost={false}
@@ -61,7 +67,7 @@ const ProductManufact = () => {
             <Column width="5%" align="center" title="การจัดการ" render={(text,record:IProductManufactData) => {
                return  <Space>
                <Tooltip placement="bottom" title="จัดการเพิ่มเติม">
-                   <Button type="primary" ghost shape="circle" icon={<SearchOutlined />} size="middle" />
+                   <Button disabled={record.shipping_status===false} onClick={setFocusedManufactKey.bind(null,record.generated_key)} type="primary" ghost shape="circle" icon={<SearchOutlined />} size="middle" />
                </Tooltip>
                {/* <Tooltip placement="bottom" title="ลบพนักงานออกจากระบบ">
                    <Button ghost danger shape="circle" icon={<DeleteOutlined />} size="middle" />
