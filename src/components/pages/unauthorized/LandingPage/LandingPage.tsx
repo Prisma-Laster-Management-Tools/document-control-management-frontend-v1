@@ -20,48 +20,48 @@ export default function Landing() {
         <>
             <Navbar is_not_in_adapter={true}/>
             <MainLandingContainer>
-
+            
                 <FirstContainer>
                     <FirstTextContainer>
                         <H3TextGray>จัดการสินค้าที่ผลิต</H3TextGray>
                         <H3TextGold>Prima Platform</H3TextGold>
-                        <FirstTextP>PRIMA TEAM นำทีมมารวมกันไม่ว่าจะอยู่ที่ไหน ด้วยการสื่อสารและเครื่องมือทั้งหมดในที่เดียว ทีมงานทางไกลจะยังคงทำงานได้อย่างมีประสิทธิภาพ ไม่ว่าคุณจะทำงานจากที่ไหน</FirstTextP>
+                        <FirstTextP> PRIMA TEAM นำทีมมารวมกันไม่ว่าจะอยู่ที่ไหน ด้วยการสื่อสารและเครื่องมือทั้งหมดในที่เดียว ทีมงานทางไกลจะยังคงทำงานได้อย่างมีประสิทธิภาพ ไม่ว่าคุณจะทำงานจากที่ไหน</FirstTextP>
                         <Button size='large' shape="round" style={{border:"solid #DDA520",color:"#DDA520",width:"15rem"}}>เรียนรู้เพิ่มเติม</Button>
                     </FirstTextContainer>
                     <FirstPic/>
                 </FirstContainer>
 
                 
-                <Divider style={{color:"#646464",margin:"2rem 0rem 5rem 0rem"}}>ฟังก์ชั่นการทำงาน</Divider>
+                <Divider style={{color:"#646464",margin:"2rem 0rem 5rem 0rem", fontSize:"22px",fontWeight:600}}>ฟังก์ชั่นการทำงาน</Divider>
 
                 <ThirdContainer>
                     <TPicContainer icon_name="producti"></TPicContainer>
                     <TTextContainer>
-                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
-                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                        <TTextHeader>" จัดการสินค้าได้รวดเร็ว "</TTextHeader>
+                        <TTextDetaiilContainer>&emsp;&emsp; Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
                     </TTextContainer>
                 </ThirdContainer>
                 <ThirdContainer>
                     <TTextContainer>
-                        <TTextHeader>ตรวจคุณภาพได้ตามเกณฑ์</TTextHeader>
-                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                        <TTextHeader>" ตรวจคุณภาพตามเกณฑ์ได้ง่าย "</TTextHeader>
+                        <TTextDetaiilContainer>&emsp;&emsp; Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
                     </TTextContainer>
                     <TPicContainer icon_name="qci"></TPicContainer>
                 </ThirdContainer>
-                {/* <ThirdContainer>
-                    <TPicContainer></TPicContainer>
+                <ThirdContainer>
+                    <TPicContainer icon_name="camani"></TPicContainer>
                     <TTextContainer>
-                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
-                        <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
+                        <TTextHeader>" แจ้งเตือนการสอบประสิทธิภาพ <br /> &nbsp; และการบำรุงรักษาเครื่องจักรตามรอบ "</TTextHeader>
+                        <TTextDetaiilContainer>&emsp;&emsp; Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
                     </TTextContainer>
                 </ThirdContainer>
                 <ThirdContainer>
                     <TTextContainer>
-                        <TTextHeader>จัดการสินค้าได้รวดเร็ว</TTextHeader>
+                        <TTextHeader>" ติดตามสถานะการซื้อวัสดุแบบเรียลไทม์ "</TTextHeader>
                         <TTextDetaiilContainer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas saepe voluptatem rem molestiae nam iusto recusandae, cupiditate ipsam. Accusamus, laboriosam!</TTextDetaiilContainer>
                     </TTextContainer>
-                    <TPicContainer></TPicContainer>
-                </ThirdContainer> */}
+                    <TPicContainer icon_name="puri"></TPicContainer>
+                </ThirdContainer>
                 
                 <Divider style={{color:"#646464",margin:"2rem 0rem 5rem 0rem"}}></Divider>
 
@@ -98,7 +98,7 @@ export default function Landing() {
             
 
             <FooterContainer>
-                    asdasd
+                
             </FooterContainer> 
             <FooterContainer2>
                 <CopyR>Copyright © 2020 by Prima laser Therapy. All Right Reserved</CopyR>

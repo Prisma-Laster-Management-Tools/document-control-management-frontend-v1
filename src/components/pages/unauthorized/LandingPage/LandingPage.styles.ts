@@ -3,11 +3,14 @@ import firstPic from './assets/1.svg'
 import p1 from '../../../../assets/main_background.jpg'
 import landing1 from './assets/landing1.png'
 import landing2 from './assets/landing2.png'
-import { types } from '@babel/core'
+import landing3 from './assets/landing3.png'
+import landing4 from './assets/landing4.png'
 
 const landingi = {
     producti: landing1,
     qci: landing2,
+    camani: landing3,
+    puri: landing4,
 }
 
 export const MainLandingContainer = styled.div`
@@ -20,10 +23,10 @@ export const MainLandingContainer = styled.div`
 
     font-family: 'Kanit', sans-serif;
 
-    padding: 0px 240px 0px 240px;
+    padding: 0px 200px 0px 200px;
     @media (max-width:1400px){
-        padding-left: 200px;
-        padding-right: 200px;
+        padding-left: 160px;
+        padding-right: 160px;
     }
     @media (max-width:993px){
         padding-left: 80px;
@@ -118,8 +121,8 @@ export const FirstTextP = styled.p`
     }
 `
 export const FirstPic = styled.div`
-    width: 25rem;
-    height: 25rem;
+    width: 27rem;
+    height: 27rem;
     background-image: url(${firstPic});
     background-position: center;
     background-size: contain;
@@ -182,6 +185,10 @@ export const ThirdContainer = styled.div`
     flex-wrap: wrap;
     flex-shrink: 3;
     padding: 0rem 1rem 0rem 1rem;
+
+    @media (max-width:768px){
+        flex-direction: column;
+    }
 `
 
 export const TPicContainer = styled.div<{icon_name: keyof typeof landingi}>`
@@ -197,6 +204,7 @@ export const TTextContainer = styled.div`
     width: 50%;
     height: 310px;
     margin: 5px 0px 5px 0px;
+    padding-left: 20px;
     
     display: flex;
     flex-direction: column;
@@ -208,14 +216,17 @@ export const TTextHeader = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 600;
     color: #DDA520;
+    @media (max-width:1300px){
+        font-size: 28px;
+    }
     @media (max-width:993px){
-        font-size: 34px;
+        font-size: 24px;
     }
     @media (max-width:768px){
-        font-size: 30px;
+        font-size: 20px;
     }
 `
 export const TTextDetaiilContainer = styled.div`
@@ -228,11 +239,14 @@ export const TTextDetaiilContainer = styled.div`
     font-size: 22px;
     font-weight: 500;
     color: #a9a9a9;
+    @media (max-width:1300px){
+        font-size: 16px;
+    }
     @media (max-width:993px){
-        font-size: 20px;
+        font-size: 14px;
     }
     @media (max-width:768px){
-        font-size: 18px;
+        font-size: 12px;
     }
 `
 
