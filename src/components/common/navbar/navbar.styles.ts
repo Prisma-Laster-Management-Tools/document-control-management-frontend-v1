@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import { Button } from 'antd';
 import menu_outline from './assets/home.png';
+import exit_outline from './assets/exit.png';
 import prima_icon from './assets/PLT-gray.png';
 
-export const NavTop = styled.div<{is_not_in_adapter?: boolean}>`
-    
+export const NavTop = styled.div<{ is_not_in_adapter?: boolean }>`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: ${props => props.is_not_in_adapter?"280": 50}px;
-    padding-right: ${props => props.is_not_in_adapter?"280": 50}px;
+    padding-left: ${(props) => (props.is_not_in_adapter ? '280' : 50)}px;
+    padding-right: ${(props) => (props.is_not_in_adapter ? '280' : 50)}px;
 
     position: relative;
     width: 100%;
@@ -21,8 +21,9 @@ export const NavTop = styled.div<{is_not_in_adapter?: boolean}>`
 
     z-index: 9;
     font-family: 'Kanit', sans-serif;
-    ${props => props.is_not_in_adapter?
-        `@media (max-width: 1200px) {
+    ${(props) =>
+        props.is_not_in_adapter
+            ? `@media (max-width: 1200px) {
             padding-left: 200px;
             padding-right: 200px;
         }
@@ -34,7 +35,7 @@ export const NavTop = styled.div<{is_not_in_adapter?: boolean}>`
             padding-left: 80px;
             padding-right: 80px;
         }`
-    :null}
+            : null}
 `;
 export const RegisZone = styled.div`
     /* Regis zone */
@@ -148,6 +149,17 @@ export const IconMenuOutline = styled.div`
     width: 1.5rem;
     height: 1.5rem;
     background-image: url('${menu_outline}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    //margin-left: 2rem;
+    //border: 1px solid red;
+`;
+
+export const LogoutOutline = styled.div`
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url('${exit_outline}');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

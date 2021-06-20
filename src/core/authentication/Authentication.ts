@@ -47,4 +47,9 @@ export class Authentication {
         console.log('[jwt]: found existing jwt-token');
         this.decode_token_and_store_in_recoil(access_token);
     }
+
+    static logOutUser() {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    }
 }

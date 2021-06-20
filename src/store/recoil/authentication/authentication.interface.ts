@@ -1,10 +1,14 @@
 export interface ITokenCredential {
-  email: string;
-  exp: number;
-  iat: number;
+    email: string;
+    firstname: string;
+    lastname: string;
+    position: string;
+    role: string;
+    exp: number;
+    iat: number;
 }
 
 export interface IAuthenticationState {
-  isAuthenticated: boolean;
-  userData: ITokenCredential | null;
+    isAuthenticated: boolean;
+    userData: ITokenCredential | null;
 }

@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Drawer, Divider} from 'antd';
 import { AppstoreOutlined, SettingOutlined, MedicineBoxOutlined} from '@ant-design/icons';
-import { NavTop, LoginBtn, RegisterBtn, RegisZone, LogoPrima, IconMenuOutline, NameTop, IconContainer, DrawerContainer, ListItemContainer, DrawerListText, DrawerOutside } from './navbar.styles'
+import { NavTop, LoginBtn, RegisterBtn, RegisZone, LogoPrima, IconMenuOutline, NameTop, IconContainer, DrawerContainer, ListItemContainer, DrawerListText, DrawerOutside, LogoutOutline } from './navbar.styles'
+import { authenticationState } from '../../../store/recoil/authentication/authentication.atom';
+import { useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
+import { Authentication } from '../../../core/authentication/Authentication';
 interface IProps{
     is_not_in_adapter?: boolean,
 }
 
 const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
-    const [visible, setVisible] = React.useState(false);
-    const showDrawer = () => {
-        setVisible(true);
-    };
-    const onClose = () => {
-        setVisible(false);
-    };
+    const [authState,setAuthState] = useRecoilState(authenticationState)
+    const history = useHistory()
+    useEffect(() => {
+        
+    },[])
+
+    const rendered_right_panel = useMemo(() => {
+        if(!authState.isAuthenticated) return  <LoginBtn> เข้าสู่ระบบ </LoginBtn>
+        return <>
+            <NameTop>{authState.userData?.firstname} {authState.userData?.lastname}</NameTop>
+            <IconContainer onClick={() => history.push('/dashboard')}><IconMenuOutline/></IconContainer>
+            <IconContainer onClick={() => Authentication.logOutUser()}><LogoutOutline/></IconContainer>
+        </>
+    },[authState])
+
     return (
         <NavTop is_not_in_adapter={is_not_in_adapter} >
             <LogoPrima/>
             <RegisZone>
-                <LoginBtn> เข้าสู่ระบบ </LoginBtn>
-                {/* <NameTop>ธิติ มหาวรรณกิจ</NameTop>
-                <IconContainer><IconMenuOutline/></IconContainer> */}
+                {rendered_right_panel}
             </RegisZone>
             {/* <Drawer
                 //title="ยินตีต้อนรับ, ธิติ มหาวรรณกิจ"
