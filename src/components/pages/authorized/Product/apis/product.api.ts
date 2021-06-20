@@ -32,19 +32,31 @@ export async function API_RemoveProductDetail(product_code: string) {
 // ─── PRODUCT SELF (created one) ───────────────────────────────────────────────────────────────
 //
 export async function API_GetAllProduct() {
-    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product?limit=1000000000&page=1'); // fetch all with no pagination
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product?limit=1000000000&page=1');
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
 
 export async function API_CreateProduct(data: ICreateProductDTO) {
-    const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/product/create-product', data); // fetch all with no pagination
+    const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/product/create-product', data);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_CreateProductBULK(data: { importation_datas: Array<ICreateProductDTO> }) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.post('/api/product/create-product@bulk', data);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}
+
+export async function API_GetRandomUnusedSerialNumber() {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/product/generate-serial-number');
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
 
 export async function API_RemoveProduct(serial_number: string) {
-    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/product/remove-product/' + serial_number); // fetch all with no pagination
+    const axios_promise: Promise<AxiosPromise> = API_instance.delete('/api/product/remove-product/' + serial_number);
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }

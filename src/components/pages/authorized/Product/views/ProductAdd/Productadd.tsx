@@ -4,7 +4,7 @@ import { Menu, Upload, Divider , Button, Dropdown,Input,Form } from 'antd';
 import { DownOutlined, UserOutlined, UploadOutlined , InboxOutlined } from '@ant-design/icons';
 import { BoxContainer2, BoxContainer, ProductMainContainer, UploadImage, NoteText, UploadfileBtn, ReportText, AddText, SelectText, SelextManualContainer, SelectText2, SelectTextSN, ErrorText, UploadImageCon, DiviDIV, FormItemStyled, InputStyled } from './Productadd.styles'
 import { ICreateProductDTO, IProductDetail } from '../../shared/interfaces/product.interfaces';
-import { API_CreateProduct, API_GetProductDetails } from '../../apis/product.api';
+import { API_CreateProduct, API_CreateProductBULK, API_GetProductDetails } from '../../apis/product.api';
 import { useForm } from 'antd/lib/form/Form';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
 import { toast } from 'react-toastify';
@@ -48,9 +48,12 @@ const Productadd:React.FC<Props> = ({on_success}) => {
   //
   // ─── EXCEL ──────────────────────────────────────────────────────────────────────
   //
+  const [focusedFile,setFocusedFile] = useState<UploadFile<any>[] | undefined>(undefined)
+
   const [pendingListOfDatasToBeImported,setPendingListOfDatasToBeImported] = useState<null | Array<any>>(null)
   const [tookOutList,setTookOutList] = useState<null | Array<any>>(null)
   const [viewingExcelDetail,setViewingExcelDetail] = useState<boolean>(false)
+  const [duplicationSerialNumbers,setDuplicationSerialNumber] = useState<Array<string> | null>(null)
   // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -88,6 +91,41 @@ const Productadd:React.FC<Props> = ({on_success}) => {
         }
     }
     setIsLoading(false)
+  }
+
+  async function onUploadBulkProduct(){
+      if(!pendingListOfDatasToBeImported || !pendingListOfDatasToBeImported.length) return toast.error('ไม่มีสินค้าให้นำเข้า กรุณาเพิ่มรายการ',ERROR_TOAST_OPTION);
+      const mapped_response = await API_CreateProductBULK({importation_datas:pendingListOfDatasToBeImported })
+      if(mapped_response.success){
+
+        if(mapped_response.data.code === 'duplication'){
+          toast.error(`เกิดข้อผิดพลาดในการนำเข้าสินค้า โปรดตรวจเช็ครายการ`,ERROR_TOAST_OPTION)
+          //console.log(mapped_response.data.duplicated_lists)
+          setDuplicationSerialNumber(mapped_response.data.duplicated_lists)
+          return
+        }
+
+        clearAllImportedData()
+        toast.success(`นำเข้าสินค้า จำนวน ${pendingListOfDatasToBeImported.length} ชิ้น เรียบร้อยแล้ว`,ERROR_TOAST_OPTION)
+      }else{
+        // server errors or duplication error let's check
+        // This will never happened
+      }
+  }
+
+  async function onRemoveDuplicatedProductFromPendingList(){
+    const current_list = [...pendingListOfDatasToBeImported!]
+    setPendingListOfDatasToBeImported(prevState => (prevState!.filter(data => !!duplicationSerialNumbers?.includes(data.serial_number))))
+    const filtered_out: Array<any> = []
+    current_list.forEach(data => {
+      const {serial_number} = data
+      if(duplicationSerialNumbers?.includes(serial_number.toString())){
+        filtered_out.push(data)
+      }
+    })
+    console.log(filtered_out)
+    setTookOutList(prevState => [...prevState!,...filtered_out])
+    setDuplicationSerialNumber(null)
   }
 
   useEffect(() => {
@@ -129,6 +167,8 @@ const Productadd:React.FC<Props> = ({on_success}) => {
       setPendingListOfDatasToBeImported(null)
       setTookOutList(null)
       setViewingExcelDetail(false)
+      setDuplicationSerialNumber(null)
+      setFocusedFile(undefined)
     }
 
     async function onUploadExcel(options:any){
@@ -141,6 +181,7 @@ const Productadd:React.FC<Props> = ({on_success}) => {
       }
       validateImportedProduct(json_parsed.data)
       onSuccess("ok")
+      setFocusedFile(file)
     }
 
     function onUploadChangeCallback({file,fileList}:UploadChangeParam<UploadFile<any>>){
@@ -157,14 +198,13 @@ const Productadd:React.FC<Props> = ({on_success}) => {
       return  <>
         <ReportText>จำนวนของรายการใน excel/xlsx จำนวน : {pendingListOfDatasToBeImported.length + (tookOutList?.length || 0)} รายการ</ReportText>
         <ReportText>จำนวนของสินค้าที่นำเข้าระบบได้ : {pendingListOfDatasToBeImported.length} รายการ</ReportText>
-        <ReportText><a onClick={setViewingExcelDetail.bind(null,true)}>ดูรายละเอียด</a></ReportText>
+        <ReportText><a onClick={setViewingExcelDetail.bind(null,true)}>ดูรายละเอียด {duplicationSerialNumbers ? <span style={{ color:'red' }}>(มี {duplicationSerialNumbers.length} รายการซ้ำ โปรดตรวจสอบ)</span> : null}</a></ReportText>
       </>
-    },[pendingListOfDatasToBeImported,tookOutList])
-    
+    },[pendingListOfDatasToBeImported,tookOutList,duplicationSerialNumbers])
 
     return (
         <Form onFinish={addProductToTheList} form={form}>
-            <ProdAddingDetailModal valid_datas={pendingListOfDatasToBeImported} invalid_datas={tookOutList} visible={viewingExcelDetail} back={setViewingExcelDetail.bind(null,false)}/>
+            <ProdAddingDetailModal remove_duplication={onRemoveDuplicatedProductFromPendingList} duplication_serial_numbers={duplicationSerialNumbers} valid_datas={pendingListOfDatasToBeImported} invalid_datas={tookOutList} visible={viewingExcelDetail} back={setViewingExcelDetail.bind(null,false)}/>
             {/* <Navbar/> */}
             <ProductMainContainer>
 
@@ -173,13 +213,13 @@ const Productadd:React.FC<Props> = ({on_success}) => {
                     <UploadImageCon>
                       <UploadImage/>
                     </UploadImageCon>
-                    <Upload onChange={onUploadChangeCallback} maxCount={1} customRequest={onUploadExcel}
+                    <Upload showUploadList={!!focusedFile} onChange={onUploadChangeCallback} maxCount={1} customRequest={onUploadExcel}
                     style={{width:"100%", color:"black"}}
                     >
                         <Button  icon={<UploadOutlined />}>เลือกไฟล์อัพโหลด</Button>
                     </Upload>
                     {rendered_description_text}
-                    <UploadfileBtn>อัพโหลดไฟล์ข้อมูลสินค้า</UploadfileBtn>
+                    <UploadfileBtn onClick={onUploadBulkProduct}>อัพโหลดไฟล์ข้อมูลสินค้า</UploadfileBtn>
                 </BoxContainer>
             
             {/* ADD MANUAL */}
