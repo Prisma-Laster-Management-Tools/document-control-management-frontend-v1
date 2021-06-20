@@ -4,7 +4,7 @@ import upload_image from './assets/upload_files_image.svg';
 
 export const ProductMainContainer = styled.div`
     width: 100%;
-    height: 70vh;
+    height: 80vh;
 
     //background-color: green;
 
