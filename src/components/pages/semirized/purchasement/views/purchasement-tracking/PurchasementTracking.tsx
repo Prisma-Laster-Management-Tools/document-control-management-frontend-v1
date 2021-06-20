@@ -62,11 +62,19 @@ export default function PurchasementTracking(props:any) {
             setRequestData(prevState => ({...prevState!,is_order_accepted:true}))
         }else{
             // failed
+            toast.error('เกิดข้อผิดพลาดบางอย่างในการตอบรับข้อเสนอ', SUCCESS_TOAST_OPTIONS)
         }
     }
 
     async function clientDeclineRequest(){
-
+        const mapped_response = await API_CreateResponseToRequest(RouteParams.confirmation_token,{accept:false})
+        if(mapped_response.success){
+            toast.success('❌ คุณได้ปฏิเสธออเดอร์เรียบร้อยแล้ว', SUCCESS_TOAST_OPTIONS)
+            setRequestData(prevState => ({...prevState!,is_order_accepted:false}))
+        }else{
+            // failed
+            toast.error('เกิดข้อผิดพลาดบางอย่างในการปฏิเสธข้อเสนอ', SUCCESS_TOAST_OPTIONS)
+        }
     }
 
     async function clientUploadEvidence(){
@@ -211,7 +219,7 @@ export default function PurchasementTracking(props:any) {
         </>
     : <Spin size="large"/>
 
-    const rendered_client_panel = requestData?.is_order_accepted || !isClient ? 
+    const rendered_client_panel = requestData?.is_order_accepted || !isClient || requestData?.is_order_accepted===false ? 
         <>
                 <HeaderTextSY>รายละเอียดผู้จัดขาย</HeaderTextSY>
                 <Descriptions
@@ -227,18 +235,18 @@ export default function PurchasementTracking(props:any) {
                 {
 
                     isClient ? 
-                            requestData?.delivery_attachments===null ? 
+                            requestData?.delivery_attachments===null && requestData.is_order_accepted===true ? 
                             <Upload accept=".pdf,.png,.jpg,.jpeg" customRequest={uploadImageClient}>
                                 <ButtonDiv>เพิ่มหลักฐานการจัดส่ง</ButtonDiv> 
                             </Upload>
-                        : <ButtonDiv disabled={true}>เพิ่มหลักฐานการจัดส่ง</ButtonDiv> 
-                    : <ButtonDiv style={{ opacity:0 }} disabled={true}>ต้องมีไว้ไม่งั้น flex เน่า</ButtonDiv>
+                        : (requestData?.is_order_accepted===false ? <span style={{ color:'red' }}>การสั่งซื้อถูกปฏิเสธ</span> : <ButtonDiv disabled={true}>เพิ่มหลักฐานการจัดส่ง</ButtonDiv> )
+                    : (requestData?.is_order_accepted===false ? <span style={{ color:'red' }}>การสั่งซื้อถูกปฏิเสธ</span>  : <ButtonDiv style={{ opacity:0 }} disabled={true}>ต้องมีไว้ไม่งั้น flex เน่า</ButtonDiv>)
                 }
         </>
     
     : <ButtonContainer>
     <ButtonDiv style={{color:"green",border:"1px solid green"}} onClick={clientConfirmRequest}>ยืนยันข้อเสนอสั่งซื้อ</ButtonDiv>
-    <ButtonDiv style={{color:"red",border:"1px solid red"}}>ปธิเสธข้อเสนอ</ButtonDiv>
+    <ButtonDiv onClick={clientDeclineRequest} style={{color:"red",border:"1px solid red"}}>ปฏิเสธข้อเสนอ</ButtonDiv>
 </ButtonContainer> 
 
     return (
@@ -267,9 +275,9 @@ export default function PurchasementTracking(props:any) {
 
                                 {rendered_client_panel}
                             </SellerDetailDiv>
-                            <StepDiv direction="vertical" current={requestData?.delivery_attachments !== null ? 3 : 0} size="small" >
+                            <StepDiv direction="vertical" current={requestData?.is_order_accepted===false ? 0 : (requestData?.delivery_attachments !== null ? 3 : (requestData.is_order_accepted ? 1 : 0))} status={requestData?.is_order_accepted===false ? 'error' : undefined}  size="small" >
                                 {
-                                    requestData?.is_order_accepted ?  
+                                    requestData?.is_order_accepted || requestData?.is_order_accepted===false ?  
                                     
                                     <Step title={<div>ยืนยันออเดอร์</div>} /> 
                                     
@@ -308,7 +316,7 @@ export default function PurchasementTracking(props:any) {
                                     {
                                         !isClient ?
                                             
-                                            requestData?.payment_attachments === null ?
+                                            requestData?.payment_attachments === null && requestData.is_order_accepted!==false ?
                                             <>
                                                 <Upload accept=".pdf,.png,.jpg,.jpeg" customRequest={uploadImageEmployee}>
                                                     <ButtonDiv>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
@@ -316,8 +324,12 @@ export default function PurchasementTracking(props:any) {
                                                 <ButtonDiv disabled={requestData.purchasement_successfully} onClick={employeeCloseRequest} danger>ยืนยันได้รับสินค้า</ButtonDiv>
                                             </>    
                                             :  <>
-                                                    <ButtonDiv disabled={true}>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
+                                                   {
+                                                       requestData?.is_order_accepted===false ? null : <>
+                                                             <ButtonDiv disabled={true}>เพิ่มหลักฐานการชำระเงิน</ButtonDiv>
                                                     <ButtonDiv disabled={requestData?.purchasement_successfully || false}  onClick={employeeCloseRequest} danger>ยืนยันได้รับสินค้า</ButtonDiv>
+                                                       </>
+                                                   }
                                                 </>
                                         : null
                                     
