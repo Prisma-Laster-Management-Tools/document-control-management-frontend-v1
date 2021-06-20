@@ -1,4 +1,5 @@
 {
     "SERVER_ADDRESS": "http://localhost:3000/",
-    "CLIENT_ADDRESS": "http://localhost:3001"
+    "CLIENT_ADDRESS": "http://localhost:3001",
+    "SPLITTER_STR": ",splitter-global,"
 }
