@@ -4,7 +4,7 @@ import { Menu, Upload, Divider , Button, Dropdown,Input,Form } from 'antd';
 import { DownOutlined, UserOutlined, UploadOutlined , InboxOutlined } from '@ant-design/icons';
 import { BoxContainer2, BoxContainer, ProductMainContainer, UploadImage, NoteText, UploadfileBtn, ReportText, AddText, SelectText, SelextManualContainer, SelectText2, SelectTextSN, ErrorText, UploadImageCon, DiviDIV, FormItemStyled, InputStyled } from './Productadd.styles'
 import { ICreateProductDTO, IProductDetail } from '../../shared/interfaces/product.interfaces';
-import { API_CreateProduct, API_CreateProductBULK, API_GetProductDetails } from '../../apis/product.api';
+import { API_CreateProduct, API_CreateProductBULK, API_GetProductDetails, API_GetRandomUnusedSerialNumber } from '../../apis/product.api';
 import { useForm } from 'antd/lib/form/Form';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
 import { toast } from 'react-toastify';
@@ -202,6 +202,17 @@ const Productadd:React.FC<Props> = ({on_success}) => {
       </>
     },[pendingListOfDatasToBeImported,tookOutList,duplicationSerialNumbers])
 
+
+    async function onGenerateRandomToken(){
+      const mapped_response = await API_GetRandomUnusedSerialNumber()
+      if(mapped_response.success){
+        //console.log(mapped_response.data)
+        form.setFieldsValue({serial_number:mapped_response.data.serial_number})
+      }else{
+        toast.error('เกิดข้อผิดพลาด ไม่สามารถสร้าง serial number ได้',ERROR_TOAST_OPTION);
+      }
+    }
+
     return (
         <Form onFinish={addProductToTheList} form={form}>
             <ProdAddingDetailModal remove_duplication={onRemoveDuplicatedProductFromPendingList} duplication_serial_numbers={duplicationSerialNumbers} valid_datas={pendingListOfDatasToBeImported} invalid_datas={tookOutList} visible={viewingExcelDetail} back={setViewingExcelDetail.bind(null,false)}/>
@@ -243,7 +254,7 @@ const Productadd:React.FC<Props> = ({on_success}) => {
                       </SelextManualContainer>
                       <SelectTextSN>ซีเรียลนัมเบอร์ S/N</SelectTextSN>
                       <SelextManualContainer>
-                          <Button style={{width:"5rem"}}>สร้าง</Button>
+                          <Button onClick={onGenerateRandomToken} style={{width:"5rem"}}>สร้าง</Button>
                           <Divider type="vertical" style={{height:"2rem"}}/>
                           <FormItemStyled name="serial_number" rules={[{required:true,message:"กรุณาระบุซีเรียลนัมเบอร์ของสินค้า"},
                         
