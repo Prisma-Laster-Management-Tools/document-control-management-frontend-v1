@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../../../../common/navbar'
 import { API_GetAllProductDetail, API_RemoveProductDetail } from '../../apis/product.api'
 import { IProductDetail } from '../../shared/interfaces/product.interfaces'
-import {Table,Button, Space, PageHeader} from 'antd'
+import {Table,Button, Space, PageHeader, Image} from 'antd'
 import { ContentContainer, MainOperatorContainer } from './productDetail.styles'
 import { CenteredContainerBox } from '../../../../../../shared/styles/common'
 import AddFragment from './fragments/add/AddFragment'
 
-
+import {SPLITTER_STR,SERVER_ADDRESS} from '../../../../../../config/STATIC.json'
 
 import { onConfirm } from 'react-confirm-pro';
+import ImagePreviewer from '../../../../../common/ImagePreviewer'
 
 const {Column} = Table
 
@@ -18,6 +19,7 @@ type TActions = "view" | "add"
 const ProductDetail = () => {
   const [action,setAction] = useState<TActions>("view")
   const [prodDetails,setProdDetails] = useState<Array<IProductDetail> | null>(null)
+  const [focusedImageList,setFocusedImageList] = useState<Array<string>|null>(null)
   async function fetchAllProductDetail(){
     const mapped_response = await API_GetAllProductDetail()
     if(mapped_response.success){
@@ -89,6 +91,14 @@ const ProductDetail = () => {
           <Column title="รหัสสินค้า (SKU)" dataIndex="product_code" key="product_code" />
           <Column title="ชื่อสินค้า" dataIndex="product_name" key="product_name" />
           <Column title="รายละเอียด" dataIndex="product_description" key="product_description" />
+          <Column align="center" width={100} title="รูปภาพ" render={(text,record:IProductDetail) => {
+              let rendered_element = null
+              if(record.images_path){
+                const images_array = record.images_path.split(SPLITTER_STR)
+                return <img style={{ cursor:'pointer' }} onClick={setFocusedImageList.bind(null,images_array)} width={50} height={50} src={`${SERVER_ADDRESS}${images_array[0]}`}/>
+              }
+              return <span>ไม่มีรูปภาพ</span>
+          }}/>
           <Column width={50} title="การจัดการ" render={(text,record) => {
             return <CenteredContainerBox>
                 <Space size="middle">
@@ -112,6 +122,7 @@ const ProductDetail = () => {
   return (
     <div>
       {/* <Navbar/> */}
+      <ImagePreviewer visible={focusedImageList!==null} on_close={setFocusedImageList.bind(null,null)} images_list={focusedImageList}/>
       <ContentContainer>
         {rendered_view}
       </ContentContainer>

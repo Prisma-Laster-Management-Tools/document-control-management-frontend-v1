@@ -7,6 +7,7 @@ export interface IProductDetail {
     product_description: string;
     protocol?: IQualityControlProtocol[];
     product_entity?: Array<IProductList>;
+    images_path: string | null;
     createdAt: string;
     updatedAt: string;
 }

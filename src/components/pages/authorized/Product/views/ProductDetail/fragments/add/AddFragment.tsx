@@ -4,6 +4,12 @@ import {Button, Form,Input, PageHeader, Upload} from 'antd'
 import {InboxOutlined} from '@ant-design/icons'
 import { API_AddProductDetail } from '../../../../apis/product.api'
 import { ICreateProductDetailDTO, IProductDetail } from '../../../../shared/interfaces/product.interfaces'
+import { UploadChangeParam } from 'antd/lib/upload'
+import { UploadFile } from 'antd/lib/upload/interface'
+
+import {SPLITTER_STR} from '../../../../../../../../config/STATIC.json'
+import { toast } from 'react-toastify'
+import { ERROR_TOAST_OPTION } from '../../../../../../../../shared/options/toast.option'
 
 const {useForm} = Form
 
@@ -19,11 +25,11 @@ const formItemLayout = {
   };
 
   const normFile = (e: any) => {
-    console.log('Upload event:', e);
+    /*console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
-    return e && e.fileList;
+    return e && e.fileList;*/
   };
 
 interface Props{
@@ -33,17 +39,41 @@ interface Props{
 
 const AddFragment:React.FC<Props> = ({onSuccess,onCancel})  => {
     const [form] = useForm()
+    let image_path : string | null =null;
+    let image_upload_list: Array<{uid:string,path:string}> = []
+    function onImageUploaded(event: UploadChangeParam<UploadFile<any>>){
+        const {status,response,uid} = event.file
+        if(status === 'uploading') return // ignore
+        else if(status === 'removed'){
+            console.log('removing picture with uid: ' + uid)
+            image_upload_list = image_upload_list.filter(data => data.uid!==uid)
+            console.log(image_upload_list)
+            return
+        }
+        if(response.success){
+            image_upload_list.push({uid,path:response.stored_path})
+
+        }
+
+    }
+
+
     async function onAddProduct(){
         // This will be triggered on the onFinish callback (means it is already validated)
         const post_data = form.getFieldsValue() as ICreateProductDetailDTO
+        const upload_list = image_upload_list.map(data => data.path)
+        const images_path = upload_list.join(SPLITTER_STR) || null
+        post_data.images_path = images_path
         const mapped_response = await API_AddProductDetail(post_data)
         if(mapped_response.success){
             // send callback to the parent that additional callback is done
             console.log('done')
             onSuccess(mapped_response.data)
+            toast.success('เพิ่มรายละเอียดสินค้าเรียบร้อยแล้ว',ERROR_TOAST_OPTION)
         }else{
             // failed to add
             console.log('failed to create prod-detail')
+            toast.success('เกิดข้อผิดพลาดในการเพิ่มรายละเอียดสินค้า',ERROR_TOAST_OPTION)
         }
     }
     return (
@@ -100,11 +130,7 @@ const AddFragment:React.FC<Props> = ({onSuccess,onCancel})  => {
                     </Form.Item>
                     <Form.Item label="รูปภาพสิ่งของ">
                         <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-                            <Upload.Dragger onChange={({file,fileList }) => {
-                                 if (file.status !== 'uploading') {
-                                    console.log(file, fileList);
-                                  }
-                            }}  name="files" action="http://localhost:3000/upload.do">
+                            <Upload.Dragger multiple={true}  name="file" action="http://localhost:3000/api/upload/image-single" maxCount={100}  onChange={onImageUploaded}>
                                 <p className="ant-upload-drag-icon">
                                 <InboxOutlined />
                                 </p>
