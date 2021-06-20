@@ -25,7 +25,7 @@ const Calibration:React.FC<IProps> = () => {
     const [onCreatingCycle,setOnCreatingCycle] = useState<boolean>(false)
     const [onCreatingEvidence,setOnCreatingEvidence] = useState<boolean>(false)
     const [focusedSerialNumber,setFocusedSerialNumber] = useState<string | null>(null) 
-    const [focusedMachineNameNSerial,setFocusedMachineNameNSerial] = useState<{machine_name:string,serial_number:string} | null>(null)
+    const [focusedMachineNameNSerial,setFocusedMachineNameNSerial] = useState<{machine_name:string,serial_number:string,instruction:string} | null>(null)
     async function getAllCalibrationCycleList(){
         const mapped_response = await API_GetAllCalibrationCycleData()
         if(mapped_response.success){
@@ -59,7 +59,7 @@ const Calibration:React.FC<IProps> = () => {
 
     function onNavigateToCreationModal(record:ICalibrationCycleData){
         setOnCreatingEvidence(true)
-        setFocusedMachineNameNSerial({machine_name:record.machine_name,serial_number:record.serial_number})
+        setFocusedMachineNameNSerial({machine_name:record.machine_name,serial_number:record.serial_number,instruction:record.instruction})
     }
     function onStopUsingCreationModal(){
         setOnCreatingEvidence(false)

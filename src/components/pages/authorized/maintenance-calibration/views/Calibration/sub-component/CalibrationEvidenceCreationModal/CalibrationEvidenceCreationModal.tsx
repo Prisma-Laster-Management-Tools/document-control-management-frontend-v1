@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Button,Form, Input, PageHeader, DatePicker, Select, Upload } from 'antd';
+import { Modal, Button,Form, Input, PageHeader, DatePicker, Select, Upload, Tag } from 'antd';
 import {InboxOutlined} from '@ant-design/icons'
 import { API_CreateCalibrationEvidence } from '../../../../apis/calibration.api';
 import { ERROR_TOAST_OPTION } from '../../../../../../../../shared/options/toast.option';
@@ -21,7 +21,7 @@ interface IProps{
     visible:boolean
     back: () => any
     on_crud: () => any
-    m_n_s: {machine_name:string,serial_number:string} | null
+    m_n_s: {machine_name:string,serial_number:string,instruction:string} | null
 }
 
 const CalibrationEvidenceCreationModal:React.FC<IProps> = ({visible,back,m_n_s,on_crud}) => {
@@ -77,8 +77,11 @@ const CalibrationEvidenceCreationModal:React.FC<IProps> = ({visible,back,m_n_s,o
                 ghost={false}
                 onBack={back}
                 title="สร้าง"
-                subTitle="หลักฐานการวัดประสิทธิภาพ"
+                subTitle={`หลักฐานการวัดประสิทธิภาพของ ${m_n_s?.machine_name}`}
                 >
+                    {m_n_s?.instruction ?                        <div style={{ marginLeft:100,width: '70%',lineHeight:2 }}>
+                            <Tag  color="lime">รายละเอียด</Tag><span>: {m_n_s?.instruction}</span>
+                       </div> : null}
                 </PageHeader>
             </div>
             <Form style={{ display:'flex',justifyContent:'center',flexDirection:'row',alignContent:'center'}} form={form} onFinish={onCreatingEvidence} {...formItemLayout}>
