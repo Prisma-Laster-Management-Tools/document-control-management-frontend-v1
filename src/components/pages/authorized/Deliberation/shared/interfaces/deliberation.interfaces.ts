@@ -59,6 +59,11 @@ export interface IProductManufactData {
     buyer_contact: string | null;
     shipping_evidence: string | null;
     shipping_evidence_uploaded_at: string | null;
+    shipping_address: string;
+
+    stamper_firstname: string | null;
+    stamper_lastname: string | null;
+
     createdAt: string;
     updatedAt: string;
     product: Array<IProductList>;

@@ -111,6 +111,18 @@ const ProdManufactExportModal:React.FC<IProps> = ({back,visible,product_detail,o
                                 ]}
                             >
                             <Input style={{textAlign:'center' }} />
+                        </Form.Item>      
+                        <Form.Item
+                                name="shipping_address"
+                                label="ที่อยู่สำหรับจัดส่ง"
+                                rules={[
+                                {
+                                    required: true,
+                                    message: 'กรุณาระบุที่อยู่สำหรับจัดส่ง',
+                                },
+                                ]}
+                            >
+                            <Input.TextArea  autoSize={{ minRows: 2, maxRows: 6 }} />
                         </Form.Item>       
                         <Form.Item
                                 name="buyer_contact"

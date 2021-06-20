@@ -121,18 +121,30 @@ const ProductManufactDetailDrawer:React.FC<IProps> =  ({visible,back,focused_gen
                 >
 
                     {
-                        manufactData ? 
+                        manufactData ?  <>
                         <Descriptions size="middle" column={2}>
                             <Descriptions.Item>
-                                <Tag color="default">สินค้า</Tag><span>{manufactData.product_name}</span>
+                                <Tag color="geekblue">สินค้า</Tag><span>{manufactData.product_name}</span>
                             </Descriptions.Item>
                             <Descriptions.Item>
-                                <Tag color="default">จำนวน</Tag><span>{manufactData.total_products} ชื้น</span>
+                                <Tag color="orange">จำนวน</Tag><span>{manufactData.total_products} ชื้น</span>
                             </Descriptions.Item>
                             <Descriptions.Item>
                                 <Tag color="default">ผู้ซื้อ</Tag><span>{manufactData.buyer_name} {manufactData.buyer_contact ? `- ${manufactData.buyer_contact}` : null}</span>
                             </Descriptions.Item>
-                    </Descriptions>
+
+                        </Descriptions>
+                        <Descriptions size="middle" column={1}>
+                            <Descriptions.Item>
+                                <Tag color="default">ที่อยู่สำหรับจัดส่ง</Tag><span>{manufactData.shipping_address}</span>
+                            </Descriptions.Item>
+                            {manufactData.shipping_status === true ? 
+                                <Descriptions.Item>
+                                    <Tag color="yellow">ผู้จัดส่ง</Tag><span>{manufactData.stamper_firstname} {manufactData.stamper_lastname}</span>
+                                </Descriptions.Item>
+                            : null}
+                        </Descriptions>
+                            </>
                         
                         : <Spin/>
                     }
