@@ -128,7 +128,7 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
                 <Column  align="center" width="10%" title="สถานะ" render={(text,record:ICalibrationEvidenceData) => {
                     return record.is_pass ? <span style={{ color:'green' }}>ผ่าน</span> : <span style={{ color:'red' }}>ไม่ผ่าน</span>
                 }} />
-                <Column align="center" width="15%" title="ลายละเอียด" render={(text,record:ICalibrationEvidenceData) => {
+                <Column align="center" width="15%" title="รายละเอียด" render={(text,record:ICalibrationEvidenceData) => {
                     return <span>{record.description || 'ไม่ระบุ'}</span>
                 }} />
                 <Column align="center" width="15%" title="หลักฐาน" render={(text,record:ICalibrationEvidenceData) => {
