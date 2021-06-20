@@ -4,7 +4,7 @@ import { HomeOutlined, SnippetsOutlined, MessageOutlined, TeamOutlined, SettingO
 import Navbar from '../../../../../common/navbar'
 import { MidMainContainer, BgContainer, DashboardMainContainer, DateP, DetailP, DivBox, MenuDivButton, MenuDivInner, MenuLeft, MidBody, NotificationContainer, NotificationListContainer, Notih1, TitleP, MenuButtonText, MidTopContainer, GoTaskBtn, TopPicBox, NameText, SelectDropDown} from './dashboard.styles'
 import NotificationFragment from './sub-components/NotificationFragment/NotificationFragment';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import useDashboard from './useDashboard';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 interface IProps extends  RouteComponentProps<any>{
@@ -16,6 +16,7 @@ export type TRoles = "hr" | "super" | "qc" | "purchasement" | "maintenance"
 const DashBoard:React.FC<IProps> = (props) => {
     const $hook_dashboard = useDashboard()
     const [, updateState] = React.useState<any>();
+    const history = useHistory()
     const forceUpdate = React.useCallback(() => updateState({}), []);
     function onRoleSelect(role:TRoles){
         $hook_dashboard.set.setFocusRole(role)
@@ -27,6 +28,20 @@ const DashBoard:React.FC<IProps> = (props) => {
         return $hook_dashboard.get.chartElement
         
     },[$hook_dashboard.get.chartElement])
+
+    function onVisitWorkingSpace(){
+        const role = $hook_dashboard.get.focusedRole
+        console.log('visit working -> '  + role)
+        if(role==='qc'){
+            history.push('/quality-control')
+        }else if(role==='hr'){
+            history.push('/recruitment')
+        }else if(role==='maintenance'){
+            history.push('/maintenance')
+        }else if(role==='purchasement'){
+            history.push('/purchasement')
+        }
+    }
 
     return (
         <>
@@ -55,7 +70,7 @@ const DashBoard:React.FC<IProps> = (props) => {
                             <Option value="purchasement">ฝ่ายจัดซื้อ</Option>
                             <Option value="qc">ฝ่ายตรวจคุณภาพ</Option>
                             <Option value="maintenance">ฝ่ายซ่อมบำรุง</Option>
-                            <Option value="Manager">ฝ่ายบริหาร</Option>
+                            {/* <Option value="Manager">ฝ่ายบริหาร</Option> */}
                         </Select>
                     </MidTopContainer>
                     <MidMainContainer>
@@ -65,7 +80,7 @@ const DashBoard:React.FC<IProps> = (props) => {
                         </ResponsiveContainer>
 
                     </MidMainContainer>
-                    <GoTaskBtn>
+                    <GoTaskBtn onClick={onVisitWorkingSpace}>
                         ไปที่หน้างาน
                     </GoTaskBtn>
                 </MidBody>
