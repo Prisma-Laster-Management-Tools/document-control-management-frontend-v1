@@ -5,6 +5,8 @@ export interface ICalibrationEvidenceData {
     description: string | null;
     is_pass: boolean;
     attachments: string; // splitter ,spiltter-23564,
+    stamper_firstname: string;
+    stamper_lastname: string;
     createdAt: string;
     updatedAt: string;
 }

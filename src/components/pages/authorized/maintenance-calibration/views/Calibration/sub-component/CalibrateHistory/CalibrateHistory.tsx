@@ -100,7 +100,7 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
         {rendered_image_viewr}
         <Drawer
         title={null}
-        width={500}
+        width={700}
         closable={false}
         onClose={onCloseDrawer}
         visible={drawerVisible}
@@ -114,7 +114,11 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
                     >
                         <Descriptions size="middle" column={2}>
                             <Descriptions.Item>
-                                <Tag color="default">จำนวนครั้งที่ตรวจ</Tag>
+                                <Tag color="geekblue">หมายเลขเครื่องตรวจวัด</Tag>
+                                {focused_serial_number}
+                            </Descriptions.Item>
+                            <Descriptions.Item>
+                                <Tag color="gold">จำนวนครั้งที่ตรวจ</Tag>
                                 {`: ${evidencesList?.length || 0} ครั้ง`}
                             </Descriptions.Item>
                             <Descriptions.Item>
@@ -128,7 +132,7 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
                 <Column  align="center" width="10%" title="สถานะ" render={(text,record:ICalibrationEvidenceData) => {
                     return record.is_pass ? <span style={{ color:'green' }}>ผ่าน</span> : <span style={{ color:'red' }}>ไม่ผ่าน</span>
                 }} />
-                <Column align="center" width="15%" title="รายละเอียด" render={(text,record:ICalibrationEvidenceData) => {
+                <Column align="center" width="25%" title="รายละเอียด" render={(text,record:ICalibrationEvidenceData) => {
                     return <span>{record.description || 'ไม่ระบุ'}</span>
                 }} />
                 <Column align="center" width="15%" title="หลักฐาน" render={(text,record:ICalibrationEvidenceData) => {
@@ -136,9 +140,13 @@ const CalibrateHistory:React.FC<IProps> = ({focused_serial_number,clear_focus}) 
                     const images = record.attachments.split(',spiltter-23564,')
                     return <a onClick={() => onViewingAttachmentImage(images)}>ดูภาพแนบ</a>
                 }} />
+                <Column align="center" width="25%" title="ผู้ตรวจ" render={(text,record:ICalibrationEvidenceData) => {
+                    return <span>{record.stamper_firstname} {record.stamper_lastname}</span>
+                }} />
                 <Column  align="center" width="15%" title="วันที่ตรวจวัด" render={(text,record:ICalibrationEvidenceData) => {
                     return <Moment format="D MMM YYYY" withTitle locale="th">{record.createdAt}</Moment>
                 }} />
+
             </Table>
         </Drawer>
     </>
