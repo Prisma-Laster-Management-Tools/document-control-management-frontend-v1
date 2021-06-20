@@ -18,7 +18,7 @@ const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
     },[])
 
     const rendered_right_panel = useMemo(() => {
-        if(!authState.isAuthenticated) return  <LoginBtn> เข้าสู่ระบบ </LoginBtn>
+        if(!authState.isAuthenticated) return  <LoginBtn onClick={() => history.push('/login')}> เข้าสู่ระบบ </LoginBtn>
         return <>
             <NameTop>{authState.userData?.firstname} {authState.userData?.lastname}</NameTop>
             <IconContainer onClick={() => history.push('/dashboard')}><IconMenuOutline/></IconContainer>
