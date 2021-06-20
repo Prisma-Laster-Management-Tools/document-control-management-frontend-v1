@@ -39,6 +39,8 @@ export interface IControlProecssOfProduct {
     protocol_description: string;
     number_of_protocol: number;
     check_status: boolean;
+    stamper_firstname: string;
+    stamper_lastname: string;
     createdAt: string;
     updatedAt: string;
     product: {

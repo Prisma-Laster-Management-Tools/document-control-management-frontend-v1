@@ -144,11 +144,17 @@ const QcHistory:React.FC<IProps> = ({focused_product_id,clear_focus}) => {
                     title="การตรวจสอบคุณภาพ"
                     subTitle="ประวัติและเส้นเวลา"
                     >
-                    <Descriptions size="middle" column={4}>
+                    <Descriptions size="middle" column={2}>
                         <Descriptions.Item>
                             {/* <Space size="small"> */}
-                            <Tag color="default">ถูกตรวจสอบทั้งหมด</Tag>
+                            <Tag color="gold">ถูกตรวจสอบทั้งหมด</Tag>
                             {`: ${sortedHistoricalProcessData.length} ครั้ง`}
+                            {/* </Space> */}
+                        </Descriptions.Item>
+                        <Descriptions.Item>
+                            {/* <Space size="small"> */}
+                            <Tag color="cyan">รหัสสินค้า</Tag>
+                              : {currentProcessData ? currentProcessData[0].product.serial_number : null}
                             {/* </Space> */}
                         </Descriptions.Item>
                     </Descriptions>
@@ -175,7 +181,7 @@ const QcHistory:React.FC<IProps> = ({focused_product_id,clear_focus}) => {
                          <Descriptions size="middle" column={2}>
                             <Descriptions.Item>
                                 {/* <Space size="small"> */}
-                                <Tag color="default">ผ่าน</Tag>
+                                <Tag color="success">ผ่าน</Tag>
                                 {`: ${getTotalPassCountFromSortedHistoricalData()} ข้อกำหนด`}
                                 {/* </Space> */}
                             </Descriptions.Item>
@@ -185,6 +191,13 @@ const QcHistory:React.FC<IProps> = ({focused_product_id,clear_focus}) => {
                                 {`: ${(focusedControlProcessData?.length || 0) - getTotalPassCountFromSortedHistoricalData()} ข้อกำหนด`}
                                 {/* </Space> */}
                             </Descriptions.Item>
+                            <Descriptions.Item>
+                                {/* <Space size="small"> */}
+                                <Tag color="blue">ผู้ตรวจ</Tag>
+                                    : {focusedControlProcessData ? `${focusedControlProcessData![0].stamper_firstname} ${focusedControlProcessData![0].stamper_lastname}` : null}
+                                {/* </Space> */}
+                            </Descriptions.Item>
+                            
                         </Descriptions>
                     </PageHeader>
                 </div>
