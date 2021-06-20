@@ -307,7 +307,7 @@ export default function PurchasementTracking(props:any) {
                                         column={1}
                                         >
                                         <Descriptions.Item label="บริษัท">บริษัท พรีมา เลเซอร์ เทอร์ราพี จำกัด</Descriptions.Item>
-                                        <Descriptions.Item label="ชื่อผู้ขาย">นายเจริญ ตั้งตรงเบญจศีล</Descriptions.Item>
+                                        <Descriptions.Item label="ชื่อผู้ซื้อ">นายเจริญ ตั้งตรงเบญจศีล</Descriptions.Item>
                                         <Descriptions.Item label="เบอร์โทร">087-912-2112</Descriptions.Item>
                                         <Descriptions.Item label="อีเมล">Charoent@primalasertherapy.com</Descriptions.Item>
                                 </Descriptions>
