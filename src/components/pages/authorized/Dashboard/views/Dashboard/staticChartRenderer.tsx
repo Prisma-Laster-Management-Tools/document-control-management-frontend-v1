@@ -52,3 +52,26 @@ export function createStaticPurchasementChartTypeWithPassedData(data:Array<any>)
         {/* <Bar dataKey="uv" stackId="a" fill="#82ca9d" /> */}
     </BarChart>
 }
+
+export function createStaticRecruitmentChartTypeWithPassedData(data:Array<any>){
+    return <BarChart
+    width={500}
+    height={300}
+    data={data}
+    margin={{
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+    }}
+    >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="จำนวนลื้งค์ใช้งานที่สร้างขึ้น" stackId="1" fill="#8884d8" />
+        <Bar dataKey="จำนวนลื่งค์ที่ใช้งานแล้ว" stackId="1" fill="gray" />
+        <Bar dataKey="จำนวนลิ้งค์ที่ยังไม่ได้ใช้งาน" stackId="1" fill="red" />
+    </BarChart>
+}

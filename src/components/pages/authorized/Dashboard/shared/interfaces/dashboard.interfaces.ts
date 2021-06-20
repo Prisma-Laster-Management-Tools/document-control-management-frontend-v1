@@ -17,3 +17,11 @@ export interface IPurchasementStatisticData {
         total_successfully_request: number;
     };
 }
+
+export interface IRecruitmentStatisticData {
+    statistic: {
+        total_generated_link: number;
+        total_used_link: number;
+        total_unused_link: number;
+    };
+}

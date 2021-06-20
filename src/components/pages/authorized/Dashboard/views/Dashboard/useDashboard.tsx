@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { TRoles } from './Dashboard'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { API_GetPurchasementStatistic, API_GetQcStatistic } from '../../apis/dashboard.api';
-import { IPurchasementStatisticData, IQcStatisticData } from '../../shared/interfaces/dashboard.interfaces';
-import { createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData } from './staticChartRenderer';
+import { API_GetPurchasementStatistic, API_GetQcStatistic, API_GetRecruitmentStatistic } from '../../apis/dashboard.api';
+import { IPurchasementStatisticData, IQcStatisticData, IRecruitmentStatisticData } from '../../shared/interfaces/dashboard.interfaces';
+import { createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData, createStaticRecruitmentChartTypeWithPassedData } from './staticChartRenderer';
 
 export default function useDashboard() {
     const [focusedRole,setFocusRole] = useState<TRoles>('qc')
@@ -20,6 +20,7 @@ export default function useDashboard() {
         resetChartData()
         if(role === "qc") return fetchAndPrepareQcDataForStatistic()
         else if(role==='purchasement') return fetchAndPreparePurchasementDataForStatistic()
+        else if(role === 'hr') return fetchAndPrepareRecruitmentDataForStatistic()
     }
 
     useEffect(() => {
@@ -96,6 +97,33 @@ export default function useDashboard() {
         setChartElement(createStaticPurchasementChartTypeWithPassedData(dataset))
     }
     // ────────────────────────────────────────────────────────────────────────────────
+
+    //
+    // ─── RECRUITMENT ────────────────────────────────────────────────────────────────
+    //
+    async function fetchAndPrepareRecruitmentDataForStatistic(){
+        const mapped_response = await API_GetRecruitmentStatistic()
+        let dataset: any = [];
+        if(mapped_response.success){
+            const {statistic}: IRecruitmentStatisticData = mapped_response.data
+            dataset = [
+                {
+                    name: 'จำนวนลื้งค์ใช้งานที่สร้างขึ้น',
+                    'จำนวนลื้งค์ใช้งานที่สร้างขึ้น': statistic.total_generated_link
+                },{
+                    name: 'จำนวนลื่งค์ที่ใช้งานแล้ว',
+                    'จำนวนลื่งค์ที่ใช้งานแล้ว': statistic.total_used_link                    
+                },
+                {
+                    name: 'จำนวนลิ้งค์ที่ยังไม่ได้ใช้งาน',
+                    'จำนวนลิ้งค์ที่ยังไม่ได้ใช้งาน': statistic.total_unused_link                    
+                }
+            ]
+        }
+        setChartElement(createStaticRecruitmentChartTypeWithPassedData(dataset))
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
+
 
     
     return {
