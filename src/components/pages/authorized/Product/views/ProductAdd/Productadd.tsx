@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Navbar from '../../../../../common/navbar'
 import { Menu, Upload, Divider , Button, Dropdown,Input,Form } from 'antd';
 import { DownOutlined, UserOutlined, UploadOutlined , InboxOutlined } from '@ant-design/icons';
@@ -9,6 +9,13 @@ import { useForm } from 'antd/lib/form/Form';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
 import { toast } from 'react-toastify';
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader';
+
+import Excel from 'exceljs'
+import * as XLSX from "xlsx";
+import { fromExcelFileToJSON } from '../../../../../../utilities/excel/common';
+import { UploadChangeParam } from 'antd/lib/upload';
+import { UploadFile } from 'antd/lib/upload/interface';
+import ProdAddingDetailModal from './sub-component/ProdAddingDetailModal';
 
 const props = {
   name: 'file',
@@ -22,6 +29,13 @@ interface Props{
   on_success: () => void
 }
 
+const make_cols = (refstr:any) => {
+  let o = [],
+    C = XLSX.utils.decode_range(refstr).e.c + 1;
+  for (var i = 0; i < C; ++i) o[i] = { name: XLSX.utils.encode_col(i), key: i };
+  return o;
+};
+
 
 const Productadd:React.FC<Props> = ({on_success}) => {
   const [prodDetails,setProdDetails] = useState<Array<IProductDetail>>([])
@@ -30,6 +44,17 @@ const Productadd:React.FC<Props> = ({on_success}) => {
   const [takenSerials,setTakenSerial] = useState<Array<string>>([])
   const [isLoading,setIsLoading] = useState<boolean>(false)
   const [form] = useForm()
+
+  //
+  // ─── EXCEL ──────────────────────────────────────────────────────────────────────
+  //
+  const [pendingListOfDatasToBeImported,setPendingListOfDatasToBeImported] = useState<null | Array<any>>(null)
+  const [tookOutList,setTookOutList] = useState<null | Array<any>>(null)
+  const [viewingExcelDetail,setViewingExcelDetail] = useState<boolean>(false)
+  // ────────────────────────────────────────────────────────────────────────────────
+
+
+
   async function getAllProductDetails(){
     const mapped_response = await API_GetProductDetails()
     if(mapped_response.success){
@@ -83,8 +108,63 @@ const Productadd:React.FC<Props> = ({on_success}) => {
 
         </Menu>
       );
+
+    function validateImportedProduct(data:any){
+        const prods_code_list = prodDetails.map((prod) => prod.product_code)
+        const validated_set_of_data_to_be_appended:Array<any> = []
+        const took_out_lists: any[] = []
+        data.forEach((row:any) => {
+           const {product_code,serial_number} = row
+           if(!prods_code_list.includes(product_code)) {
+              return took_out_lists.push(row)
+           }
+           validated_set_of_data_to_be_appended.push(row)
+        })
+
+        setPendingListOfDatasToBeImported(validated_set_of_data_to_be_appended)
+        setTookOutList(took_out_lists)
+    }
+
+    function clearAllImportedData(){
+      setPendingListOfDatasToBeImported(null)
+      setTookOutList(null)
+      setViewingExcelDetail(false)
+    }
+
+    async function onUploadExcel(options:any){
+      const { onSuccess, onError, file, onProgress } = options;
+      //console.log(file)
+      const json_parsed = await fromExcelFileToJSON(file)
+      if(!json_parsed.success){
+        onError(json_parsed.data)
+        throw new Error('error importing the csv/xlsx file')
+      }
+      validateImportedProduct(json_parsed.data)
+      onSuccess("ok")
+    }
+
+    function onUploadChangeCallback({file,fileList}:UploadChangeParam<UploadFile<any>>){
+      if(file.status === 'removed'){
+        clearAllImportedData()
+      }
+    }
+
+    const rendered_description_text = useMemo(() => {
+      if(pendingListOfDatasToBeImported === null) return <>
+<NoteText>***หมายเหตุ ไฟล์ที่อัพโหลดจะต้องเป็นสกุล .csv หรือ .xlsx เท่านั้น</NoteText>
+                    <div>Download Example</div>
+      </>
+      return  <>
+        <ReportText>จำนวนของรายการใน excel/xlsx จำนวน : {pendingListOfDatasToBeImported.length + (tookOutList?.length || 0)} รายการ</ReportText>
+        <ReportText>จำนวนของสินค้าที่นำเข้าระบบได้ : {pendingListOfDatasToBeImported.length} รายการ</ReportText>
+        <ReportText><a onClick={setViewingExcelDetail.bind(null,true)}>ดูรายละเอียด</a></ReportText>
+      </>
+    },[pendingListOfDatasToBeImported,tookOutList])
+    
+
     return (
         <Form onFinish={addProductToTheList} form={form}>
+            <ProdAddingDetailModal valid_datas={pendingListOfDatasToBeImported} invalid_datas={tookOutList} visible={viewingExcelDetail} back={setViewingExcelDetail.bind(null,false)}/>
             {/* <Navbar/> */}
             <ProductMainContainer>
 
@@ -93,14 +173,12 @@ const Productadd:React.FC<Props> = ({on_success}) => {
                     <UploadImageCon>
                       <UploadImage/>
                     </UploadImageCon>
-                    <Upload {...props}
+                    <Upload onChange={onUploadChangeCallback} maxCount={1} customRequest={onUploadExcel}
                     style={{width:"100%", color:"black"}}
                     >
-                        <Button icon={<UploadOutlined />}>เลือกไฟล์อัพโหลด</Button>
+                        <Button  icon={<UploadOutlined />}>เลือกไฟล์อัพโหลด</Button>
                     </Upload>
-                    <ReportText>จำนวนของลิสต์สินค้าที่ตรวจสอบได้ จำนวน : 23 รายการ</ReportText>
-                    <NoteText>***หมายเหตุ ไฟล์ที่อัพโหลดจะต้องเป็นสกุล .csv หรือ .xlsx เท่านั้น</NoteText>
-                    <div>Download Example</div>
+                    {rendered_description_text}
                     <UploadfileBtn>อัพโหลดไฟล์ข้อมูลสินค้า</UploadfileBtn>
                 </BoxContainer>
             
