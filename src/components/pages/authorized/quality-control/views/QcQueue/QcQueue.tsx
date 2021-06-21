@@ -21,7 +21,8 @@ const QcQueue:React.FC = () => {
     async function getAllProdInQueue(){
         const mapped_response = await API_GetAllProductInControlQueue()
         if(mapped_response.success){
-            setProdInQueue(mapped_response.data)
+            const filtered_data = mapped_response.data.filter((data:IQualityInQueueData) => !data.product.already_shipped && !data.product.prod_manufact_code) // filtered the one that already ship or in ship process out
+            setProdInQueue(filtered_data)
         }else{
             // failed to get the data
         }

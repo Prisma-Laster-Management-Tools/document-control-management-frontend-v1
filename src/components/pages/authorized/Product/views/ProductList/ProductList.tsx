@@ -168,12 +168,12 @@ export const ProductList:React.FC = () => {
           <Column  align="center" width="10%" title="วันที่นำเข้าระบบ" render={(text,record) => {
             return <Moment format="D MMM YYYY" withTitle locale="th">{(record as IProductList).createdAt}</Moment>
           }} />
-          <Column align="center" width="20%" title="การตรวจสอบคุณภาพ" render={(text,record) => {
+          <Column align="center" width="20%" title="การตรวจสอบคุณภาพ" render={(text,record:IProductList) => {
             return <CenteredContainerBox>
 
               <Space>
                 <Badge {...generateBadgePropFromQcStatus((record as IProductList).quality_passed) as BadgeProps}/>
-                {(record as IProductList).is_in_queue ? <Badge status="processing" text="อยู่ในคิว"/> : null}
+                {record.is_in_queue && !record.prod_manufact_code && !record.already_shipped ? <Badge status="processing" text="อยู่ในคิว"/> : null}
               </Space>
             </CenteredContainerBox>
           }} />
