@@ -39,13 +39,13 @@ const NotificationPortal:React.FC = () => {
                     createMaintenanceNotify(data)
                 }
             }
-            else{
-                toast.dark(`⚠️ ${data.message}`, {
-                    onOpen: () => null,
-                    onClose: () => null,
-                    ...NOTIFITOAST_OPTIONS
-                });
-            }
+            // else{
+            //     toast.dark(`⚠️ ${data.message}`, {
+            //         onOpen: () => null,
+            //         onClose: () => null,
+            //         ...NOTIFITOAST_OPTIONS
+            //     });
+            // }
         })
     }
 
