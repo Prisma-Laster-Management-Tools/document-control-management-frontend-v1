@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import  {connect} from "socket.io-client";
 import { toast, ToastOptions,Flip } from 'react-toastify';
 import { RouteProps, RouterProps } from 'react-router';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import { INotificationData } from '../../interfaces/notification.interfaces';
-interface IProps extends RouteComponentProps<any> {
+/*interface IProps extends RouteComponentProps<any> {
 
-}
+}*/
 
 const NOTIFITOAST_OPTIONS:ToastOptions = {
     position: "top-right",
@@ -20,7 +20,8 @@ const NOTIFITOAST_OPTIONS:ToastOptions = {
 
 
 
-const NotificationPortal:React.FC<IProps> = ({history}) => {
+const NotificationPortal:React.FC = () => {
+    const history = useHistory()
     function connectToSocketServer(){
         const socket = connect("http://localhost:80/notification");
         settingUpEvents(socket)
@@ -31,10 +32,19 @@ const NotificationPortal:React.FC<IProps> = ({history}) => {
         })
         socket.on("notification",(data:INotificationData) => {
             const {attached_params} = data
-            if(attached_params.startsWith("calibration")){ // calibration:9:เครื่องวัดความถี่:HZ00134:ตรวจเช็คความคงที่ของคลื่น
-                createCalibrateNotify(data)
-            }else if(attached_params.startsWith("maintenance")){ //maintenance:7:เครื่องทอผ้า:TORPLA33647:เช็คสายตึงเหล็ก:null:null
-                createMaintenanceNotify(data)
+            if(attached_params){
+                if(attached_params.startsWith("calibration")){ // calibration:9:เครื่องวัดความถี่:HZ00134:ตรวจเช็คความคงที่ของคลื่น
+                    createCalibrateNotify(data)
+                }else if(attached_params.startsWith("maintenance")){ //maintenance:7:เครื่องทอผ้า:TORPLA33647:เช็คสายตึงเหล็ก:null:null
+                    createMaintenanceNotify(data)
+                }
+            }
+            else{
+                toast.dark(`⚠️ ${data.message}`, {
+                    onOpen: () => null,
+                    onClose: () => null,
+                    ...NOTIFITOAST_OPTIONS
+                });
             }
         })
     }

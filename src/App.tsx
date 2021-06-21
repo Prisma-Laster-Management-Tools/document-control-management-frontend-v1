@@ -75,6 +75,7 @@ function App() {
 
   return (
       <Router>
+          <NotificationPortal/>
           <FullLoadingScreen/>
           <Switch>
             <Route path="/" exact component={LandingPage}/>

@@ -11,6 +11,13 @@ interface IProps extends RouteComponentProps<any>{
 
 }
 
+export function getProperTitleFromAttachmentData(attachment_data:INotificationData['attached_params']){
+    if(!attachment_data) return "ไม่มีหัวข้อ"
+    if(attachment_data.startsWith("calibration")) return "การตรวจวัดประสิทธิภาพ"
+    else if(attachment_data.startsWith("maintenance")) return "การบำรุงรักษา"
+    else return "ไม่มีหัวข้อ"
+}
+
 const NotificationFragment:React.FC<IProps> = ({history}) => {
     const [notificationList,setNotificationList] = useState<Array<INotificationData>|null>(null)
     const [isViewingMore,setIsViewingMore] = useState<boolean>(false)
@@ -40,12 +47,7 @@ const NotificationFragment:React.FC<IProps> = ({history}) => {
     //
     // ─── VIS HELPER ─────────────────────────────────────────────────────────────────
     //
-    function getProperTitleFromAttachmentData(attachment_data:INotificationData['attached_params']){
-        if(!attachment_data) return "ไม่มีหัวข้อ"
-        if(attachment_data.startsWith("calibration")) return "การตรวจวัดประสิทธิภาพ"
-        else if(attachment_data.startsWith("maintenance")) return "การบำรุงรักษา"
-        else return "ไม่มีหัวข้อ"
-    }
+
     // ────────────────────────────────────────────────────────────────────────────────
 
 

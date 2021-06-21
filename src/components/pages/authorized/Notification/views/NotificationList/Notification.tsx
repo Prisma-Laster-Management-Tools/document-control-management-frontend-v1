@@ -7,6 +7,7 @@ import { API_GetAllNotification } from '../../apis/notification.api';
 import Moment from 'react-moment';
 import { INotificationData } from '../../interfaces/notification.interfaces';
 import { sleep } from '../../../../../../utilities/fake-loader/fakeLoader';
+import { getProperTitleFromAttachmentData } from '../../../Dashboard/views/Dashboard/sub-components/NotificationFragment/NotificationFragment';
 export default function Notification() {
     const [notificationList,setNotificationList] = useState<Array<INotificationData>|null>(null)
     const [cachedNotificationListInThePast,setCachedNotificationListInThePast] = useState<Array<INotificationData> | null>(null)
@@ -45,7 +46,7 @@ export default function Notification() {
             return <NotiListContainer key={notification.id}>
                         <Avatar size={54} icon={<UserOutlined />}/>
                         <NotiInsideTextContainer>
-                            <NotiHearderType>การตรวจสอบคุณภาพ</NotiHearderType>
+                            <NotiHearderType>{getProperTitleFromAttachmentData(notification.attached_params)}</NotiHearderType>
                             <NotiDetailText color={"#454545"}>{notification.message}</NotiDetailText>
                             <NotiDateText color={"#DDA520"}><Moment fromNow locale="th">{notification.createdAt}</Moment></NotiDateText>
                         </NotiInsideTextContainer>
