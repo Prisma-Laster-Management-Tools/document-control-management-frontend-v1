@@ -8,9 +8,10 @@ import { useHistory } from 'react-router-dom';
 import { Authentication } from '../../../core/authentication/Authentication';
 interface IProps{
     is_not_in_adapter?: boolean,
+    hide_name?:boolean
 }
 
-const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
+const Navbar:React.FC<IProps> = ({is_not_in_adapter=false,hide_name=false}) => {
     const [authState,setAuthState] = useRecoilState(authenticationState)
     const history = useHistory()
     useEffect(() => {
@@ -20,7 +21,7 @@ const Navbar:React.FC<IProps> = ({is_not_in_adapter=false}) => {
     const rendered_right_panel = useMemo(() => {
         if(!authState.isAuthenticated) return  <LoginBtn onClick={() => history.push('/login')}> เข้าสู่ระบบ </LoginBtn>
         return <>
-            <NameTop>{authState.userData?.firstname} {authState.userData?.lastname}</NameTop>
+            {hide_name ? null : <NameTop>{authState.userData?.firstname} {authState.userData?.lastname}</NameTop>}
             <IconContainer onClick={() => history.push('/dashboard')}><IconMenuOutline/></IconContainer>
             <IconContainer onClick={() => Authentication.logOutUser()}><LogoutOutline/></IconContainer>
         </>

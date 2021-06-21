@@ -7,6 +7,8 @@ import NotificationFragment from './sub-components/NotificationFragment/Notifica
 import { RouteComponentProps, useHistory } from 'react-router-dom';
 import useDashboard from './useDashboard';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useRecoilState } from 'recoil';
+import { authenticationState } from '../../../../../../store/recoil/authentication/authentication.atom';
 interface IProps extends  RouteComponentProps<any>{
 
 }
@@ -18,6 +20,7 @@ const DashBoard:React.FC<IProps> = (props) => {
     const [, updateState] = React.useState<any>();
     const history = useHistory()
     const forceUpdate = React.useCallback(() => updateState({}), []);
+    const [authState,setAuthState] = useRecoilState(authenticationState)
     function onRoleSelect(role:TRoles){
         $hook_dashboard.set.setFocusRole(role)
     }
@@ -50,7 +53,7 @@ const DashBoard:React.FC<IProps> = (props) => {
     return (
         <>
         
-            <Navbar/>
+            <Navbar hide_name={true}/>
             {/* <BgContainer/> */}
             <DashboardMainContainer>
                 
@@ -68,7 +71,7 @@ const DashBoard:React.FC<IProps> = (props) => {
                 <MidBody>
                     <MidTopContainer>
                         <TopPicBox></TopPicBox>
-                        <NameText>Thiti Mahawannakit</NameText>
+                        <NameText>{authState.userData?.firstname} {authState.userData?.lastname}</NameText>
                         <Select onChange={onRoleSelect} value={ $hook_dashboard.get.focusedRole} style={{ width: 150 }} allowClear>
                             <Option value="hr">ฝ่ายบุคคล</Option>
                             <Option value="purchasement">ฝ่ายจัดซื้อ</Option>
