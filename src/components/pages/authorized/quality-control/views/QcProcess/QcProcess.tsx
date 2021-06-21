@@ -166,6 +166,7 @@ const Qc:React.FC<IProps> = ({focused_product_data,back,on_success}) => {
                     <QcProcessPictureContainer>
                         <QcPicText>ภาพรายละเอียด</QcPicText>
                         <PicCon>
+                            
                             {rendered_picture_content}
                             
                         </PicCon>
@@ -174,6 +175,11 @@ const Qc:React.FC<IProps> = ({focused_product_data,back,on_success}) => {
                     <QcProcessDetailContainer>
                         <QcTextD>ขั้นตอน</QcTextD>
                         {rendered_pagination}
+                        <Divider style={{width:"90%"}}/>
+                        
+                        <div>asdasdasd</div>
+                        <div>asdasdasd</div>
+
                         <Divider style={{width:"90%"}}/>
                         <QcTextR>รายละเอียด</QcTextR>
                         <InfoTextBox>
