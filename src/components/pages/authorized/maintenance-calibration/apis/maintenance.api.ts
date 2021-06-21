@@ -20,3 +20,9 @@ export async function API_CreateMaintenanceCycle(data: ICreateMaintenanceCycleDT
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_MarkAsMaintained(id: number) {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get(`/api/maintenance/${id}/set-maintain`);
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}

@@ -1,10 +1,10 @@
-import { Button, PageHeader,Space,Table, Tooltip } from 'antd'
+import { Badge, Button, Divider, PageHeader,Popconfirm,Space,Table, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
-import { API_GetAllMaintenanceCycleData, API_RemoveMaintenanceCycleData } from '../../apis/maintenance.api'
+import { API_GetAllMaintenanceCycleData, API_MarkAsMaintained, API_RemoveMaintenanceCycleData } from '../../apis/maintenance.api'
 import { IMaintenenaceCycleData } from '../../shared/interfaces/maintenance.interfaces'
 import { MainContainer } from './maintenance.styles'
-import { PartitionOutlined,DeleteOutlined,EditOutlined,PlusOutlined } from '@ant-design/icons';
+import { PartitionOutlined,DeleteOutlined,EditOutlined,PlusOutlined,FormOutlined } from '@ant-design/icons';
 import { ConfirmationModalRequired } from '../../../../../../utilities/react-confirm-pro'
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option'
 import { toast } from 'react-toastify'
@@ -67,6 +67,25 @@ const Maintenance:React.FC<IProps> =() => {
     getAllMaintenanceCycleData()
   },[])
 
+  async function onMarkAsMaintained(id:number){
+    const mapped_response = await API_MarkAsMaintained(id)
+    console.log(mapped_response)
+    if(mapped_response.success){
+      //getAllMaintenanceCycleData() // force re-fetch
+      toast.success('ยืนยันการบำรุงรักษาสำเร็จ',ERROR_TOAST_OPTION)
+      const copied_record = [...maintenanceCycleList!]
+      const element = copied_record.find(data => data.id === id)
+      if(!element) return
+      element.already_maintain = true
+      setMaintenanceCycleList(copied_record)
+
+
+    }else{
+      // failed to marked as maintained
+      toast.success('เกิดข้อผิดพลาดในการยืนยันการบำรุงรักษา',ERROR_TOAST_OPTION)
+    }
+  }
+
   //
   // ─── VIS HELPER ─────────────────────────────────────────────────────────────────
   //
@@ -111,15 +130,33 @@ const Maintenance:React.FC<IProps> =() => {
             <Column align="center" width="10%" title="รอบ" render={(text,record:IMaintenenaceCycleData) => {
                 return <span>{translateCycleInfoDataToReadableFormat(record.cycle_info)}</span>
             }}/>
+            <Column align="center" width="10%" title="สถานะ" render={(text,record:IMaintenenaceCycleData) => {
+                if(record.already_maintain===null) return <Badge status="default" text="ยังไม่เคยได้รับการตรวจสอบ"/>
+                else if(record.already_maintain===false) return <Badge status="processing" text="รอรับการบำรุงรักษา"/>
+                else if(record.already_maintain===true) return <Badge status="success" text="บำรุงรักษาแล้ว"/>
+            }}/>
             <Column align="center" width="15%" title="การจัดการ" render={(text,record:IMaintenenaceCycleData) => {
-               return <Space>
-                        <Tooltip placement="bottom" title="แก้ไข">
-                            <Button ghost type="primary" shape="circle" icon={<EditOutlined />} size="middle" />
-                        </Tooltip>
-                        <Tooltip placement="bottom" title="ลบ">
-                             <Button onClick={ConfirmationModalRequired.bind(null,{title:"โปรดยืนยัน",message:`คุณแน่ใจหรือไม่ว่าคุณต้องการที่จะลบรอบการบำรุงรักษา ไอดี:${record.id}`},removeMaintenanceCycle.bind(null,record.id))}  ghost danger shape="circle" icon={<DeleteOutlined />} size="middle" />
-                        </Tooltip>
-                    </Space>
+                const should_disable = record.already_maintain===null || record.already_maintain===true
+               return <div style={{ display:'flex',flexDirection:'row' }}>
+                      <div style={{ width:'50%',height:'100%',alignItems:'center' }}>
+                          <Tooltip placement="bottom" title="ยืนยันว่าเครื่องจักรได้รับการตรวจเช็คและบำรุงรักษาแล้ว">
+                            <Popconfirm disabled={should_disable} onConfirm={onMarkAsMaintained.bind(null,record.id)} title="คุณแน่ใจหรือไม่ที่จะยืนยันว่าเครื่องจักรได้รับการบำรุงรักษาแล้ว？" okText="แน่ใจ" cancelText="ยกเลิก">
+                              <Button disabled={should_disable} style={{ borderColor:should_disable ? 'gray' :'green' }} ghost type="primary" shape="circle" icon={<FormOutlined style={{ color:should_disable ? 'gray' : 'green' }} />} size="middle" />
+                              </Popconfirm>
+                          </Tooltip>
+                      </div>
+                      <Divider style={{ height:'35px' }} type="vertical" />
+                      <div style={{ width:'50%',height:'100%',alignItems:'center'  }}>
+                        <Space>
+                            <Tooltip placement="bottom" title="แก้ไข">
+                                <Button ghost type="primary" shape="circle" icon={<EditOutlined />} size="middle" />
+                            </Tooltip>
+                            <Tooltip placement="bottom" title="ลบ">
+                                <Button onClick={ConfirmationModalRequired.bind(null,{title:"โปรดยืนยัน",message:`คุณแน่ใจหรือไม่ว่าคุณต้องการที่จะลบรอบการบำรุงรักษา ไอดี:${record.id}`},removeMaintenanceCycle.bind(null,record.id))}  ghost danger shape="circle" icon={<DeleteOutlined />} size="middle" />
+                            </Tooltip>
+                        </Space>
+                        </div>
+                      </div>
             }}/>
           </Table>
     </MainContainer>

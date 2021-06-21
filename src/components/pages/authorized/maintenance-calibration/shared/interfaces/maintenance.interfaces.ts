@@ -7,6 +7,7 @@ export interface IMaintenenaceCycleData {
     instruction: string;
     cycle_start_at: string;
     cycle_info: string;
+    already_maintain: boolean | null;
     createdAt: string;
     updatedAt: string;
 }
