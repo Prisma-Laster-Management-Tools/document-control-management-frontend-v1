@@ -98,3 +98,28 @@ export function createStaticMaintenanceChartTypeWithPassedData(data:Array<any>){
         <Bar dataKey="จำนวนเครื่องวัดที่ถึงรอบการตรวจสอบประสิทธิภาพ" stackId="1" fill="red" />
     </BarChart>
 }
+
+
+export function createStaticDeliberationChartTypeWithPassedData(data:Array<any>){
+    return <BarChart
+    width={500}
+    height={300}
+    data={data}
+    margin={{
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+    }}
+    >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="จำนวนการจัดเตรียมส่งออกทั้งหมด" stackId="1" fill="#8884d8" />
+        <Bar dataKey="ถูกยกเลิก" stackId="1" fill="red" />
+        <Bar dataKey="จัดส่งสำเร็จ" stackId="1" fill="green" />
+        <Bar dataKey="รอการส่งออก" stackId="1" fill="blue" />
+    </BarChart>
+}

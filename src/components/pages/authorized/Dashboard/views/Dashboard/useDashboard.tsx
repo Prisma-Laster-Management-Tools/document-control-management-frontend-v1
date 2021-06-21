@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { TRoles } from './Dashboard'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { API_GetMaintenanceStatistic, API_GetPurchasementStatistic, API_GetQcStatistic, API_GetRecruitmentStatistic } from '../../apis/dashboard.api';
-import { IMaintenanceStatisticData, IPurchasementStatisticData, IQcStatisticData, IRecruitmentStatisticData } from '../../shared/interfaces/dashboard.interfaces';
-import { createStaticMaintenanceChartTypeWithPassedData, createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData, createStaticRecruitmentChartTypeWithPassedData } from './staticChartRenderer';
+import { API_GetDeliberationStatistic, API_GetMaintenanceStatistic, API_GetPurchasementStatistic, API_GetQcStatistic, API_GetRecruitmentStatistic } from '../../apis/dashboard.api';
+import { IDeliberationStatisticData, IMaintenanceStatisticData, IPurchasementStatisticData, IQcStatisticData, IRecruitmentStatisticData } from '../../shared/interfaces/dashboard.interfaces';
+import { createStaticDeliberationChartTypeWithPassedData, createStaticMaintenanceChartTypeWithPassedData, createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData, createStaticRecruitmentChartTypeWithPassedData } from './staticChartRenderer';
 
 export default function useDashboard() {
     const [focusedRole,setFocusRole] = useState<TRoles>('qc')
@@ -22,6 +22,7 @@ export default function useDashboard() {
         else if(role==='purchasement') return fetchAndPreparePurchasementDataForStatistic()
         else if(role === 'hr') return fetchAndPrepareRecruitmentDataForStatistic()
         else if(role==='maintenance') return fetchAndPrepareMaintenanceDataForStatistic()
+        else if(role==='deliberation') return fetchAndPrepareDeliberationDataForStatistic()
     }
 
     useEffect(() => {
@@ -148,6 +149,36 @@ export default function useDashboard() {
             ]
         }
         setChartElement(createStaticMaintenanceChartTypeWithPassedData(dataset))
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
+
+    //
+    // ─── RECRUITMENT ────────────────────────────────────────────────────────────────
+    //
+    async function fetchAndPrepareDeliberationDataForStatistic(){
+        const mapped_response = await API_GetDeliberationStatistic()
+        let dataset: any = [];
+        if(mapped_response.success){
+            const {statistic}: IDeliberationStatisticData = mapped_response.data
+            dataset = [
+                {
+                    name: 'จำนวนการจัดเตรียมส่งออกทั้งหมด',
+                    'จำนวนการจัดเตรียมส่งออกทั้งหมด': statistic.total_exportation
+                },{
+                    name: 'ถูกยกเลิก',
+                    'ถูกยกเลิก': statistic.total_rejected_shipping                    
+                },
+                {
+                    name: 'จัดส่งสำเร็จ',
+                    'จัดส่งสำเร็จ': statistic.total_shipping_successfully                    
+                },
+                {
+                    name: 'รอการส่งออก',
+                    'รอการส่งออก': statistic.total_waiting_to_be_shipped                    
+                }
+            ]
+        }
+        setChartElement(createStaticDeliberationChartTypeWithPassedData(dataset))
     }
     // ────────────────────────────────────────────────────────────────────────────────
 

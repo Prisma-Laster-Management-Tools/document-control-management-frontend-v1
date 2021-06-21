@@ -33,3 +33,12 @@ export interface IMaintenanceStatisticData {
         total_maintenance_schedule: number;
     };
 }
+
+export interface IDeliberationStatisticData {
+    statistic: {
+        total_shipping_successfully: number;
+        total_waiting_to_be_shipped: number;
+        total_rejected_shipping: number;
+        total_exportation: number;
+    };
+}
