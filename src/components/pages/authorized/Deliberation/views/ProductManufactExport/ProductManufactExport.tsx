@@ -1,4 +1,4 @@
-import { Button, PageHeader, Space, Table, Tooltip } from 'antd'
+import { Button, PageHeader, Space, Table, Tooltip,Input } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { API_GetAllProductDetail } from '../../../Product/apis/product.api'
 import { IProductDetail } from '../../../Product/shared/interfaces/product.interfaces'
@@ -6,6 +6,7 @@ import { MainContainer } from './productManufactExport.styles'
 import { DeleteOutlined , ExportOutlined} from'@ant-design/icons';
 import ProdManufactExportModal from './sub-components/ProdManufactExportModal/ProdManufactExportModal'
 const {Column} = Table
+const {Search} = Input
 
 export default function ProductManufactExport() {
     const [prodDetails,setProdDetails] = useState<null | Array<IProductDetail>>(null)
@@ -34,6 +35,19 @@ export default function ProductManufactExport() {
         getAllProductDetailData()
     }
 
+    //
+    // ─── SEARCH ─────────────────────────────────────────────────────────────────────
+    //
+    const [filteredProd,setFilteredProd] = useState<Array<any> | null>(null)
+    function onSearch(value:string){
+      if(!value) return setFilteredProd(null)
+      const search_text = value.toLowerCase()
+      setFilteredProd(prodDetails!.filter(data => data.product_code.toLowerCase().includes(search_text) || data.product_name.toLowerCase().includes(search_text)))
+    }
+
+    const data_source_renderer = filteredProd ? filteredProd : prodDetails // if filtered is currently in action -> use it as main
+    // ────────────────────────────────────────────────────────────────────────────────
+
     return (
         <MainContainer>
             <ProdManufactExportModal on_crud={onChildComponentDoAnyCRUDOperation} product_detail={focusedProductDetail} visible={focusedProductDetail!== null} back={setFocusedProductDetail.bind(null,null)}/>
@@ -45,7 +59,10 @@ export default function ProductManufactExport() {
                     >
                     </PageHeader>
             </div>
-            <Table dataSource={prodDetails || []} bordered loading={prodDetails===null} size="middle" pagination={{ pageSize:8 }} rowKey="id" >
+            <div style={{ width:'100%',marginBottom:20 }}>
+                <Search placeholder="รหัสสินค้า / ชื่อสินค้า" allowClear onSearch={onSearch} style={{ width: 285 }} />
+            </div>
+            <Table dataSource={data_source_renderer || []} bordered loading={data_source_renderer===null} size="middle" pagination={{ pageSize:8 }} rowKey="id" >
                 <Column width="8%" align="center" title="รหัสสินค้า [SKU]" dataIndex="product_code" key="product_code"/>
                 <Column width="8%" align="center" title="ชื่อสินค้า" dataIndex="product_name" key="product_name"/>
                 <Column width="10%" align="center" title="สินค้าที่รอ qc" render={(text,record:IProductDetail) => {
