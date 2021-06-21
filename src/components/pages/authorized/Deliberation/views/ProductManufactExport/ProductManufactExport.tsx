@@ -48,10 +48,11 @@ export default function ProductManufactExport() {
             <Table dataSource={prodDetails || []} bordered loading={prodDetails===null} size="middle" pagination={{ pageSize:8 }} rowKey="id" >
                 <Column width="8%" align="center" title="รหัสสินค้า [SKU]" dataIndex="product_code" key="product_code"/>
                 <Column width="8%" align="center" title="ชื่อสินค้า" dataIndex="product_name" key="product_name"/>
-                <Column width="10%" align="center" title="สินค้าทั้งหมด" render={(text,record:IProductDetail) => {
+                <Column width="10%" align="center" title="สินค้าที่รอ qc" render={(text,record:IProductDetail) => {
                     // We will filtered the on in queue out [but for now i think this is enough]
                     // return <span>{record.product_entity?.filter(data => data.quality_passed && !data.is_in_queue).length} ชื้น</span>
-                    return <span>{record.product_entity?.length} ชื้น</span>
+                    
+                    return <span>{record.product_entity?.filter(data => data.quality_passed!==true&&data.prod_manufact_code===null).length} ชื้น</span>
                 }}/>
                 <Column width="10%" align="center" title="จำนวนที่พร้อมส่งออก" render={(text,record:IProductDetail) => {
                     // We will filtered the on in queue out [but for now i think this is enough]
