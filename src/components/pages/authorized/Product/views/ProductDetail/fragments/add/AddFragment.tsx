@@ -11,6 +11,8 @@ import {SPLITTER_STR} from '../../../../../../../../config/STATIC.json'
 import { toast } from 'react-toastify'
 import { ERROR_TOAST_OPTION } from '../../../../../../../../shared/options/toast.option'
 
+import {SERVER_ADDRESS} from '../../../../../../../../config/STATIC.json'
+
 const {useForm} = Form
 
 const formItemLayout = {
@@ -130,7 +132,7 @@ const AddFragment:React.FC<Props> = ({onSuccess,onCancel})  => {
                     </Form.Item>
                     <Form.Item label="รูปภาพสิ่งของ">
                         <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-                            <Upload.Dragger multiple={true}  name="file" action="http://localhost:3000/api/upload/image-single" maxCount={100}  onChange={onImageUploaded}>
+                            <Upload.Dragger multiple={true}  name="file" action={`${SERVER_ADDRESS}api/upload/image-single`} maxCount={100}  onChange={onImageUploaded}>
                                 <p className="ant-upload-drag-icon">
                                 <InboxOutlined />
                                 </p>
