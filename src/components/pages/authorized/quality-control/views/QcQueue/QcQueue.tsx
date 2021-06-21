@@ -1,4 +1,4 @@
-import { Button, Space, Table, Tag,Tooltip } from 'antd'
+import { Button, Space, Table, Tag,Tooltip,Input } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { ControlledHeightContainer } from '../../../Product/views/ProductList/productList.styles'
@@ -14,6 +14,8 @@ import QcProcess from '../QcProcess'
 const {Column} = Table
 type TQcStatus = null | boolean
 type TAction = "view" | "process"
+
+const {Search} = Input
 const QcQueue:React.FC = () => {
     const [prodInQueue,setProdInQueue] = useState<Array<IQualityInQueueData>|null>(null)
     const [action,setAction] = useState<TAction>("view")
@@ -97,7 +99,21 @@ const QcQueue:React.FC = () => {
         //forces re-fetching
         getAllProdInQueue()
         setAction("view")
+        setFilteredProd(null) // stop filtering
     }
+    // ────────────────────────────────────────────────────────────────────────────────
+
+    //
+    // ─── SEARCH ─────────────────────────────────────────────────────────────────────
+    //
+    const [filteredProd,setFilteredProd] = useState<Array<any> | null>(null)
+    function onSearch(value:string){
+    if(!value) return setFilteredProd(null)
+    const search_text = value.toLowerCase()
+    setFilteredProd(prodInQueue!.filter(data => data.product.serial_number.toLowerCase().includes(search_text) || data.product.product_code.toLowerCase().includes(search_text)))
+    }
+
+    const data_source_renderer = filteredProd ? filteredProd : prodInQueue // if filtered is currently in action -> use it as main
     // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -106,7 +122,10 @@ const QcQueue:React.FC = () => {
         case 'view':
             rendered_content = <>
              <QcHeaderStatus product_data={prodInQueue}/>
-            <Table style={{ padding:22 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodInQueue || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodInQueue===null}>
+             <div style={{ width:'100%',marginLeft:21 }}>
+          <Search placeholder="รหัสสินค้า / ซีเรียลนัมเบอร์" allowClear onSearch={onSearch} style={{ width: 285 }} />
+        </div>
+            <Table style={{ padding:22 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={data_source_renderer || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={data_source_renderer===null}>
                 <Column width="5%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex={["product","serial_number"]} key="serial_number" />
                 <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex={["product","product_code"]} key="product_code" />
                 <Column width="2%" title="วันที่นำเข้าคิว" render={(text,record) => {
