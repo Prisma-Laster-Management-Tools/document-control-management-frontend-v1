@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { TRoles } from './Dashboard'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { API_GetPurchasementStatistic, API_GetQcStatistic, API_GetRecruitmentStatistic } from '../../apis/dashboard.api';
-import { IPurchasementStatisticData, IQcStatisticData, IRecruitmentStatisticData } from '../../shared/interfaces/dashboard.interfaces';
-import { createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData, createStaticRecruitmentChartTypeWithPassedData } from './staticChartRenderer';
+import { API_GetMaintenanceStatistic, API_GetPurchasementStatistic, API_GetQcStatistic, API_GetRecruitmentStatistic } from '../../apis/dashboard.api';
+import { IMaintenanceStatisticData, IPurchasementStatisticData, IQcStatisticData, IRecruitmentStatisticData } from '../../shared/interfaces/dashboard.interfaces';
+import { createStaticMaintenanceChartTypeWithPassedData, createStaticPurchasementChartTypeWithPassedData, createStaticQcChartTypeWithPassedData, createStaticRecruitmentChartTypeWithPassedData } from './staticChartRenderer';
 
 export default function useDashboard() {
     const [focusedRole,setFocusRole] = useState<TRoles>('qc')
@@ -21,6 +21,7 @@ export default function useDashboard() {
         if(role === "qc") return fetchAndPrepareQcDataForStatistic()
         else if(role==='purchasement') return fetchAndPreparePurchasementDataForStatistic()
         else if(role === 'hr') return fetchAndPrepareRecruitmentDataForStatistic()
+        else if(role==='maintenance') return fetchAndPrepareMaintenanceDataForStatistic()
     }
 
     useEffect(() => {
@@ -121,6 +122,32 @@ export default function useDashboard() {
             ]
         }
         setChartElement(createStaticRecruitmentChartTypeWithPassedData(dataset))
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
+
+     //
+    // ─── RECRUITMENT ────────────────────────────────────────────────────────────────
+    //
+    async function fetchAndPrepareMaintenanceDataForStatistic(){
+        const mapped_response = await API_GetMaintenanceStatistic()
+        let dataset: any = [];
+        if(mapped_response.success){
+            const {statistic}: IMaintenanceStatisticData = mapped_response.data
+            dataset = [
+                {
+                    name: 'จำนวนเครื่องจักรทั้งหมด',
+                    'จำนวนเครื่องจักรทั้งหมด': statistic.total_maintenance_schedule
+                },{
+                    name: 'จำนวนเครื่องวัดทั้งหมด',
+                    'จำนวนเครื่องวัดทั้งหมด': statistic.total_calibration_schedule                    
+                },
+                {
+                    name: 'จำนวนเครื่องวัดที่ถึงรอบการตรวจสอบประสิทธิภาพ',
+                    'จำนวนเครื่องวัดที่ถึงรอบการตรวจสอบประสิทธิภาพ': statistic.total_calibration_period_hit                    
+                }
+            ]
+        }
+        setChartElement(createStaticMaintenanceChartTypeWithPassedData(dataset))
     }
     // ────────────────────────────────────────────────────────────────────────────────
 

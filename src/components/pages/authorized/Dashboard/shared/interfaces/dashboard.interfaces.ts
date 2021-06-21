@@ -25,3 +25,11 @@ export interface IRecruitmentStatisticData {
         total_unused_link: number;
     };
 }
+
+export interface IMaintenanceStatisticData {
+    statistic: {
+        total_calibration_schedule: number;
+        total_calibration_period_hit: number;
+        total_maintenance_schedule: number;
+    };
+}
