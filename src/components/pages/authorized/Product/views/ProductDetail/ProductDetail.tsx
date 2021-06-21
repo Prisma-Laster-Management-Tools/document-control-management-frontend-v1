@@ -11,6 +11,9 @@ import {SPLITTER_STR,SERVER_ADDRESS} from '../../../../../../config/STATIC.json'
 
 import { onConfirm } from 'react-confirm-pro';
 import ImagePreviewer from '../../../../../common/ImagePreviewer'
+import {Input} from 'antd'
+
+const {Search} = Input
 
 const {Column} = Table
 
@@ -72,6 +75,21 @@ const ProductDetail = () => {
     })
   };
 
+  
+  //
+  // ─── SEARCH ─────────────────────────────────────────────────────────────────────
+  //
+  const [filteredProd,setFilteredProd] = useState<Array<any> | null>(null)
+  function onSearch(value:string){
+    if(!value) return setFilteredProd(null)
+    const search_text = value.toLowerCase()
+    setFilteredProd(prodDetails!.filter(data => data.product_code.toLowerCase().includes(search_text) || data.product_name.toLowerCase().includes(search_text)))
+  }
+  
+  const data_source_renderer = filteredProd ? filteredProd : prodDetails // if filtered is currently in action -> use it as main
+  // ────────────────────────────────────────────────────────────────────────────────
+
+
   let rendered_view = null
   switch (action) {
     case "view":
@@ -85,9 +103,12 @@ const ProductDetail = () => {
           </PageHeader>
       </div>
         <MainOperatorContainer>
+        <div style={{ width:'100%' }}>
+          <Search placeholder="รหัสสินค้า / ชื่อสินค้า" allowClear onSearch={onSearch} style={{ width: 285 }} />
+        </div>
           <Button onClick={() => setAction("add")}>เพิ่มรายละเอียด</Button>
         </MainOperatorContainer>
-        <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={prodDetails || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={prodDetails===null}>
+        <Table onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={data_source_renderer || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={data_source_renderer===null}>
           <Column title="รหัสสินค้า (SKU)" dataIndex="product_code" key="product_code" />
           <Column title="ชื่อสินค้า" dataIndex="product_name" key="product_name" />
           <Column title="รายละเอียด" dataIndex="product_description" key="product_description" />
