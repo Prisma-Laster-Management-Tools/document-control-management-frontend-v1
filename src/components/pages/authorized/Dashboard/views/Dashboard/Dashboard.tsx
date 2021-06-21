@@ -11,7 +11,7 @@ interface IProps extends  RouteComponentProps<any>{
 
 }
 
-export type TRoles = "hr" | "super" | "qc" | "purchasement" | "maintenance" | "deliberation"
+export type TRoles = "hr" | "super" | "qc" | "purchasement" | "maintenance" | "deliberation" | "product"
 
 const DashBoard:React.FC<IProps> = (props) => {
     const $hook_dashboard = useDashboard()
@@ -42,6 +42,8 @@ const DashBoard:React.FC<IProps> = (props) => {
             history.push('/purchasement')
         }else if(role==='deliberation'){
             history.push('/deliberation')
+        }else if(role==='product'){
+            history.push('/product')
         }
     }
 
@@ -73,6 +75,7 @@ const DashBoard:React.FC<IProps> = (props) => {
                             <Option value="qc">ฝ่ายตรวจคุณภาพ</Option>
                             <Option value="maintenance">ฝ่ายซ่อมบำรุง</Option>
                             <Option value="deliberation">ฝ่ายจัดขาย</Option>
+                            <Option value="product">ฝ่ายสินค้า</Option>
                             {/* <Option value="Manager">ฝ่ายบริหาร</Option> */}
                         </Select>
                     </MidTopContainer>

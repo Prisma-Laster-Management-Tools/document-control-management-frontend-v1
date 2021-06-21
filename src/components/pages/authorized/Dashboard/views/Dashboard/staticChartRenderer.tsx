@@ -123,3 +123,25 @@ export function createStaticDeliberationChartTypeWithPassedData(data:Array<any>)
         <Bar dataKey="รอการส่งออก" stackId="1" fill="blue" />
     </BarChart>
 }
+
+export function createStaticProductChartTypeWithPassedData(data:Array<any>){
+    return <BarChart
+    width={500}
+    height={300}
+    data={data}
+    margin={{
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+    }}
+    >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="จำนวนสินค้าทั้งหมดที่นำเข้ามาในระบบ" stackId="1" fill="#f83f11" />
+        <Bar dataKey="จำนวนประเภทของสินค้าทั้งหมด" stackId="1" fill="#24ce6b" />
+    </BarChart>
+}

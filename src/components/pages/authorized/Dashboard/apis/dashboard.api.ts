@@ -31,3 +31,9 @@ export async function API_GetDeliberationStatistic() {
     const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
     return mapped_response;
 }
+
+export async function API_GetProductStatistic() {
+    const axios_promise: Promise<AxiosPromise> = API_instance.get('/api/statistic/product');
+    const mapped_response = await transformDataFromAxiosPromiseToReadableFormat(axios_promise, { on_success: '*', on_fail: '*' });
+    return mapped_response;
+}

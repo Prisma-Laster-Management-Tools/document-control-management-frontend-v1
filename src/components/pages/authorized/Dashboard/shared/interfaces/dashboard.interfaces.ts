@@ -42,3 +42,10 @@ export interface IDeliberationStatisticData {
         total_exportation: number;
     };
 }
+
+export interface IProductStatisticData {
+    statistic: {
+        total_product: number;
+        total_product_type: number;
+    };
+}
