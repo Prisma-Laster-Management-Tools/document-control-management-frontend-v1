@@ -25,6 +25,7 @@ export interface IProductList {
     quality_passed: boolean | null;
     is_in_queue: boolean;
     prod_manufact_code: string | null;
+    already_shipped: boolean;
 }
 
 export type ICreateProductDTO = Pick<IProductList, 'product_code' | 'serial_number'>;

@@ -166,7 +166,7 @@ export const ProductList:React.FC = () => {
           <Column width="15%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex="serial_number" key="serial_number" />
           <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex="product_code" key="product_code" />
           <Column  align="center" width="10%" title="วันที่นำเข้าระบบ" render={(text,record) => {
-            return <Moment format="D MMM YYYY" withTitle>{(record as IProductList).createdAt}</Moment>
+            return <Moment format="D MMM YYYY" withTitle locale="th">{(record as IProductList).createdAt}</Moment>
           }} />
           <Column align="center" width="20%" title="การตรวจสอบคุณภาพ" render={(text,record) => {
             return <CenteredContainerBox>
@@ -182,13 +182,15 @@ export const ProductList:React.FC = () => {
               <Button onClick={setViewingProductHistory.bind(null,record)} type="primary" ghost disabled={(record as IProductList).quality_passed === null}>ดูประวัติ</Button>
             </CenteredContainerBox>
           }} />
-          <Column align="center" width="20%" title="ตัวจัดการ" render={(text,record) => {
-            return <CenteredContainerBox>
-                <Space>
-                  <Button loading={productIdPendingInQueue === (record as IProductList).id} onClick={sendProductToQueue.bind(null,(record as IProductList).id)} type="primary" ghost disabled={(record as IProductList).is_in_queue}>ส่งไปตรวจสอบคุณภาพ</Button>
-                  <Button onClick={onClickLight.bind(null,(record as IProductList).serial_number)} danger ghost>ลบ</Button>
-                </Space>
-            </CenteredContainerBox>
+          <Column align="center" width="20%" title="ตัวจัดการ" render={(text,record:IProductList) => {
+              if(record.already_shipped && record.prod_manufact_code) return <span>สินค้าถูกส่งออกแล้ว</span>
+              else if(record.prod_manufact_code && record.already_shipped===false) return <span>สินค้าอยู่ในกระบวนการส่งออก</span>
+              return <CenteredContainerBox>
+              <Space>
+                <Button loading={productIdPendingInQueue === (record as IProductList).id} onClick={sendProductToQueue.bind(null,(record as IProductList).id)} type="primary" ghost disabled={(record as IProductList).is_in_queue}>ส่งไปตรวจสอบคุณภาพ</Button>
+                <Button onClick={onClickLight.bind(null,(record as IProductList).serial_number)} danger ghost>ลบ</Button>
+              </Space>
+          </CenteredContainerBox>
           }} />
      </Table>
                       </>
