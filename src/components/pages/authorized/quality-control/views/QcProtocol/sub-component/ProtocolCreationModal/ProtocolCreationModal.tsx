@@ -261,7 +261,7 @@ const CreationForm:React.FC<ICreationFormProps> = ({back,product_code,on_crud}) 
                             ]}
                         >
                         <Upload
-                            action="http://localhost:3000/api/upload/image-single"
+                            action={`${SERVER_ADDRESS}api/upload/image-single`}
                             listType="picture"
                             maxCount={1}
                             onChange={onImageUploaded}
