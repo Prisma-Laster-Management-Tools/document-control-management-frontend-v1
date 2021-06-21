@@ -22,6 +22,7 @@ export default function Registration(props:any) {
 
     React.useEffect(() => {
         (async() => {
+            localStorage.removeItem('token')
             //Getting recruitment data
             await sleep(500) // wait for the LoadingScreen component is fully-set -> [safe from newly enter website]
             LoadingScreen.show_loading_screen("กำลังตรวจสอบลื้งค์ของคุณ")
