@@ -17,6 +17,9 @@ import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import ProdAddingDetailModal from './sub-component/ProdAddingDetailModal';
 
+import {SERVER_ADDRESS} from '../../../../../../config/STATIC.json'
+import { downloadAs } from '../../../../../../utilities/downloader/downloaderAs';
+
 const props = {
   name: 'file',
   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -193,7 +196,7 @@ const Productadd:React.FC<Props> = ({on_success}) => {
     const rendered_description_text = useMemo(() => {
       if(pendingListOfDatasToBeImported === null) return <>
 <NoteText>***หมายเหตุ ไฟล์ที่อัพโหลดจะต้องเป็นสกุล .csv หรือ .xlsx เท่านั้น</NoteText>
-                    <div>Download Example</div>
+                    <a onClick={downloadAs.bind(null,`${SERVER_ADDRESS}uploads/1624260196238_products_importation.csv`,'ตัวอย่างไฟล์ excel.csv')}>ดาวน์โหลดไฟล์ตัวอย่าง (.csv)</a>
       </>
       return  <>
         <ReportText>จำนวนของรายการใน excel/xlsx จำนวน : {pendingListOfDatasToBeImported.length + (tookOutList?.length || 0)} รายการ</ReportText>
