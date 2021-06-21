@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { ERROR_TOAST_OPTION } from '../../../../../../shared/options/toast.option';
 import { useHistory } from 'react-router-dom';
 interface IProps{
-    focused_product_data:{product_code:string,product_id:number} | null
+    focused_product_data:{product_code:string,product_id:number,serial_number:string} | null
     back: () => any
     on_success: () => any
 }
@@ -177,8 +177,8 @@ const Qc:React.FC<IProps> = ({focused_product_data,back,on_success}) => {
                         {rendered_pagination}
                         <Divider style={{width:"90%"}}/>
                         
-                        <div>asdasdasd</div>
-                        <div>asdasdasd</div>
+                        <div>รหัสสินค้า: {focused_product_data?.product_code}</div>
+                        <div>ซีเรียลนัมเบอร์: {focused_product_data?.serial_number}</div>
 
                         <Divider style={{width:"90%"}}/>
                         <QcTextR>รายละเอียด</QcTextR>

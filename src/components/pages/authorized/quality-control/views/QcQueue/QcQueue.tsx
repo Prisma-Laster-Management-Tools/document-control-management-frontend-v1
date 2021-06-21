@@ -19,7 +19,7 @@ const {Search} = Input
 const QcQueue:React.FC = () => {
     const [prodInQueue,setProdInQueue] = useState<Array<IQualityInQueueData>|null>(null)
     const [action,setAction] = useState<TAction>("view")
-    const [focusedProductDataForQc,setFocusedProductDataForQc] = useState<{product_code:string,product_id:number} | null>(null)
+    const [focusedProductDataForQc,setFocusedProductDataForQc] = useState<{product_code:string,product_id:number,serial_number:string} | null>(null)
     async function getAllProdInQueue(){
         const mapped_response = await API_GetAllProductInControlQueue()
         if(mapped_response.success){
@@ -31,7 +31,7 @@ const QcQueue:React.FC = () => {
     }
 
     function onMakeAQCProcessForSpecificProduct($data:IQualityInQueueData){
-        setFocusedProductDataForQc({product_code:$data.product.product_code,product_id:$data.product.id})
+        setFocusedProductDataForQc({product_code:$data.product.product_code,product_id:$data.product.id,serial_number: $data.product.serial_number})
         setAction("process")
     }
 
