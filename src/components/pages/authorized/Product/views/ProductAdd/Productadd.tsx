@@ -118,7 +118,7 @@ const Productadd:React.FC<Props> = ({on_success}) => {
 
   async function onRemoveDuplicatedProductFromPendingList(){
     const current_list = [...pendingListOfDatasToBeImported!]
-    setPendingListOfDatasToBeImported(prevState => (prevState!.filter(data => !!duplicationSerialNumbers?.includes(data.serial_number))))
+    setPendingListOfDatasToBeImported(prevState => (prevState!.filter(data => !duplicationSerialNumbers?.includes(data.serial_number))))
     const filtered_out: Array<any> = []
     current_list.forEach(data => {
       const {serial_number} = data
@@ -175,6 +175,8 @@ const Productadd:React.FC<Props> = ({on_success}) => {
     }
 
     async function onUploadExcel(options:any){
+
+      clearAllImportedData()
       const { onSuccess, onError, file, onProgress } = options;
       //console.log(file)
       const json_parsed = await fromExcelFileToJSON(file)
