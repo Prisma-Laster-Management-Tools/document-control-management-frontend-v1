@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Button, Dropdown } from 'antd';
 import bg_image from '../../../../../../assets/main_background.jpg';
+import avatar_dummy from './assets/avatar_dummy.png'
 
 export const BgContainer = styled.div`
     position: absolute;
@@ -102,7 +103,7 @@ export const MidBody = styled.div`
     padding: 60px 20px 20px 20px;
     width: 60%;
     height: 100%;
-    background-color: #f9f9f9;
+    //background-color: #f9f9f9;
 
     display: flex;
     flex-direction: column;
@@ -112,7 +113,7 @@ export const MidBody = styled.div`
     font-family: 'Kanit', sans-serif;
     font-size: 15px;
     border-radius: 0rem 0rem 1rem 1rem;
-    //border: 1px solid black;
+    //border: 1px solid red;
 `;
 export const MidTopContainer = styled.div`
     width: 100%;
@@ -124,23 +125,35 @@ export const MidTopContainer = styled.div`
     align-items: center;
     justify-content: space-evenly;
 
-    border: 1px solid black;
+    background-color: #f9f9f9;
+    border-radius: 1rem 1rem 0rem 0rem;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
+    //border: 1px solid #333333;
 `;
 export const MidMainContainer = styled.div`
     width: 100%;
     height: 60vh;
     padding: 20px 20px 20px 20px;
 
+    background-color: #f9f9f9;
+    border-radius: 0rem 0rem 1rem 1rem;
     //background-color: purple;
-    border: 1px solid black;
+    //border: 1px solid black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
 `;
 export const TopPicBox = styled.div`
     width: 70px;
     height: 70px;
+    //margin-right: -20px;
     //background-color: gray;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    //border: 1px solid black;
 
-    border: 1px solid black;
+    background-image: url(${avatar_dummy});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 export const NameText = styled.p`
     height: 70px;
@@ -148,9 +161,9 @@ export const NameText = styled.p`
     display: flex;
     align-items: center;
 
-    border: 1px solid black;
+    //border: 1px solid black;
     margin: 1px 0px 0px 10px;
-    padding-left: 10px;
+    //padding-left: 10px;
     font-size: 20px;
     @media (max-width: 1575px) {
         font-size: 18px;
