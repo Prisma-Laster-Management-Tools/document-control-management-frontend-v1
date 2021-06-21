@@ -49,6 +49,7 @@ import MaintenanceCalibrationLayout from './components/pages/authorized/maintena
 import NotificationPortal from './components/pages/authorized/Notification/views/NotificationPortal';
 import RecruitmentLayout from './components/pages/authorized/Recruitment/adapter/RecruitmentLayout/RecruitmentLayout';
 import PurchasementTracking from './components/pages/semirized/purchasement/views/purchasement-tracking';
+import PrivateRoute from './components/common/PrivateRoute';
 // ────────────────────────────────────────────────────────────────────────────────
 
 
@@ -81,22 +82,22 @@ function App() {
             {/* <Route path="/sales" exact component={Sales}/> */}
             <Route path="/feedback/:id" exact component={Feedback}/>
             <Route path="/feedback-survey/:access_token" exact component={Feedbacksurvey}/>
-            <Route path="/recruitment" exact component={RecruitmentLayout}/>
+            <PrivateRoute path="/recruitment" exact component={RecruitmentLayout}/>
             <Route path="/registration/:access_token" exact component={Registration}/>
-            <Route path="/dashboard" exact component={Dashboard}/>
+            <PrivateRoute path="/dashboard" exact component={Dashboard}/>
             {/* <Route path="/qc-process" exact component={QcProcess}/>
             <Route path="/qc-queue" exact component={QcQueue}/> */}
-            <Route path="/quality-control" exact component={QcLayout}/>
-            <Route path="/purchasement" exact component={PurchasementLayout}/>
+            <PrivateRoute path="/quality-control" exact component={QcLayout}/>
+            <PrivateRoute path="/purchasement" exact component={PurchasementLayout}/>
             {/* <Route path="/product-add" exact component={Productadd}/>          
             <Route path="/product-detail" exact component={ProductDetail}/> */}
-            <Route path="/product" exact component={ProductLayout}/>
-            <Route path="/deliberation" exact component={DeliberationLayout}/>
-            <Route path="/notifications" exact component={Notification}/>
+            <PrivateRoute path="/product" exact component={ProductLayout}/>
+            <PrivateRoute path="/deliberation" exact component={DeliberationLayout}/>
+            <PrivateRoute path="/notifications" exact component={Notification}/>
             <Route path="/notifications/test" exact component={NotificationPortal}/>
 
 
-            <Route exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
+            <PrivateRoute exact path="/maintenance" component={MaintenanceCalibrationLayout}/>
 
             <Route exact path="/purchasement-tracking/:confirmation_token" component={PurchasementTracking}/>
           </Switch>
