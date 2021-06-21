@@ -69,7 +69,7 @@ const DashBoard:React.FC<IProps> = (props) => {
                     <MidTopContainer>
                         <TopPicBox></TopPicBox>
                         <NameText>Thiti Mahawannakit</NameText>
-                        <Select onChange={onRoleSelect} value={ $hook_dashboard.get.focusedRole} style={{ width: 120 }} allowClear>
+                        <Select onChange={onRoleSelect} value={ $hook_dashboard.get.focusedRole} style={{ width: 150 }} allowClear>
                             <Option value="hr">ฝ่ายบุคคล</Option>
                             <Option value="purchasement">ฝ่ายจัดซื้อ</Option>
                             <Option value="qc">ฝ่ายตรวจคุณภาพ</Option>
