@@ -94,6 +94,7 @@ export function createStaticMaintenanceChartTypeWithPassedData(data:Array<any>){
         <Tooltip />
         <Legend />
         <Bar dataKey="จำนวนเครื่องจักรทั้งหมด" stackId="1" fill="#8884d8" />
+        <Bar dataKey="เครื่องจักรที่ถึงรอบการบำรุงรักษา" stackId="1" fill="#ce5712" />
         <Bar dataKey="จำนวนเครื่องวัดทั้งหมด" stackId="1" fill="gray" />
         <Bar dataKey="จำนวนเครื่องวัดที่ถึงรอบการตรวจสอบประสิทธิภาพ" stackId="1" fill="red" />
     </BarChart>

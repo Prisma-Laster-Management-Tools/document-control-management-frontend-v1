@@ -139,7 +139,13 @@ export default function useDashboard() {
                 {
                     name: 'จำนวนเครื่องจักรทั้งหมด',
                     'จำนวนเครื่องจักรทั้งหมด': statistic.total_maintenance_schedule
-                },{
+                },
+                {
+                    name: 'เครื่องจักรที่ถึงรอบการบำรุงรักษา',
+                    'เครื่องจักรที่ถึงรอบการบำรุงรักษา': statistic.total_maintenance_attention_needed
+                }
+                ,
+                {
                     name: 'จำนวนเครื่องวัดทั้งหมด',
                     'จำนวนเครื่องวัดทั้งหมด': statistic.total_calibration_schedule                    
                 },

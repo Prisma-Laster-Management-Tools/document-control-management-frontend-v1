@@ -31,6 +31,8 @@ export interface IMaintenanceStatisticData {
         total_calibration_schedule: number;
         total_calibration_period_hit: number;
         total_maintenance_schedule: number;
+        total_maintenance_attention_needed: number;
+        total_maintenance_never_maintained: number;
     };
 }
 
