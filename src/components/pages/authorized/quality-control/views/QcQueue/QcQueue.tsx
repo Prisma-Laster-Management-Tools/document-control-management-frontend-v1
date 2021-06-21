@@ -123,8 +123,8 @@ const QcQueue:React.FC = () => {
             rendered_content = <>
              <QcHeaderStatus product_data={prodInQueue}/>
              <div style={{ width:'100%',marginLeft:21 }}>
-          <Search placeholder="รหัสสินค้า / ซีเรียลนัมเบอร์" allowClear onSearch={onSearch} style={{ width: 285 }} />
-        </div>
+                <Search placeholder="รหัสสินค้า / ซีเรียลนัมเบอร์" allowClear onSearch={onSearch} style={{ width: 285 }} />
+            </div>
             <Table style={{ padding:22 }} onRow={(r) => ({onClick: () => console.log("lol")})} dataSource={data_source_renderer || []} rowKey="id" size="middle" pagination={{ pageSize:8 }} bordered loading={data_source_renderer===null}>
                 <Column width="5%" title="ซีเรียลนัมเบอร์ (Serial_Number)" dataIndex={["product","serial_number"]} key="serial_number" />
                 <Column width="10%" title="รหัสสินค้า (SKU)" dataIndex={["product","product_code"]} key="product_code" />
