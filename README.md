@@ -1,46 +1,166 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `yarn start`
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1">
+    <img src="https://www.pngitem.com/pimgs/m/158-1581729_transparent-gender-png-human-resource-management-png-png.png" alt="Logo" width="500" height="300">
+  </a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <h3 align="center">Document Control Management System (Web-application)</h3>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  <p align="center">
+    A web application that helps in managing documents in the industrial business such as quality control, product manufacturing, creating purchasement request, maintenance scheduling, etc.
+    <br />
+<!--
+    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+  </p>
+</p>
+-->
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-### `yarn eject`
+This project is created under the graduation project of the KMUTT University that would be then served for the industrial company (This is not the final prototype just an  outline for implementing the next version)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Built With
+* []() Reactjs
+<!-- GETTING STARTED -->
+## Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To get a local copy up and running follow these simple steps.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Prerequisites
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In order to get this project works you need to have
+* Reactjs
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- USAGE EXAMPLES -->
+## Usage
+
+1. Start the react server  by
+   ```sh
+   npm start
+   ```
+    and the application will run on port 3001 (editable)
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/issues) for a list of proposed features (and known issues).
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the GPL License. See `LICENSE` for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Thiti Mahawannakit - [@Thiti-Dev](https://www.facebook.com/thiti.developer)
+  <br>
+Tanawatt Jituthai - [@sspritesatang](https://www.facebook.com/sspritesatang)
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+
+* []() Roles system is planned to be fully functionable in the v2 prototype
+* []() Some error cases are not well implemented due to the time limit [you may found some swinky peaky tings]
+* []() Feel free to leave any issues or implementation idea in the issues tab
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.svg?style=for-the-badge
+[contributors-url]: https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.svg?style=for-the-badge
+[forks-url]: https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/network/members
+[stars-shield]: https://img.shields.io/github/stars/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.svg?style=for-the-badge
+[stars-url]: https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.svg?style=for-the-badge
+[issues-url]: https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/issues
+[license-shield]: https://img.shields.io/github/license/Prisma-Laster-Management-Tools/document-control-management-frontend-v1.svg?style=for-the-badge
+[license-url]: https://github.com/Prisma-Laster-Management-Tools/document-control-management-frontend-v1/blob/master/LICENSE.txt
